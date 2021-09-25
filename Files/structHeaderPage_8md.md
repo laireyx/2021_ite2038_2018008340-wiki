@@ -1,4 +1,19 @@
 ---
+title: structHeaderPage.md
+
+---
+
+# structHeaderPage.md
+
+
+
+
+
+
+## Source code
+
+```markdown
+---
 title: HeaderPage
 summary: struct for the header page. 
 
@@ -47,6 +62,12 @@ Total count of the page reserved.
 
 ```cpp
 uint8_t reserved;
+```
+
+
+-------------------------------
+
+Updated on 2021-09-25 at 17:41:34 +0900
 ```
 
 

@@ -1,11 +1,27 @@
 ---
-title: types.h
+title: group__Type.md
 
 ---
 
-# types.h
+# group__Type.md
 
 
+
+
+
+
+## Source code
+
+```markdown
+---
+title: Types
+summary: These are the type definitions. 
+
+---
+
+# Types
+
+These are the type definitions. 
 
 ## Types
 
@@ -21,35 +37,35 @@ title: types.h
 
 ### typedef pagenum_t
 
-```cpp
+```
 typedef uint64_t pagenum_t;
 ```
 
 
 ### typedef page_t
 
-```cpp
+```
 typedef Page page_t;
 ```
 
 
 ### typedef allocatedpage_t
 
-```cpp
+```
 typedef AllocatedPage allocatedpage_t;
 ```
 
 
 ### typedef headerpage_t
 
-```cpp
+```
 typedef HeaderPage headerpage_t;
 ```
 
 
 ### typedef freepage_t
 
-```cpp
+```
 typedef FreePage freepage_t;
 ```
 
@@ -57,22 +73,11 @@ typedef FreePage freepage_t;
 
 
 
-## Source code
 
-```cpp
 
-#pragma once
+-------------------------------
 
-#include <cstdint>
-
-typedef uint64_t pagenum_t;
-
-#include "page.h"
-
-typedef Page page_t;
-typedef AllocatedPage allocatedpage_t;
-typedef HeaderPage headerpage_t;
-typedef FreePage freepage_t;
+Updated on 2021-09-25 at 17:41:34 +0900
 ```
 
 

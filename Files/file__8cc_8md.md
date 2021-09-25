@@ -1,4 +1,19 @@
 ---
+title: file_8cc.md
+
+---
+
+# file_8cc.md
+
+
+
+
+
+
+## Source code
+
+```markdown
+---
 title: file.cc
 
 ---
@@ -11,7 +26,7 @@ title: file.cc
 
 |                | Name           |
 | -------------- | -------------- |
-| void | **[_initialize](Files/file_8cc.md#function--initialize)**()<br>Initialize file manager.  |
+| void | **[_initialize](Files/file_8cc.md#function--initialize)**()<br>Initialized file manager.  |
 | void | **[_page_growth](Files/file_8cc.md#function--page-growth)**()<br>Automatically check and size-up a page file.  |
 | void | **[_seek_page](Files/file_8cc.md#function--seek-page)**([pagenum_t](Modules/group__Type.md#typedef-pagenum-t) pagenum)<br>Seek page file pointer at offset matching with given page index.  |
 | void | **[_flush_header](Files/file_8cc.md#function--flush-header)**()<br>Flush a header page as "pagenum 0".  |
@@ -37,7 +52,7 @@ title: file.cc
 void _initialize()
 ```
 
-Initialize file manager. 
+Initialized file manager. 
 
 Open a page file and read header page, or create and initialize if not exists. 
 
@@ -262,6 +277,12 @@ void file_write_page(pagenum_t pagenum, const page_t* src) {
     fwrite(src, PAGE_SIZE, 1, page_file);
     fflush(page_file);
 }
+```
+
+
+-------------------------------
+
+Updated on 2021-09-25 at 17:41:34 +0900
 ```
 
 

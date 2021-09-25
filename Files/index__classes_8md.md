@@ -1,4 +1,19 @@
 ---
+title: index_classes.md
+
+---
+
+# index_classes.md
+
+
+
+
+
+
+## Source code
+
+```markdown
+---
 title: Classes
 
 ---
@@ -13,6 +28,12 @@ title: Classes
 * **class [HeaderPage](Classes/structHeaderPage.md)** <br>struct for the header page. 
 * **class [Page](Classes/structPage.md)** <br>struct for abstract page. 
 
+
+
+-------------------------------
+
+Updated on 2021-09-25 at 17:41:34 +0900
+```
 
 
 -------------------------------

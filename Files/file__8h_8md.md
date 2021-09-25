@@ -1,12 +1,26 @@
 ---
-title: File Manager
-summary: These are the file management functions. 
+title: file_8h.md
 
 ---
 
-# File Manager
+# file_8h.md
 
-These are the file management functions. 
+
+
+
+
+
+## Source code
+
+```markdown
+---
+title: file.h
+
+---
+
+# file.h
+
+
 
 ## Functions
 
@@ -22,7 +36,7 @@ These are the file management functions.
 
 ### function file_alloc_page
 
-```
+```cpp
 pagenum_t file_alloc_page()
 ```
 
@@ -32,7 +46,7 @@ Allocate an on-disk page from the free page list.
 
 ### function file_free_page
 
-```
+```cpp
 void file_free_page(
     pagenum_t pagenum
 )
@@ -47,7 +61,7 @@ Free an on-disk page to the free page list.
 
 ### function file_read_page
 
-```
+```cpp
 void file_read_page(
     pagenum_t pagenum,
     page_t * dest
@@ -64,7 +78,7 @@ Read an on-disk page into the in-memory page structure(dest)
 
 ### function file_write_page
 
-```
+```cpp
 void file_write_page(
     pagenum_t pagenum,
     const page_t * src
@@ -81,6 +95,28 @@ Write an in-memory page(src) to the on-disk page.
 
 
 
+## Source code
+
+```cpp
+
+#pragma once
+
+#include "types.h"
+
+pagenum_t file_alloc_page();
+
+void file_free_page(pagenum_t pagenum);
+
+void file_read_page(pagenum_t pagenum, page_t* dest);
+
+void file_write_page(pagenum_t pagenum, const page_t* src);
+```
+
+
+-------------------------------
+
+Updated on 2021-09-25 at 17:41:34 +0900
+```
 
 
 -------------------------------

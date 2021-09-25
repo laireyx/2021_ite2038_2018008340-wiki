@@ -1,9 +1,10 @@
 ---
-title: Pages
+title: docs/Classes
 
 ---
 
-# Pages
+# docs/Classes
+
 
 
 

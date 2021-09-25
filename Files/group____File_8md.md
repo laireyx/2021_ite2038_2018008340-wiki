@@ -1,4 +1,19 @@
 ---
+title: group__File.md
+
+---
+
+# group__File.md
+
+
+
+
+
+
+## Source code
+
+```markdown
+---
 title: File Manager
 summary: These are the file management functions. 
 
@@ -81,6 +96,12 @@ Write an in-memory page(src) to the on-disk page.
 
 
 
+
+
+-------------------------------
+
+Updated on 2021-09-25 at 17:41:34 +0900
+```
 
 
 -------------------------------

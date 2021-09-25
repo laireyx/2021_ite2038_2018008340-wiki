@@ -1,4 +1,19 @@
 ---
+title: structFreePage.md
+
+---
+
+# structFreePage.md
+
+
+
+
+
+
+## Source code
+
+```markdown
+---
 title: FreePage
 summary: struct for the free page. 
 
@@ -41,6 +56,12 @@ uint8_t reserved;
 ```
 
 Reserved area for next project. 
+
+-------------------------------
+
+Updated on 2021-09-25 at 17:41:34 +0900
+```
+
 
 -------------------------------
 

@@ -1,4 +1,19 @@
 ---
+title: structAllocatedPage.md
+
+---
+
+# structAllocatedPage.md
+
+
+
+
+
+
+## Source code
+
+```markdown
+---
 title: AllocatedPage
 summary: struct for allocated page. 
 
@@ -32,6 +47,12 @@ uint8_t reserved;
 ```
 
 Reserved area for normal allocated page. 
+
+-------------------------------
+
+Updated on 2021-09-25 at 17:41:34 +0900
+```
+
 
 -------------------------------
 

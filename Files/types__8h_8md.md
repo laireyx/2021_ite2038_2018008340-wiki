@@ -1,4 +1,19 @@
 ---
+title: types_8h.md
+
+---
+
+# types_8h.md
+
+
+
+
+
+
+## Source code
+
+```markdown
+---
 title: types.h
 
 ---
@@ -73,6 +88,12 @@ typedef Page page_t;
 typedef AllocatedPage allocatedpage_t;
 typedef HeaderPage headerpage_t;
 typedef FreePage freepage_t;
+```
+
+
+-------------------------------
+
+Updated on 2021-09-25 at 17:41:34 +0900
 ```
 
 

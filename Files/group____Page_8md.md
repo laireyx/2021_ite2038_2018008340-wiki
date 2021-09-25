@@ -1,11 +1,27 @@
 ---
-title: page.h
+title: group__Page.md
 
 ---
 
-# page.h
+# group__Page.md
 
 
+
+
+
+
+## Source code
+
+```markdown
+---
+title: Page structure
+summary: These are the page structures. 
+
+---
+
+# Page structure
+
+These are the page structures. 
 
 ## Classes
 
@@ -28,39 +44,17 @@ title: page.h
 
 ### variable PAGE_SIZE
 
-```cpp
+```
 constexpr int PAGE_SIZE = 4096;
 ```
 
 
 
-## Source code
 
-```cpp
 
-#pragma once
-#include <cstdint>
+-------------------------------
 
-constexpr int PAGE_SIZE = 4096;
-
-struct Page { };
-
-struct AllocatedPage : public Page {
-    uint8_t reserved[PAGE_SIZE];
-};
-
-struct HeaderPage : public Page {
-    uint64_t free_page_idx;
-    uint64_t page_num;
-
-    uint8_t reserved[PAGE_SIZE - 16];
-};
-
-struct FreePage : public Page {
-    uint64_t next_free_idx;
-
-    uint8_t reserved[PAGE_SIZE - 8];
-};
+Updated on 2021-09-25 at 17:41:34 +0900
 ```
 
 
