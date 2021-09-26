@@ -3,7 +3,7 @@
 * [Classes](Classes/home)
   * [Page](Classes/structPage)
   * [HeaderPage](Classes/structHeaderPage)
-  * [FreePage](Classes/structFreePage.m
+  * [FreePage](Classes/structFreePage)
   * [DatabaseInstance](Classes/structDatabaseInstance)
   * [AllocatedPage](Classes/structAllocatedPage)
 * [Files](Files/home)
