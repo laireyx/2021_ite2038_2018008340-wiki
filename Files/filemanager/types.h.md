@@ -1,12 +1,3 @@
----
-title: filemanager/types.h
-
----
-
-# filemanager/types.h
-
-
-
 ## Types
 
 |                | Name           |
@@ -77,4 +68,4 @@ typedef FreePage freepage_t;
 
 -------------------------------
 
-Updated on 2021-09-26 at 23:49:27 +0900
+Updated on 2021-09-27 at 00:01:02 +0900

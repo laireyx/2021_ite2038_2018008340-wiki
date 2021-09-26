@@ -1,19 +1,15 @@
-# AllocatedPage
-
-
-
 struct for allocated page. 
 
 
 `#include <page.h>`
 
-Inherits from [Page](/Classes/structPage)
+Inherits from [Page](/Classes/Page)
 
 ## Public Attributes
 
 |                | Name           |
 | -------------- | -------------- |
-| uint8_t | **[reserved](/Classes/structAllocatedPage#variable-reserved)** <br>Reserved area for normal allocated page.  |
+| uint8_t | **[reserved](/Classes/AllocatedPage#variable-reserved)** <br>Reserved area for normal allocated page.  |
 
 ## Public Attributes Documentation
 
@@ -27,4 +23,4 @@ Reserved area for normal allocated page.
 
 -------------------------------
 
-Updated on 2021-09-26 at 23:49:26 +0900
+Updated on 2021-09-27 at 00:01:02 +0900

@@ -1,12 +1,3 @@
----
-title: filemanager/page.h
-
----
-
-# filemanager/page.h
-
-
-
 ## Classes
 
 |                | Name           |
@@ -66,4 +57,4 @@ struct FreePage : public Page {
 
 -------------------------------
 
-Updated on 2021-09-26 at 23:49:26 +0900
+Updated on 2021-09-27 at 00:01:02 +0900

@@ -1,8 +1,3 @@
----
-title: Files
-
----
-
 # Files
 
 
@@ -12,11 +7,10 @@ title: Files
     * **file [filemanager/file.cc](/Files/file_8cc#file-file.cc)** 
     * **file [filemanager/file.h](/Files/file_8h#file-file.h)** 
     * **file [filemanager/page.h](/Files/page_8h#file-page.h)** 
-    * **file [filemanager/test.cc](/Files/test_8cc#file-test.cc)** 
     * **file [filemanager/types.h](/Files/types_8h#file-types.h)** 
 
 
 
 -------------------------------
 
-Updated on 2021-09-26 at 23:49:27 +0900
+Updated on 2021-09-27 at 00:01:02 +0900
