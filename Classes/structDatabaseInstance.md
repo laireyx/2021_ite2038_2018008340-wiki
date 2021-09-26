@@ -1,3 +1,13 @@
+---
+title: DatabaseInstance
+summary: Database file instance. 
+
+---
+
+# DatabaseInstance
+
+
+
 Database file instance. 
 
 
@@ -7,8 +17,8 @@ Database file instance.
 
 |                | Name           |
 | -------------- | -------------- |
-| char * | **[file_path](/Classes/DatabaseInstance#variable-file-path)**  |
-| FILE * | **[file_pointer](/Classes/DatabaseInstance#variable-file-pointer)**  |
+| char * | **[file_path](/Classes/structDatabaseInstance#variable-file-path)**  |
+| FILE * | **[file_pointer](/Classes/structDatabaseInstance#variable-file-pointer)**  |
 
 ## Public Attributes Documentation
 
@@ -28,4 +38,4 @@ FILE * file_pointer;
 
 -------------------------------
 
-Updated on 2021-09-27 at 00:01:02 +0900
+Updated on 2021-09-27 at 00:13:04 +0900
