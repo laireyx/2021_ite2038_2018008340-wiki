@@ -1,9 +1,3 @@
----
-title: DatabaseInstance
-summary: Database file instance. 
-
----
-
 # DatabaseInstance
 
 
