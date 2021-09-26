@@ -1,9 +1,3 @@
----
-title: AllocatedPage
-summary: struct for allocated page. 
-
----
-
 # AllocatedPage
 
 
