@@ -49,7 +49,7 @@ inline bool check(
 )
 ```
 
-If value < 0, then print error message. 
+If <code>value &lt; 0</code>, then print error message. 
 
 **Parameters**: 
 
