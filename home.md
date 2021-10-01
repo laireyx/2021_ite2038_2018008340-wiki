@@ -1,11 +1,11 @@
 # File manager wiki
 
-##[Modules](/Modules/Modules)
+### [Modules](/Modules/Modules)
   * [DiskSpaceManager](/Modules/DiskSpaceManager)
 
 ***
 
-## [Classes](/Classes/Classes)
+### [Classes](/Classes/Classes)
   * [record](/Classes/record)
   * [node](/Classes/node)
   * [Page](/Classes/Page)
@@ -16,11 +16,11 @@
   * [DatabaseInstance](/Classes/DatabaseInstance)
   * [BasicFileManagerTest](/Classes/BasicFileManagerTest)
   * [AllocatedPage](/Classes/AllocatedPage)
-## [Namespaces](/Namespaces/Namespaces)
+### [Namespaces](/Namespaces/Namespaces)
   * [testing](/Namespaces/testing)
   * [file_helper](/Namespaces/file_helper)
   * [error](/Namespaces/error)
-## [Files](/Files/Files)
+### [Files](/Files/Files)
   * [test](/Files/test)
   * [basic_test.cc](/Files/test/basic_test.cc)
   * [file_test.cc](/Files/test/file_test.cc)
