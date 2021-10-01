@@ -1,7 +1,7 @@
 # File manager wiki
 
-# [Modules](/Modules/Modules)
-  # [DiskSpaceManager](/Modules/DiskSpaceManager)
+* [Modules](/Modules/Modules)
+  * [DiskSpaceManager](/Modules/DiskSpaceManager)
 
 ***
 
