@@ -1,6 +1,6 @@
 # DB Project wiki
 
-###[Analysis for original B+ Tree](/Original-In-Memory-B--Tree)
+### [Analysis for original B+ Tree](/Original-In-Memory-B--Tree)
 
 ### [Modules](/Modules/Modules)
   * [TestCode](/Modules/TestCode)
