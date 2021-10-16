@@ -5,7 +5,7 @@ The original In-Memory B+ Tree source code starts any operations from the leaf n
 To find the appropriate leaf node, it uses `find_by_key()` and `find_leaf()` function.
 
 1. Insertion
-![insert](/img/insert.png)
+![insert](/wikis/uploads/bptanalysis/insert.png)
 First, find a record corresponding to the key to insert from the tree, and terminates if found. This implementation does not allow key duplication.
 Second, find an appropriate leaf node that can contain a record key to insert. If its free space is enough, then append the record to that leaf node and terminates. If not, it starts splitting.
 
