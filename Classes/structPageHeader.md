@@ -1,0 +1,77 @@
+---
+title: PageHeader
+summary: page header for allocated(internal and leaf) node. 
+
+---
+
+# PageHeader
+
+**Module:** **[DiskSpaceManager](/Modules/group__DiskSpaceManager)**
+
+
+
+page header for allocated(internal and leaf) node. 
+
+
+`#include <page.h>`
+
+## Public Classes
+
+|                | Name           |
+| -------------- | -------------- |
+| struct | **[ReservedFooter](/Classes/structPageHeader_1_1ReservedFooter)**  |
+
+## Public Attributes
+
+|                | Name           |
+| -------------- | -------------- |
+| pagenum_t | **[parent_page_idx](/Classes/structPageHeader#variable-parent-page-idx)** <br>The parent page index.  |
+| uint32_t | **[is_leaf_page](/Classes/structPageHeader#variable-is-leaf-page)** <br>1 if this page is leaf page, and 0 if internal page.  |
+| uint32_t | **[key_num](/Classes/structPageHeader#variable-key-num)** <br>Number of keys this page is holding.  |
+| uint8_t | **[reserved](/Classes/structPageHeader#variable-reserved)** <br>Reserved area for page header.  |
+| struct <a href="/Classes/structPageHeader_1_1ReservedFooter">PageHeader::ReservedFooter</a> | **[reserved_footer](/Classes/structPageHeader#variable-reserved-footer)**  |
+
+## Public Attributes Documentation
+
+### variable parent_page_idx
+
+```cpp
+pagenum_t parent_page_idx;
+```
+
+The parent page index. 
+
+### variable is_leaf_page
+
+```cpp
+uint32_t is_leaf_page;
+```
+
+1 if this page is leaf page, and 0 if internal page. 
+
+### variable key_num
+
+```cpp
+uint32_t key_num;
+```
+
+Number of keys this page is holding. 
+
+### variable reserved
+
+```cpp
+uint8_t reserved;
+```
+
+Reserved area for page header. 
+
+### variable reserved_footer
+
+```cpp
+struct PageHeader::ReservedFooter reserved_footer;
+```
+
+
+-------------------------------
+
+Updated on 2021-10-16 at 22:36:54 +0900
