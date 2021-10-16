@@ -264,4 +264,4 @@ In internal page, <code>page-&gt;page&#95;header.reserved&#95;footer.footer&#95;
 
 -------------------------------
 
-Updated on 2021-10-16 at 22:08:23 +0900
+Updated on 2021-10-16 at 22:13:14 +0900

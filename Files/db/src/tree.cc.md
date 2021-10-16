@@ -1262,4 +1262,4 @@ pagenum_t delete_node(tableid_t table_id, int64_t key) {
 
 -------------------------------
 
-Updated on 2021-10-16 at 22:08:23 +0900
+Updated on 2021-10-16 at 22:13:14 +0900
