@@ -6,7 +6,6 @@ To find the appropriate leaf node, it uses `find_by_key()` and `find_leaf()` fun
 
 1. Insertion
 ![insert](uploads/4d1f8aab1d509bc8c6b3aa40c5d7b2b2/insert.png)
-![insert](insert.png)
 First, find a record corresponding to the key to insert from the tree, and terminates if found. This implementation does not allow key duplication.
 Second, find an appropriate leaf node that can contain a record key to insert. If its free space is enough, then append the record to that leaf node and terminates. If not, it starts splitting.
 
@@ -18,7 +17,7 @@ When the splitting is finished, then check if the root node has split. If it is,
 Then the insertion is finished.
 
 2. Deletion
-![delete](delete.png)
+![delete](uploads/b284de09fed4711ab504edfc94a95598/delete.png)
 First, find a record corresponding to the key to insert from the tree, and terminates if not found. Deletion is valid for only existing items.
 Second, just remove the record from that leaf node and check the free space amount. If it has too much free space so that it causes unbalance, then it starts merging or redistributing. If the node has enough space for all the sibling node's records, it chooses to merge two nodes or redistribute otherwise.
 
