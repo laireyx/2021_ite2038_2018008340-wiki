@@ -268,4 +268,4 @@ In internal page, <code>page-&gt;page&#95;header.reserved&#95;footer.footer&#95;
 
 -------------------------------
 
-Updated on 2021-10-25 at 16:53:02 +0900
+Updated on 2021-10-25 at 16:59:00 +0900
