@@ -15,7 +15,7 @@ struct for abstract page.  [More...](#detailed-description)
 
 `#include <page.h>`
 
-Inherited by [AllocatedPage](/Classes/structAllocatedPage), [FreePage](/Classes/structFreePage), [HeaderPage](/Classes/structHeaderPage)
+Inherited by [AllocatedPage](/Classes/structAllocatedPage), [FreePage](/Classes/structFreePage), [FullPage](/Classes/structFullPage), [HeaderPage](/Classes/structHeaderPage)
 
 ## Detailed Description
 
@@ -29,4 +29,4 @@ Actually this struct is empty for equalizing the size of all inherited pages.
 
 -------------------------------
 
-Updated on 2021-10-16 at 22:36:54 +0900
+Updated on 2021-10-25 at 16:53:02 +0900

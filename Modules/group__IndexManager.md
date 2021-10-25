@@ -1,9 +1,9 @@
 ---
-title: db/include/tree.h
+title: IndexManager
 
 ---
 
-# db/include/tree.h
+# IndexManager
 
 
 
@@ -27,6 +27,7 @@ title: db/include/tree.h
 | pagenum_t | **[delete_internal_key](/Modules/group__IndexManager#function-delete-internal-key)**(tableid_t table_id, pagenum_t internal_page_idx, int64_t key)<br>Delete a page branch from internal page.  |
 | pagenum_t | **[delete_leaf_key](/Modules/group__IndexManager#function-delete-leaf-key)**(tableid_t table_id, pagenum_t leaf_page_idx, int64_t key)<br>Delete a record from leaf page.  |
 | pagenum_t | **[delete_node](/Modules/group__IndexManager#function-delete-node)**(tableid_t table_id, int64_t key)<br>Entrance for remove a record from table.  |
+| pagenum_t | **[insert_into_new_root](/Modules/group__IndexManager#function-insert-into-new-root)**(tableid_t table_id, pagenum_t left_page_idx, int64_t key, pagenum_t right_page_idx) |
 
 ## Attributes
 
@@ -40,7 +41,7 @@ title: db/include/tree.h
 
 ### function make_leaf
 
-```cpp
+```
 pagenum_t make_leaf(
     tableid_t table_id,
     pagenum_t parent_page_idx =0
@@ -59,7 +60,7 @@ Allocate and make a leaf page.
 
 ### function make_node
 
-```cpp
+```
 pagenum_t make_node(
     tableid_t table_id,
     pagenum_t parent_page_idx =0
@@ -78,7 +79,7 @@ Allocate and make an internal page.
 
 ### function create_tree
 
-```cpp
+```
 pagenum_t create_tree(
     tableid_t table_id,
     int64_t key,
@@ -104,7 +105,7 @@ Create a new leaf page for root page and set initial record.
 
 ### function find_leaf
 
-```cpp
+```
 pagenum_t find_leaf(
     tableid_t table_id,
     int64_t key
@@ -123,7 +124,7 @@ Find a leaf node which contains given key.
 
 ### function find_by_key
 
-```cpp
+```
 bool find_by_key(
     tableid_t table_id,
     int64_t key,
@@ -146,7 +147,7 @@ Find a record with key.
 
 ### function insert_into_node
 
-```cpp
+```
 pagenum_t insert_into_node(
     tableid_t table_id,
     pagenum_t parent_page_idx,
@@ -171,7 +172,7 @@ Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page.
 
 ### function insert_into_node_after_splitting
 
-```cpp
+```
 pagenum_t insert_into_node_after_splitting(
     tableid_t table_id,
     pagenum_t parent_page_idx,
@@ -194,7 +195,7 @@ Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page, and sp
 
 ### function insert_into_parent
 
-```cpp
+```
 pagenum_t insert_into_parent(
     tableid_t table_id,
     pagenum_t left_page_idx,
@@ -217,7 +218,7 @@ Choose right method between just inserting and <code>insert&#95;into&#95;node&#9
 
 ### function insert_into_leaf_after_splitting
 
-```cpp
+```
 pagenum_t insert_into_leaf_after_splitting(
     tableid_t table_id,
     pagenum_t leaf_page_idx,
@@ -242,7 +243,7 @@ Insert <code>(key, value)</code>into leaf node and split it into two pages.
 
 ### function insert_node
 
-```cpp
+```
 pagenum_t insert_node(
     tableid_t table_id,
     int64_t key,
@@ -265,7 +266,7 @@ Find appropriate leaf page and insert a record into it.
 
 ### function adjust_root
 
-```cpp
+```
 pagenum_t adjust_root(
     tableid_t table_id
 )
@@ -285,7 +286,7 @@ Pull up the child page if the root page is empty internal page. Or free the root
 
 ### function coalesce_internal_nodes
 
-```cpp
+```
 pagenum_t coalesce_internal_nodes(
     tableid_t table_id,
     pagenum_t left_page_idx,
@@ -313,7 +314,7 @@ Moves all right page branch into the left page.
 
 ### function coalesce_leaf_nodes
 
-```cpp
+```
 pagenum_t coalesce_leaf_nodes(
     tableid_t table_id,
     pagenum_t left_page_idx,
@@ -337,7 +338,7 @@ Moves all right page record into the left page.
 
 ### function delete_internal_key
 
-```cpp
+```
 pagenum_t delete_internal_key(
     tableid_t table_id,
     pagenum_t internal_page_idx,
@@ -358,7 +359,7 @@ Delete a page branch from internal page.
 
 ### function delete_leaf_key
 
-```cpp
+```
 pagenum_t delete_leaf_key(
     tableid_t table_id,
     pagenum_t leaf_page_idx,
@@ -379,7 +380,7 @@ Delete a record from leaf page.
 
 ### function delete_node
 
-```cpp
+```
 pagenum_t delete_node(
     tableid_t table_id,
     int64_t key
@@ -396,71 +397,36 @@ Entrance for remove a record from table.
 
 **Return**: root page number. 
 
+### function insert_into_new_root
+
+```
+pagenum_t insert_into_new_root(
+    tableid_t table_id,
+    pagenum_t left_page_idx,
+    int64_t key,
+    pagenum_t right_page_idx
+)
+```
+
+
 
 ## Attributes Documentation
 
 ### variable REDISTRIBUTE_THRESHOLD
 
-```cpp
+```
 constexpr int REDISTRIBUTE_THRESHOLD = 2500;
 ```
 
 
 ### variable MAX_VALUE_SIZE
 
-```cpp
+```
 constexpr int MAX_VALUE_SIZE = 112;
 ```
 
 
 
-## Source code
-
-```cpp
-
-#pragma once
-
-#include <types.h>
-
-constexpr int REDISTRIBUTE_THRESHOLD = 2500;
-constexpr int MAX_VALUE_SIZE = 112;
-
-pagenum_t make_leaf(tableid_t table_id, pagenum_t parent_page_idx = 0);
-pagenum_t make_node(tableid_t table_id, pagenum_t parent_page_idx = 0);
-
-pagenum_t create_tree(tableid_t table_id, int64_t key, const char* value,
-                      uint16_t value_size);
-
-pagenum_t find_leaf(tableid_t table_id, int64_t key);
-bool find_by_key(tableid_t table_id, int64_t key, char* value = nullptr,
-                 uint16_t* value_size = nullptr);
-
-pagenum_t insert_into_node(tableid_t table_id, pagenum_t parent_page_idx,
-                           pagenum_t left_page_idx, int64_t key,
-                           pagenum_t right_page_idx);
-pagenum_t insert_into_node_after_splitting(tableid_t table_id,
-                                           pagenum_t parent_page_idx, int64_t key,
-                                           pagenum_t right_page_idx);
-pagenum_t insert_into_parent(tableid_t table_id, pagenum_t left_page_idx, int64_t key,
-                             pagenum_t right_page_idx);
-pagenum_t insert_into_leaf_after_splitting(tableid_t table_id,
-                                           pagenum_t leaf_page_idx, int64_t key,
-                                           const char* value,
-                                           uint16_t value_size);
-
-pagenum_t insert_node(tableid_t table_id, int64_t key, const char* value,
-                      uint16_t value_size);
-
-pagenum_t adjust_root(tableid_t table_id);
-pagenum_t coalesce_internal_nodes(tableid_t table_id, pagenum_t left_page_idx,
-                                  int64_t seperate_key,
-                                  int seperate_key_idx,
-                                  pagenum_t right_page_idx);
-pagenum_t coalesce_leaf_nodes(tableid_t table_id, pagenum_t left_page_idx, pagenum_t right_page_idx);
-pagenum_t delete_internal_key(tableid_t table_id, pagenum_t internal_page_idx, int64_t key);
-pagenum_t delete_leaf_key(tableid_t table_id, pagenum_t leaf_page_idx, int64_t key);
-pagenum_t delete_node(tableid_t table_id, int64_t key);
-```
 
 
 -------------------------------

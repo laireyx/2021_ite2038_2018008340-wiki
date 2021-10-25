@@ -17,8 +17,8 @@ title: test/table_test.cc
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicTableTest">BasicTableTest</a> , RandomDeletionTest )<br>Tests database deletion API.  |
 | | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicTableTest">BasicTableTest</a> , RandomInsertTest )<br>Tests database insertion API.  |
+| | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicTableTest">BasicTableTest</a> , RandomDeletionTest )<br>Tests database deletion API.  |
 
 ## Attributes
 
@@ -28,6 +28,23 @@ title: test/table_test.cc
 
 
 ## Functions Documentation
+
+### function TEST_F
+
+```cpp
+TEST_F(
+    BasicTableTest ,
+    RandomInsertTest 
+)
+```
+
+Tests database insertion API. 
+
+
+
+1. Open a database and write random values in random order.
+    * Find the value using the key and compare it to the value. 
+
 
 ### function TEST_F
 
@@ -47,23 +64,6 @@ Tests database deletion API.
     * Find those values and check existency. 
 
 
-### function TEST_F
-
-```cpp
-TEST_F(
-    BasicTableTest ,
-    RandomInsertTest 
-)
-```
-
-Tests database insertion API. 
-
-
-
-1. Open a database and write random values in random order.
-    * Find the value using the key and compare it to the value. 
-
-
 
 ## Attributes Documentation
 
@@ -79,8 +79,7 @@ constexpr int test_count = 10000;
 
 ```cpp
 
-#include "file.h"
-#include "table.h"
+#include <db.h>
 
 #include <gtest/gtest.h>
 #include <sys/stat.h>
@@ -97,7 +96,8 @@ class BasicTableTest : public ::testing::Test {
     int test_order[test_count];
 
     BasicTableTest() {
-        srand(2);
+        init_db();
+        srand(1);
 
         // Generate random indexes
         for (int i = 0; i < test_count; i++) {
@@ -114,8 +114,46 @@ class BasicTableTest : public ::testing::Test {
             test_order[y] = temp;
         }
     }
-    ~BasicTableTest() { file_close_table_files(); }
+    ~BasicTableTest() { shutdown_db(); }
 };
+
+TEST_F(BasicTableTest, RandomInsertTest) {
+    tableid_t table_id = open_table("test_insert.db");
+    // Check if the file is opened
+    ASSERT_TRUE(table_id >=
+                0);  // change the condition to your design's behavior
+
+    uint8_t temp_size[test_count] = {};
+    static uint8_t temp_value[test_count][128] = {};
+
+    for (int i = 0; i < test_count; i++) {
+        uint16_t value_size;
+        uint8_t return_value[128] = {};
+
+        temp_size[test_order[i]] = 50 + rand() % 63;
+        for (int j = 0; j < 128; j++) {
+            temp_value[test_order[i]][j] = rand() % 256;
+        }
+
+        ASSERT_EQ(db_insert(table_id, test_order[i],
+                            reinterpret_cast<char*>(temp_value[test_order[i]]),
+                            temp_size[test_order[i]]),
+                  0);
+    }
+
+    for (int i = 0; i < test_count; i++) {
+        uint16_t value_size;
+        uint8_t return_value[128] = {};
+
+        ASSERT_FALSE(db_find(table_id, test_order[i],
+                             reinterpret_cast<char*>(return_value),
+                             &value_size) < 0);
+        ASSERT_EQ(value_size, temp_size[test_order[i]]);
+        ASSERT_EQ(memcmp(temp_value[test_order[i]], return_value,
+                         temp_size[test_order[i]]),
+                  0);
+    }
+}
 
 TEST_F(BasicTableTest, RandomDeletionTest) {
     tableid_t table_id = open_table("test_delete.db");
@@ -131,8 +169,7 @@ TEST_F(BasicTableTest, RandomDeletionTest) {
         }
 
         ASSERT_EQ(db_insert(table_id, test_order[i],
-                            reinterpret_cast<char*>(temp_value),
-                            temp_size),
+                            reinterpret_cast<char*>(temp_value), temp_size),
                   0);
     }
 
@@ -146,40 +183,9 @@ TEST_F(BasicTableTest, RandomDeletionTest) {
                             &value_size) < 0);
     }
 }
-
-TEST_F(BasicTableTest, RandomInsertTest) {
-    tableid_t table_id = open_table("test_insert.db");
-    // Check if the file is opened
-    ASSERT_TRUE(table_id >=
-                0);  // change the condition to your design's behavior
-
-    uint8_t temp_size[test_count] = {};
-    static uint8_t temp_value[test_count][128] = {};
-
-    for (int i = 0; i < test_count; i++) {
-        uint16_t value_size;
-        uint8_t return_value[128] = {};
-        
-        temp_size[test_order[i]] = 50 + rand() % 63;
-        for(int j = 0; j < 128; j++) {
-            temp_value[test_order[i]][j] = rand() % 256;
-        }
-
-        ASSERT_EQ(db_insert(table_id, test_order[i], reinterpret_cast<char*>(temp_value[test_order[i]]), temp_size[test_order[i]]), 0);
-    }
-
-    for (int i = 0; i < test_count; i++) {
-        uint16_t value_size;
-        uint8_t return_value[128] = {};
-
-        ASSERT_FALSE(db_find(table_id, test_order[i], reinterpret_cast<char*>(return_value), &value_size) < 0);
-        ASSERT_EQ(value_size, temp_size[test_order[i]]);
-        ASSERT_EQ(memcmp(temp_value[test_order[i]], return_value, temp_size[test_order[i]]), 0);
-    }
-}
 ```
 
 
 -------------------------------
 
-Updated on 2021-10-16 at 22:36:54 +0900
+Updated on 2021-10-25 at 16:53:02 +0900
