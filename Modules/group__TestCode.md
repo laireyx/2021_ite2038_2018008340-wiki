@@ -11,6 +11,8 @@ title: TestCode
 
 |                | Name           |
 | -------------- | -------------- |
+| class | **[BasicBufferManagerTest](/Classes/classBasicBufferManagerTest)**  |
+| class | **[CrossTableTest](/Classes/classCrossTableTest)**  |
 | class | **[BasicFileManagerTest](/Classes/classBasicFileManagerTest)**  |
 | class | **[BasicTableTest](/Classes/classBasicTableTest)**  |
 
@@ -18,14 +20,20 @@ title: TestCode
 
 |                | Name           |
 | -------------- | -------------- |
+| | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicBufferManagerTest">BasicBufferManagerTest</a> , HandlesPageAllocation )<br>Tests page allocation and free.  |
+| | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicBufferManagerTest">BasicBufferManagerTest</a> , CheckReadWriteOperation )<br>Tests page read/write operations.  |
+| | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicBufferManagerTest">BasicBufferManagerTest</a> , UniqueIdTest )<br>Tests unique table fd.  |
+| | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicBufferManagerTest">BasicBufferManagerTest</a> , SequentialAllocateTest )<br>Tests sequential allocation.  |
+| | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicBufferManagerTest">BasicBufferManagerTest</a> , RandomAllocateTest )<br>Tests random allocation.  |
+| | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classCrossTableTest">CrossTableTest</a> , RandomAllocateTest )<br>Test for cross table buffer management.  |
 | | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicFileManagerTest">BasicFileManagerTest</a> , HandlesInitialization )<br>Tests file open/close APIs.  |
 | | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicFileManagerTest">BasicFileManagerTest</a> , HandlesPageAllocation )<br>Tests page allocation and free.  |
 | | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicFileManagerTest">BasicFileManagerTest</a> , CheckReadWriteOperation )<br>Tests page read/write operations.  |
 | | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicFileManagerTest">BasicFileManagerTest</a> , UniqueIdTest )<br>Tests unique table fd.  |
 | | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicFileManagerTest">BasicFileManagerTest</a> , SequentialAllocateTest )<br>Tests sequential allocation.  |
 | | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicFileManagerTest">BasicFileManagerTest</a> , RandomAllocateTest )<br>Tests random allocation.  |
-| | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicTableTest">BasicTableTest</a> , RandomDeletionTest )<br>Tests database deletion API.  |
 | | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicTableTest">BasicTableTest</a> , RandomInsertTest )<br>Tests database insertion API.  |
+| | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicTableTest">BasicTableTest</a> , RandomDeletionTest )<br>Tests database deletion API.  |
 
 ## Attributes
 
@@ -36,9 +44,98 @@ title: TestCode
 | const char * | **[TABLE_PATH_ALIAS](/Modules/group__TestCode#variable-table-path-alias)**  |
 | const char * | **[ANOTHER_TABLE_PATH](/Modules/group__TestCode#variable-another-table-path)**  |
 | constexpr int | **[test_count](/Modules/group__TestCode#variable-test-count)**  |
+| const char * | **[TABLE_PATH](/Modules/group__TestCode#variable-table-path)**  |
+| const char * | **[TABLE_PATH_ALIAS](/Modules/group__TestCode#variable-table-path-alias)**  |
+| const char * | **[ANOTHER_TABLE_PATH](/Modules/group__TestCode#variable-another-table-path)**  |
+| constexpr int | **[test_count](/Modules/group__TestCode#variable-test-count)**  |
 
 
 ## Functions Documentation
+
+### function TEST_F
+
+```
+TEST_F(
+    BasicBufferManagerTest ,
+    HandlesPageAllocation 
+)
+```
+
+Tests page allocation and free. 
+
+
+
+1. Allocate 2 pages and free one of them, traverse the free page list and check the existence/absence of the freed/allocated page 
+
+
+### function TEST_F
+
+```
+TEST_F(
+    BasicBufferManagerTest ,
+    CheckReadWriteOperation 
+)
+```
+
+Tests page read/write operations. 
+
+
+
+1. Write/Read a page with some random content and check if the data matches 
+
+
+### function TEST_F
+
+```
+TEST_F(
+    BasicBufferManagerTest ,
+    UniqueIdTest 
+)
+```
+
+Tests unique table fd. 
+
+Create table files with different path, but same realpath to check if table uses unique id for that file. Also checks real different file and assure that two different table id should not be same. 
+
+
+### function TEST_F
+
+```
+TEST_F(
+    BasicBufferManagerTest ,
+    SequentialAllocateTest 
+)
+```
+
+Tests sequential allocation. 
+
+Check if pages are correctly allocated and freed. it does not include any expectation, so test procedure purely depends on filemanager's own error checking method. 
+
+
+### function TEST_F
+
+```
+TEST_F(
+    BasicBufferManagerTest ,
+    RandomAllocateTest 
+)
+```
+
+Tests random allocation. 
+
+This disk space manager uses LIFO for free page management. Allocate and free page randomly first then allocate again and check if second allocation result is equal to first free result in reverse order. 
+
+
+### function TEST_F
+
+```
+TEST_F(
+    CrossTableTest ,
+    RandomAllocateTest 
+)
+```
+
+Test for cross table buffer management. 
 
 ### function TEST_F
 
@@ -136,6 +233,23 @@ This disk space manager uses LIFO for free page management. Allocate and free pa
 ```
 TEST_F(
     BasicTableTest ,
+    RandomInsertTest 
+)
+```
+
+Tests database insertion API. 
+
+
+
+1. Open a database and write random values in random order.
+    * Find the value using the key and compare it to the value. 
+
+
+### function TEST_F
+
+```
+TEST_F(
+    BasicTableTest ,
     RandomDeletionTest 
 )
 ```
@@ -149,30 +263,13 @@ Tests database deletion API.
     * Find those values and check existency. 
 
 
-### function TEST_F
-
-```
-TEST_F(
-    BasicTableTest ,
-    RandomInsertTest 
-)
-```
-
-Tests database insertion API. 
-
-
-
-1. Open a database and write random values in random order.
-    * Find the value using the key and compare it to the value. 
-
-
 
 ## Attributes Documentation
 
 ### variable test_count
 
 ```
-constexpr int test_count = 128;
+constexpr int test_count = 100;
 ```
 
 
@@ -200,7 +297,35 @@ const char * ANOTHER_TABLE_PATH = "test_another.db";
 ### variable test_count
 
 ```
-constexpr int test_count = 128;
+constexpr int test_count = 100;
+```
+
+
+### variable TABLE_PATH
+
+```
+const char * TABLE_PATH = "test.db";
+```
+
+
+### variable TABLE_PATH_ALIAS
+
+```
+const char * TABLE_PATH_ALIAS = "./test.db";
+```
+
+
+### variable ANOTHER_TABLE_PATH
+
+```
+const char * ANOTHER_TABLE_PATH = "test_another.db";
+```
+
+
+### variable test_count
+
+```
+constexpr int test_count = 100;
 ```
 
 
@@ -209,4 +334,4 @@ constexpr int test_count = 128;
 
 -------------------------------
 
-Updated on 2021-10-25 at 17:06:26 +0900
+Updated on 2021-10-25 at 17:08:19 +0900

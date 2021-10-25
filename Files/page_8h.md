@@ -11,13 +11,14 @@ title: db/include/page.h
 
 | Name           |
 | -------------- |
-| **[page_helper](/Namespaces/namespacepage__helper)** <br><a href="/Classes/structPage">Page</a> helper.  |
+| **[page_helper](/Namespaces/namespacepage__helper)** <br>Page helper.  |
 
 ## Classes
 
 |                | Name           |
 | -------------- | -------------- |
 | class | **[Page](/Classes/structPage)** <br>struct for abstract page.  |
+| class | **[FullPage](/Classes/structFullPage)** <br>struct for any page.  |
 | class | **[HeaderPage](/Classes/structHeaderPage)** <br>struct for the header page.  |
 | class | **[FreePage](/Classes/structFreePage)** <br>struct for the free page.  |
 | class | **[PageHeader](/Classes/structPageHeader)** <br>page header for allocated(internal and leaf) node.  |
@@ -34,6 +35,7 @@ title: db/include/page.h
 |                | Name           |
 | -------------- | -------------- |
 | typedef <a href="/Classes/structPage">Page</a> | **[page_t](/Modules/group__DiskSpaceManager#typedef-page-t)**  |
+| typedef <a href="/Classes/structFullPage">FullPage</a> | **[fullpage_t](/Modules/group__DiskSpaceManager#typedef-fullpage-t)**  |
 | typedef <a href="/Classes/structPageHeader">PageHeader</a> | **[pageheader_t](/Modules/group__DiskSpaceManager#typedef-pageheader-t)**  |
 | typedef <a href="/Classes/structHeaderPage">HeaderPage</a> | **[headerpage_t](/Modules/group__DiskSpaceManager#typedef-headerpage-t)**  |
 | typedef <a href="/Classes/structFreePage">FreePage</a> | **[freepage_t](/Modules/group__DiskSpaceManager#typedef-freepage-t)**  |
@@ -66,6 +68,13 @@ title: db/include/page.h
 
 ```cpp
 typedef Page page_t;
+```
+
+
+### typedef fullpage_t
+
+```cpp
+typedef FullPage fullpage_t;
 ```
 
 
@@ -195,7 +204,7 @@ Reserved area for normal allocated page.
 ```cpp
 
 #pragma once
-#include "types.h"
+#include <types.h>
 
 #include <cstdint>
 
@@ -206,6 +215,10 @@ constexpr int PAGE_HEADER_SIZE = 128;
 constexpr int MAX_PAGE_BRANCHES = 248;
 
 struct Page {};
+
+struct FullPage : public Page {
+    uint8_t reserved[PAGE_SIZE];
+};
 
 struct HeaderPage : public Page {
     pagenum_t free_page_idx;
@@ -284,6 +297,7 @@ pagenum_t* get_leftmost_child_idx(InternalPage* page);
 }
 
 typedef Page page_t;
+typedef FullPage fullpage_t;
 typedef PageHeader pageheader_t;
 typedef HeaderPage headerpage_t;
 typedef FreePage freepage_t;
@@ -295,4 +309,4 @@ typedef LeafPage leafpage_t;
 
 -------------------------------
 
-Updated on 2021-10-25 at 17:06:26 +0900
+Updated on 2021-10-25 at 17:08:19 +0900

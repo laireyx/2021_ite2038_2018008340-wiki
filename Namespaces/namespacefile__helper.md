@@ -14,9 +14,9 @@ Filemanager helper.  [More...](#detailed-description)
 
 |                | Name           |
 | -------------- | -------------- |
-| <a href="/Classes/structTableInstance">TableInstance</a> & | **[get_table](/Namespaces/namespacefile__helper#function-get-table)**(tableid_t table_id)<br>Get table instance.  |
-| void | **[extend_capacity](/Namespaces/namespacefile__helper#function-extend-capacity)**(tableid_t table_id, pagenum_t newsize)<br>Automatically check and size-up a page file.  |
-| void | **[flush_header](/Namespaces/namespacefile__helper#function-flush-header)**(tableid_t table_id)<br>Flush a header page as "pagenum 0".  |
+| <a href="/Classes/structTableInstance">TableInstance</a> & | **[get_table_instance](/Namespaces/namespacefile__helper#function-get-table-instance)**(tableid_t table_id)<br>Get table instance.  |
+| void | **[extend_capacity](/Namespaces/namespacefile__helper#function-extend-capacity)**(tableid_t table_id, pagenum_t newsize =0)<br>Automatically check and size-up a page file.  |
+| void | **[flush_header](/Namespaces/namespacefile__helper#function-flush-header)**(tableid_t table_id, <a href="/Modules/group__DiskSpaceManager#typedef-headerpage-t">headerpage_t</a> * header_page)<br>Flush a header page as "pagenum 0".  |
 
 ## Detailed Description
 
@@ -27,10 +27,10 @@ This namespace includes some helper functions which are used by filemanager API.
 
 ## Functions Documentation
 
-### function get_table
+### function get_table_instance
 
 ```cpp
-TableInstance & get_table(
+TableInstance & get_table_instance(
     tableid_t table_id
 )
 ```
@@ -50,7 +50,7 @@ Get the reference of the table instance ojbect corresponds with the given table 
 ```cpp
 void extend_capacity(
     tableid_t table_id,
-    pagenum_t newsize
+    pagenum_t newsize =0
 )
 ```
 
@@ -74,13 +74,19 @@ next free page index is next page index, unless it is the last page.
 
 ```cpp
 void flush_header(
-    tableid_t table_id
+    tableid_t table_id,
+    headerpage_t * header_page
 )
 ```
 
 Flush a header page as "pagenum 0". 
 
-Write header page into offset 0 of the current table file 
+**Parameters**: 
+
+  * **header_page** Header page. 
+
+
+Write header page into offset 0 of the current table file
 
 
 
@@ -89,4 +95,4 @@ Write header page into offset 0 of the current table file
 
 -------------------------------
 
-Updated on 2021-10-25 at 17:06:26 +0900
+Updated on 2021-10-25 at 17:08:19 +0900
