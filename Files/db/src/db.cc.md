@@ -1,9 +1,6 @@
----
-title: db/src/table.cc
 
----
 
-# db/src/table.cc
+# db/src/db.cc
 
 
 
@@ -11,12 +8,12 @@ title: db/src/table.cc
 
 |                | Name           |
 | -------------- | -------------- |
-| int | **[init_db](/Modules/group__TableManager#function-init-db)**()<br>Initialize database management system.  |
-| tableid_t | **[open_table](/Modules/group__TableManager#function-open-table)**(char * pathname)<br>Open existing data file using ‘pathname’ or create one if not existed.  |
-| int | **[db_insert](/Modules/group__TableManager#function-db-insert)**(tableid_t table_id, int64_t key, char * value, uint16_t value_size)<br>Insert input (key, value) record with its size to data file at the right place.  |
-| int | **[db_find](/Modules/group__TableManager#function-db-find)**(tableid_t table_id, int64_t key, char * ret_val, uint16_t * value_size)<br>Find the record corresponding the input key.  |
-| int | **[db_delete](/Modules/group__TableManager#function-db-delete)**(tableid_t table_id, int64_t key)<br>Find the matching record and delete it if found.  |
-| int | **[shutdown_db](/Modules/group__TableManager#function-shutdown-db)**()<br>Shutdown database management system.  |
+| int | **[init_db](/Modules/DatabaseAPI#function-init_db)**(int num_buf =1024)<br>Initialize database management system.  |
+| tableid_t | **[open_table](/Modules/DatabaseAPI#function-open_table)**(char * pathname)<br>Open existing data file using ‘pathname’ or create one if not existed.  |
+| int | **[db_insert](/Modules/DatabaseAPI#function-db_insert)**(tableid_t table_id, int64_t key, char * value, uint16_t value_size)<br>Insert input (key, value) record with its size to data file at the right place.  |
+| int | **[db_find](/Modules/DatabaseAPI#function-db_find)**(tableid_t table_id, int64_t key, char * ret_val, uint16_t * value_size)<br>Find the record corresponding the input key.  |
+| int | **[db_delete](/Modules/DatabaseAPI#function-db_delete)**(tableid_t table_id, int64_t key)<br>Find the matching record and delete it if found.  |
+| int | **[shutdown_db](/Modules/DatabaseAPI#function-shutdown_db)**()<br>Shutdown database management system.  |
 
 
 ## Functions Documentation
@@ -24,7 +21,9 @@ title: db/src/table.cc
 ### function init_db
 
 ```cpp
-int init_db()
+int init_db(
+    int num_buf =1024
+)
 ```
 
 Initialize database management system. 
@@ -63,10 +62,10 @@ Insert input (key, value) record with its size to data file at the right place.
 
 **Parameters**: 
 
-  * **table_id** Table id obtained with <code><a href="/Modules/group__TableManager#function-open-table">open&#95;table()</a></code>. 
-  * **key** Record key. 
-  * **value** Record value. 
-  * **value_size** Record value size. 
+  * **table_id** table id obtained with <code><a href="/Modules/DatabaseAPI#function-open-table">open&#95;table()</a></code>. 
+  * **key** record key. 
+  * **value** record value. 
+  * **value_size** record value size. 
 
 
 **Return**: 0 if success. negative value otherwise. 
@@ -86,10 +85,10 @@ Find the record corresponding the input key.
 
 **Parameters**: 
 
-  * **table_id** Table id obtained with <code><a href="/Modules/group__TableManager#function-open-table">open&#95;table()</a></code>. 
-  * **key** Record key. 
-  * **value** Record value. 
-  * **value_size** Record value size. 
+  * **table_id** table id obtained with <code><a href="/Modules/DatabaseAPI#function-open-table">open&#95;table()</a></code>. 
+  * **key** record key. 
+  * **value** record value. 
+  * **value_size** record value size. 
 
 
 **Return**: 0 if success. negative value otherwise. 
@@ -110,8 +109,8 @@ Find the matching record and delete it if found.
 
 **Parameters**: 
 
-  * **table_id** Table id obtained with <code><a href="/Modules/group__TableManager#function-open-table">open&#95;table()</a></code>. 
-  * **key** Record key. 
+  * **table_id** table id obtained with <code><a href="/Modules/DatabaseAPI#function-open-table">open&#95;table()</a></code>. 
+  * **key** record key. 
 
 
 **Return**: 0 if success. negative value otherwise. 
@@ -132,17 +131,16 @@ Shutdown database management system.
 
 ```cpp
 
-#include "table.h"
-
-#include "file.h"
-#include "tree.h"
+#include <buffer.h>
+#include <db.h>
+#include <tree.h>
 
 #include <cstring>
 
-int init_db() { return 0; }
+int init_db(int num_buf) { return init_buffer(num_buf); }
 
 tableid_t open_table(char* pathname) {
-    return file_open_table_file(pathname);
+    return buffered_open_table_file(pathname);
 }
 
 int db_insert(tableid_t table_id, int64_t key, char* value,
@@ -166,7 +164,7 @@ int db_delete(tableid_t table_id, int64_t key) {
 }
 
 int shutdown_db() {
-    file_close_table_files();
+    shutdown_buffer();
     return 0;
 }
 ```
@@ -174,4 +172,4 @@ int shutdown_db() {
 
 -------------------------------
 
-Updated on 2021-10-25 at 17:06:26 +0900
+Updated on 2021-10-25 at 17:08:33 +0900

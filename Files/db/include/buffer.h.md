@@ -1,7 +1,4 @@
----
-title: db/include/buffer.h
 
----
 
 # db/include/buffer.h
 
@@ -11,34 +8,34 @@ title: db/include/buffer.h
 
 | Name           |
 | -------------- |
-| **[std](/Namespaces/namespacestd)**  |
-| **[buffer_helper](/Namespaces/namespacebuffer__helper)** <br>BufferManager helper.  |
+| **[std](/Namespaces/std)**  |
+| **[buffer_helper](/Namespaces/buffer_helper)** <br>BufferManager helper.  |
 
 ## Classes
 
 |                | Name           |
 | -------------- | -------------- |
-| struct | **[std::hash< PageLocation >](/Classes/structstd_1_1hash_3_01PageLocation_01_4)**  |
-| struct | **[BufferBlock](/Classes/structBufferBlock)**  |
+| struct | **[std::hash< PageLocation >](/Classes/std::hash< PageLocation >)**  |
+| struct | **[BufferBlock](/Classes/BufferBlock)**  |
 
 ## Types
 
 |                | Name           |
 | -------------- | -------------- |
-| typedef std::pair< tableid_t, pagenum_t > | **[PageLocation](/Modules/group__BufferManager#typedef-pagelocation)**  |
-| typedef struct <a href="/Classes/structBufferBlock">BufferBlock</a> | **[BufferBlock](/Modules/group__BufferManager#typedef-bufferblock)**  |
+| typedef std::pair< tableid_t, pagenum_t > | **[PageLocation](/Modules/BufferManager#typedef-pagelocation)**  |
+| typedef struct <a href="/Classes/BufferBlock">BufferBlock</a> | **[BufferBlock](/Modules/BufferManager#typedef-bufferblock)**  |
 
 ## Functions
 
 |                | Name           |
 | -------------- | -------------- |
-| int | **[init_buffer](/Modules/group__BufferManager#function-init-buffer)**(int buffer_size)<br>Initialize buffer manager.  |
-| tableid_t | **[buffered_open_table_file](/Modules/group__BufferManager#function-buffered-open-table-file)**(const char * path)<br>Open existing table file or create one if not existed.  |
-| pagenum_t | **[buffered_alloc_page](/Modules/group__BufferManager#function-buffered-alloc-page)**(tableid_t table_id)<br>Allocate an on-disk page from the free page list.  |
-| void | **[buffered_free_page](/Modules/group__BufferManager#function-buffered-free-page)**(tableid_t table_id, pagenum_t pagenum)<br>Free an on-disk page to the free page list.  |
-| void | **[buffered_read_page](/Modules/group__BufferManager#function-buffered-read-page)**(tableid_t table_id, pagenum_t pagenum, <a href="/Modules/group__DiskSpaceManager#typedef-page-t">page_t</a> * dest, bool pin =true)<br>Read an on-disk page into the in-memory page structure(dest)  |
-| void | **[buffered_write_page](/Modules/group__BufferManager#function-buffered-write-page)**(tableid_t table_id, pagenum_t pagenum, const <a href="/Modules/group__DiskSpaceManager#typedef-page-t">page_t</a> * src)<br>Write an in-memory page(src) to the on-disk page.  |
-| int | **[shutdown_buffer](/Modules/group__BufferManager#function-shutdown-buffer)**()<br>Shutdown buffer manager.  |
+| int | **[init_buffer](/Modules/BufferManager#function-init_buffer)**(int buffer_size)<br>Initialize buffer manager.  |
+| tableid_t | **[buffered_open_table_file](/Modules/BufferManager#function-buffered_open_table_file)**(const char * path)<br>Open existing table file or create one if not existed.  |
+| pagenum_t | **[buffered_alloc_page](/Modules/BufferManager#function-buffered_alloc_page)**(tableid_t table_id)<br>Allocate an on-disk page from the free page list.  |
+| void | **[buffered_free_page](/Modules/BufferManager#function-buffered_free_page)**(tableid_t table_id, pagenum_t pagenum)<br>Free an on-disk page to the free page list.  |
+| void | **[buffered_read_page](/Modules/BufferManager#function-buffered_read_page)**(tableid_t table_id, pagenum_t pagenum, <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * dest, bool pin =true)<br>Read an on-disk page into the in-memory page structure(dest)  |
+| void | **[buffered_write_page](/Modules/BufferManager#function-buffered_write_page)**(tableid_t table_id, pagenum_t pagenum, const <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * src)<br>Write an in-memory page(src) to the on-disk page.  |
+| int | **[shutdown_buffer](/Modules/BufferManager#function-shutdown_buffer)**()<br>Shutdown buffer manager.  |
 
 ## Types Documentation
 
@@ -105,10 +102,10 @@ Allocate an on-disk page from the free page list.
 
 **Parameters**: 
 
-  * **table_id** table id obtained with <code><a href="/Modules/group__BufferManager#function-buffered-open-table-file">buffered&#95;open&#95;table&#95;file()</a></code>. 
+  * **table_id** table id obtained with <code><a href="/Modules/BufferManager#function-buffered-open-table-file">buffered&#95;open&#95;table&#95;file()</a></code>. 
 
 
-**Return**: >0 <a href="/Classes/structPage">Page</a> index number if allocation success. 0 Zero if allocation failed. 
+**Return**: >0 <a href="/Classes/Page">Page</a> index number if allocation success. 0 Zero if allocation failed. 
 
 ### function buffered_free_page
 
@@ -123,7 +120,7 @@ Free an on-disk page to the free page list.
 
 **Parameters**: 
 
-  * **table_id** table id obtained with <code><a href="/Modules/group__BufferManager#function-buffered-open-table-file">buffered&#95;open&#95;table&#95;file()</a></code>. 
+  * **table_id** table id obtained with <code><a href="/Modules/BufferManager#function-buffered-open-table-file">buffered&#95;open&#95;table&#95;file()</a></code>. 
   * **pagenum** page index. 
 
 
@@ -142,7 +139,7 @@ Read an on-disk page into the in-memory page structure(dest)
 
 **Parameters**: 
 
-  * **table_id** table id obtained with <code><a href="/Modules/group__BufferManager#function-buffered-open-table-file">buffered&#95;open&#95;table&#95;file()</a></code>. 
+  * **table_id** table id obtained with <code><a href="/Modules/BufferManager#function-buffered-open-table-file">buffered&#95;open&#95;table&#95;file()</a></code>. 
   * **pagenum** page index. 
   * **dest** the pointer of the page data. 
   * **pin** <code>true</code> if this buffer will be writed after. 
@@ -162,7 +159,7 @@ Write an in-memory page(src) to the on-disk page.
 
 **Parameters**: 
 
-  * **table_id** table id obtained with <code><a href="/Modules/group__BufferManager#function-buffered-open-table-file">buffered&#95;open&#95;table&#95;file()</a></code>. 
+  * **table_id** table id obtained with <code><a href="/Modules/BufferManager#function-buffered-open-table-file">buffered&#95;open&#95;table&#95;file()</a></code>. 
   * **pagenum** page index. 
   * **src** the pointer of the page data. 
 
@@ -243,4 +240,4 @@ int shutdown_buffer();
 
 -------------------------------
 
-Updated on 2021-10-25 at 17:08:19 +0900
+Updated on 2021-10-25 at 17:08:33 +0900

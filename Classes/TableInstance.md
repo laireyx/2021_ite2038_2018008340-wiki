@@ -15,9 +15,8 @@ Table file instance.
 
 |                | Name           |
 | -------------- | -------------- |
-| char * | **[file_path](/Classes/TableInstance#variable-file_path)** <br>Real table file path(obtained by realpath(3)).  |
-| int | **[file_descriptor](/Classes/TableInstance#variable-file_descriptor)** <br>Table file descriptor.  |
-| <a href="/Modules/DiskSpaceManager#typedef-headerpage-t">headerpage_t</a> | **[header_page](/Classes/TableInstance#variable-header_page)** <br>Table header page.  |
+| char * | **[file_path](/Classes/TableInstance#variable-file_path)** <br>real table file path(obtained by realpath(3)).  |
+| int | **[file_descriptor](/Classes/TableInstance#variable-file_descriptor)** <br>table file descriptor.  |
 
 ## Public Attributes Documentation
 
@@ -27,7 +26,7 @@ Table file instance.
 char * file_path;
 ```
 
-Real table file path(obtained by realpath(3)). 
+real table file path(obtained by realpath(3)). 
 
 ### variable file_descriptor
 
@@ -35,16 +34,8 @@ Real table file path(obtained by realpath(3)).
 int file_descriptor;
 ```
 
-Table file descriptor. 
-
-### variable header_page
-
-```cpp
-headerpage_t header_page;
-```
-
-Table header page. 
+table file descriptor. 
 
 -------------------------------
 
-Updated on 2021-10-16 at 22:14:07 +0900
+Updated on 2021-10-25 at 17:08:33 +0900

@@ -1,7 +1,4 @@
----
-title: test/buffer_test.cc
 
----
 
 # test/buffer_test.cc
 
@@ -11,28 +8,28 @@ title: test/buffer_test.cc
 
 |                | Name           |
 | -------------- | -------------- |
-| class | **[BasicBufferManagerTest](/Classes/classBasicBufferManagerTest)**  |
-| class | **[CrossTableTest](/Classes/classCrossTableTest)**  |
+| class | **[BasicBufferManagerTest](/Classes/BasicBufferManagerTest)**  |
+| class | **[CrossTableTest](/Classes/CrossTableTest)**  |
 
 ## Functions
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicBufferManagerTest">BasicBufferManagerTest</a> , HandlesPageAllocation )<br>Tests page allocation and free.  |
-| | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicBufferManagerTest">BasicBufferManagerTest</a> , CheckReadWriteOperation )<br>Tests page read/write operations.  |
-| | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicBufferManagerTest">BasicBufferManagerTest</a> , UniqueIdTest )<br>Tests unique table fd.  |
-| | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicBufferManagerTest">BasicBufferManagerTest</a> , SequentialAllocateTest )<br>Tests sequential allocation.  |
-| | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classBasicBufferManagerTest">BasicBufferManagerTest</a> , RandomAllocateTest )<br>Tests random allocation.  |
-| | **[TEST_F](/Modules/group__TestCode#function-test-f)**(<a href="/Classes/classCrossTableTest">CrossTableTest</a> , RandomAllocateTest )<br>Test for cross table buffer management.  |
+| | **[TEST_F](/Modules/TestCode#function-test_f)**(<a href="/Classes/BasicBufferManagerTest">BasicBufferManagerTest</a> , HandlesPageAllocation )<br>Tests page allocation and free.  |
+| | **[TEST_F](/Modules/TestCode#function-test_f)**(<a href="/Classes/BasicBufferManagerTest">BasicBufferManagerTest</a> , CheckReadWriteOperation )<br>Tests page read/write operations.  |
+| | **[TEST_F](/Modules/TestCode#function-test_f)**(<a href="/Classes/BasicBufferManagerTest">BasicBufferManagerTest</a> , UniqueIdTest )<br>Tests unique table fd.  |
+| | **[TEST_F](/Modules/TestCode#function-test_f)**(<a href="/Classes/BasicBufferManagerTest">BasicBufferManagerTest</a> , SequentialAllocateTest )<br>Tests sequential allocation.  |
+| | **[TEST_F](/Modules/TestCode#function-test_f)**(<a href="/Classes/BasicBufferManagerTest">BasicBufferManagerTest</a> , RandomAllocateTest )<br>Tests random allocation.  |
+| | **[TEST_F](/Modules/TestCode#function-test_f)**(<a href="/Classes/CrossTableTest">CrossTableTest</a> , RandomAllocateTest )<br>Test for cross table buffer management.  |
 
 ## Attributes
 
 |                | Name           |
 | -------------- | -------------- |
-| constexpr int | **[test_count](/Modules/group__TestCode#variable-test-count)**  |
-| const char * | **[TABLE_PATH](/Modules/group__TestCode#variable-table-path)**  |
-| const char * | **[TABLE_PATH_ALIAS](/Modules/group__TestCode#variable-table-path-alias)**  |
-| const char * | **[ANOTHER_TABLE_PATH](/Modules/group__TestCode#variable-another-table-path)**  |
+| constexpr int | **[test_count](/Modules/TestCode#variable-test_count)**  |
+| const char * | **[TABLE_PATH](/Modules/TestCode#variable-table_path)**  |
+| const char * | **[TABLE_PATH_ALIAS](/Modules/TestCode#variable-table_path_alias)**  |
+| const char * | **[ANOTHER_TABLE_PATH](/Modules/TestCode#variable-another_table_path)**  |
 
 
 ## Functions Documentation
@@ -368,4 +365,4 @@ TEST_F(CrossTableTest, RandomAllocateTest) {
 
 -------------------------------
 
-Updated on 2021-10-25 at 17:08:19 +0900
+Updated on 2021-10-25 at 17:08:33 +0900

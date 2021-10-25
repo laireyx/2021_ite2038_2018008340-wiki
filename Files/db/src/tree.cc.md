@@ -8,23 +8,23 @@
 
 |                | Name           |
 | -------------- | -------------- |
-| pagenum_t | **[make_node](/Modules/DiskBasedBpt#function-make_node)**(tableid_t table_id, pagenum_t parent_page_idx =0)<br>Allocate and make an internal page.  |
-| pagenum_t | **[make_leaf](/Modules/DiskBasedBpt#function-make_leaf)**(tableid_t table_id, pagenum_t parent_page_idx =0)<br>Allocate and make a leaf page.  |
-| pagenum_t | **[create_tree](/Modules/DiskBasedBpt#function-create_tree)**(tableid_t table_id, int64_t key, const char * value, uint16_t value_size)<br>Create a new tree.  |
-| pagenum_t | **[find_leaf](/Modules/DiskBasedBpt#function-find_leaf)**(tableid_t table_id, int64_t key)<br>Find a leaf node which contains given key.  |
-| bool | **[find_by_key](/Modules/DiskBasedBpt#function-find_by_key)**(tableid_t table_id, int64_t key, char * value =nullptr, uint16_t * value_size =nullptr)<br>Find a record with key.  |
-| pagenum_t | **[insert_into_new_root](/Modules/DiskBasedBpt#function-insert_into_new_root)**(tableid_t table_id, pagenum_t left_page_idx, int64_t key, pagenum_t right_page_idx) |
-| pagenum_t | **[insert_into_node](/Modules/DiskBasedBpt#function-insert_into_node)**(tableid_t table_id, pagenum_t parent_page_idx, pagenum_t left_page_idx, int64_t key, pagenum_t right_page_idx)<br>Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page.  |
-| pagenum_t | **[insert_into_node_after_splitting](/Modules/DiskBasedBpt#function-insert_into_node_after_splitting)**(tableid_t table_id, pagenum_t parent_page_idx, int64_t key, pagenum_t right_page_idx)<br>Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page, and split it into two pages.  |
-| pagenum_t | **[insert_into_parent](/Modules/DiskBasedBpt#function-insert_into_parent)**(tableid_t table_id, pagenum_t left_page_idx, int64_t key, pagenum_t right_page_idx)<br>Choose right method between just inserting and <code>insert&#95;into&#95;node&#95;after&#95;splitting</code> and call it.  |
-| pagenum_t | **[insert_into_leaf_after_splitting](/Modules/DiskBasedBpt#function-insert_into_leaf_after_splitting)**(tableid_t table_id, pagenum_t leaf_page_idx, int64_t key, const char * value, uint16_t value_size)<br>Insert <code>(key, value)</code>into leaf node and split it into two pages.  |
-| pagenum_t | **[insert_node](/Modules/DiskBasedBpt#function-insert_node)**(tableid_t table_id, int64_t key, const char * value, uint16_t value_size)<br>Find appropriate leaf page and insert a record into it.  |
-| pagenum_t | **[adjust_root](/Modules/DiskBasedBpt#function-adjust_root)**(tableid_t table_id)<br>Adjust root page.  |
-| pagenum_t | **[coalesce_internal_nodes](/Modules/DiskBasedBpt#function-coalesce_internal_nodes)**(tableid_t table_id, pagenum_t left_page_idx, int64_t seperate_key, int seperate_key_idx, pagenum_t right_page_idx)<br>Coalesces two internal pages.  |
-| pagenum_t | **[coalesce_leaf_nodes](/Modules/DiskBasedBpt#function-coalesce_leaf_nodes)**(tableid_t table_id, pagenum_t left_page_idx, pagenum_t right_page_idx)<br>Coalesces two leaf pages.  |
-| pagenum_t | **[delete_internal_key](/Modules/DiskBasedBpt#function-delete_internal_key)**(tableid_t table_id, pagenum_t internal_page_idx, int64_t key)<br>Delete a page branch from internal page.  |
-| pagenum_t | **[delete_leaf_key](/Modules/DiskBasedBpt#function-delete_leaf_key)**(tableid_t table_id, pagenum_t leaf_page_idx, int64_t key)<br>Delete a record from leaf page.  |
-| pagenum_t | **[delete_node](/Modules/DiskBasedBpt#function-delete_node)**(tableid_t table_id, int64_t key)<br>Entrance for remove a record from table.  |
+| pagenum_t | **[make_node](/Modules/IndexManager#function-make_node)**(tableid_t table_id, pagenum_t parent_page_idx =0)<br>Allocate and make an internal page.  |
+| pagenum_t | **[make_leaf](/Modules/IndexManager#function-make_leaf)**(tableid_t table_id, pagenum_t parent_page_idx =0)<br>Allocate and make a leaf page.  |
+| pagenum_t | **[create_tree](/Modules/IndexManager#function-create_tree)**(tableid_t table_id, int64_t key, const char * value, uint16_t value_size)<br>Create a new tree.  |
+| pagenum_t | **[find_leaf](/Modules/IndexManager#function-find_leaf)**(tableid_t table_id, int64_t key)<br>Find a leaf node which contains given key.  |
+| bool | **[find_by_key](/Modules/IndexManager#function-find_by_key)**(tableid_t table_id, int64_t key, char * value =nullptr, uint16_t * value_size =nullptr)<br>Find a record with key.  |
+| pagenum_t | **[insert_into_new_root](/Modules/IndexManager#function-insert_into_new_root)**(tableid_t table_id, pagenum_t left_page_idx, int64_t key, pagenum_t right_page_idx) |
+| pagenum_t | **[insert_into_node](/Modules/IndexManager#function-insert_into_node)**(tableid_t table_id, pagenum_t parent_page_idx, pagenum_t left_page_idx, int64_t key, pagenum_t right_page_idx)<br>Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page.  |
+| pagenum_t | **[insert_into_node_after_splitting](/Modules/IndexManager#function-insert_into_node_after_splitting)**(tableid_t table_id, pagenum_t parent_page_idx, int64_t key, pagenum_t right_page_idx)<br>Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page, and split it into two pages.  |
+| pagenum_t | **[insert_into_parent](/Modules/IndexManager#function-insert_into_parent)**(tableid_t table_id, pagenum_t left_page_idx, int64_t key, pagenum_t right_page_idx)<br>Choose right method between just inserting and <code>insert&#95;into&#95;node&#95;after&#95;splitting</code> and call it.  |
+| pagenum_t | **[insert_into_leaf_after_splitting](/Modules/IndexManager#function-insert_into_leaf_after_splitting)**(tableid_t table_id, pagenum_t leaf_page_idx, int64_t key, const char * value, uint16_t value_size)<br>Insert <code>(key, value)</code>into leaf node and split it into two pages.  |
+| pagenum_t | **[insert_node](/Modules/IndexManager#function-insert_node)**(tableid_t table_id, int64_t key, const char * value, uint16_t value_size)<br>Find appropriate leaf page and insert a record into it.  |
+| pagenum_t | **[adjust_root](/Modules/IndexManager#function-adjust_root)**(tableid_t table_id)<br>Adjust root page.  |
+| pagenum_t | **[coalesce_internal_nodes](/Modules/IndexManager#function-coalesce_internal_nodes)**(tableid_t table_id, pagenum_t left_page_idx, int64_t seperate_key, int seperate_key_idx, pagenum_t right_page_idx)<br>Coalesces two internal pages.  |
+| pagenum_t | **[coalesce_leaf_nodes](/Modules/IndexManager#function-coalesce_leaf_nodes)**(tableid_t table_id, pagenum_t left_page_idx, pagenum_t right_page_idx)<br>Coalesces two leaf pages.  |
+| pagenum_t | **[delete_internal_key](/Modules/IndexManager#function-delete_internal_key)**(tableid_t table_id, pagenum_t internal_page_idx, int64_t key)<br>Delete a page branch from internal page.  |
+| pagenum_t | **[delete_leaf_key](/Modules/IndexManager#function-delete_leaf_key)**(tableid_t table_id, pagenum_t leaf_page_idx, int64_t key)<br>Delete a record from leaf page.  |
+| pagenum_t | **[delete_node](/Modules/IndexManager#function-delete_node)**(tableid_t table_id, int64_t key)<br>Entrance for remove a record from table.  |
 
 
 ## Functions Documentation
@@ -42,11 +42,11 @@ Allocate and make an internal page.
 
 **Parameters**: 
 
-  * **table_id** Table id. 
-  * **parent_page_idx** Parent page index. 
+  * **table_id** table id. 
+  * **parent_page_idx** parent page index. 
 
 
-**Return**: Created page index. 
+**Return**: created page index. 
 
 ### function make_leaf
 
@@ -61,11 +61,11 @@ Allocate and make a leaf page.
 
 **Parameters**: 
 
-  * **table_id** Table id. 
-  * **parent_page_idx** Parent page index. 
+  * **table_id** table id. 
+  * **parent_page_idx** parent page index. 
 
 
-**Return**: Created page index. 
+**Return**: created page index. 
 
 ### function create_tree
 
@@ -82,13 +82,13 @@ Create a new tree.
 
 **Parameters**: 
 
-  * **table_id** Table id. 
-  * **key** Initial record key. 
-  * **value** Initial record value. 
-  * **value_size** Initial record value size. 
+  * **table_id** table id. 
+  * **key** initial record key. 
+  * **value** initial record value. 
+  * **value_size** initial record value size. 
 
 
-**Return**: Root page index. 
+**Return**: root page index. 
 
 Create a new leaf page for root page and set initial record.
 
@@ -106,11 +106,11 @@ Find a leaf node which contains given key.
 
 **Parameters**: 
 
-  * **table_id** Table id. 
-  * **key** Key to query with. 
+  * **table_id** table id. 
+  * **key** key to query with. 
 
 
-**Return**: <a href="/Classes/Page">Page</a> index if found. <code>0</code> if the key does not exist. 
+**Return**: page index if found. <code>0</code> if the key does not exist. 
 
 ### function find_by_key
 
@@ -127,8 +127,8 @@ Find a record with key.
 
 **Parameters**: 
 
-  * **table_id** Table id. 
-  * **key** Key to query with. 
+  * **table_id** table id. 
+  * **key** key to query with. 
   * **value** If the record is found successful, then this value is set to record value. Caller should allocate enough(MAX_VALUE_SIZE) memory for it. 
   * **value_size** If the record is found successful, then this value is set to record size. 
 
@@ -163,14 +163,14 @@ Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page.
 
 **Parameters**: 
 
-  * **table_id** Table id. 
-  * **parent_page_idx** Parent page index. 
-  * **left_page_idx** Left page index. 
-  * **key** Key which means right page. 
-  * **right_page_idx** Right page index. 
+  * **table_id** table id. 
+  * **parent_page_idx** parent page index. 
+  * **left_page_idx** left page index. 
+  * **key** key which means right page. 
+  * **right_page_idx** right page index. 
 
 
-**Return**: Root page number. 
+**Return**: root page number. 
 
 ### function insert_into_node_after_splitting
 
@@ -187,13 +187,13 @@ Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page, and sp
 
 **Parameters**: 
 
-  * **table_id** Table id. 
-  * **parent_page_idx** Parent page index. 
-  * **key** Key which means right page. 
-  * **right_page_idx** Right page index. 
+  * **table_id** table id. 
+  * **parent_page_idx** parent page index. 
+  * **key** key which means right page. 
+  * **right_page_idx** right page index. 
 
 
-**Return**: Root page number. 
+**Return**: root page number. 
 
 ### function insert_into_parent
 
@@ -210,13 +210,13 @@ Choose right method between just inserting and <code>insert&#95;into&#95;node&#9
 
 **Parameters**: 
 
-  * **table_id** Table id. 
-  * **left_page_idx** Left page index. 
-  * **key** Key which means right page. 
-  * **right_page_idx** Right page index. 
+  * **table_id** table id. 
+  * **left_page_idx** left page index. 
+  * **key** key which means right page. 
+  * **right_page_idx** right page index. 
 
 
-**Return**: Root page number. 
+**Return**: root page number. 
 
 ### function insert_into_leaf_after_splitting
 
@@ -234,14 +234,14 @@ Insert <code>(key, value)</code>into leaf node and split it into two pages.
 
 **Parameters**: 
 
-  * **table_id** Table id. 
-  * **leaf_page_idx** Leaf page index. 
-  * **key** Record key. 
-  * **value** Record value. 
-  * **value_size** Record value size. 
+  * **table_id** table id. 
+  * **leaf_page_idx** leaf page index. 
+  * **key** record key. 
+  * **value** record value. 
+  * **value_size** record value size. 
 
 
-**Return**: Root page number. 
+**Return**: root page number. 
 
 ### function insert_node
 
@@ -258,13 +258,13 @@ Find appropriate leaf page and insert a record into it.
 
 **Parameters**: 
 
-  * **table_id** Table id. 
-  * **key** Record key. 
-  * **value** Record value. 
-  * **value_size** Record value size. 
+  * **table_id** table id. 
+  * **key** record key. 
+  * **value** record value. 
+  * **value_size** record value size. 
 
 
-**Return**: Root page number. 
+**Return**: root page number. 
 
 ### function adjust_root
 
@@ -278,7 +278,7 @@ Adjust root page.
 
 **Parameters**: 
 
-  * **table_id** Table id. 
+  * **table_id** table id. 
 
 
 **Return**: <code>&gt;0</code> if succesful. <code>0</code> otherwise. 
@@ -302,14 +302,14 @@ Coalesces two internal pages.
 
 **Parameters**: 
 
-  * **table_id** Table id. 
-  * **left_page_idx** Left page index. 
-  * **seperate_key** Key which can seperate between left and right page. 
-  * **seperate_key_idx** Parent branch index of <code>seperate&#95;key</code>. 
-  * **right_page_idx** Right page index. 
+  * **table_id** table id. 
+  * **left_page_idx** left page index. 
+  * **seperate_key** key which can seperate between left and right page. 
+  * **seperate_key_idx** parent branch index of <code>seperate&#95;key</code>. 
+  * **right_page_idx** right page index. 
 
 
-**Return**: Root page number. 
+**Return**: root page number. 
 
 Moves all right page branch into the left page.
 
@@ -328,12 +328,12 @@ Coalesces two leaf pages.
 
 **Parameters**: 
 
-  * **table_id** Table id. 
-  * **left_page_idx** Left page index. 
-  * **right_page_idx** Right page index. 
+  * **table_id** table id. 
+  * **left_page_idx** left page index. 
+  * **right_page_idx** right page index. 
 
 
-**Return**: Root page number. 
+**Return**: root page number. 
 
 Moves all right page record into the left page.
 
@@ -352,12 +352,12 @@ Delete a page branch from internal page.
 
 **Parameters**: 
 
-  * **table_id** Table id. 
-  * **internal_page_idx** Internal page index. 
-  * **key** Branch key. 
+  * **table_id** table id. 
+  * **internal_page_idx** internal page index. 
+  * **key** branch key. 
 
 
-**Return**: Root page number. 
+**Return**: root page number. 
 
 ### function delete_leaf_key
 
@@ -373,12 +373,12 @@ Delete a record from leaf page.
 
 **Parameters**: 
 
-  * **table_id** Table id. 
-  * **leaf_page_idx** Leaf page index. 
-  * **key** Record key. 
+  * **table_id** table id. 
+  * **leaf_page_idx** leaf page index. 
+  * **key** record key. 
 
 
-**Return**: Root page number. 
+**Return**: root page number. 
 
 ### function delete_node
 
@@ -393,11 +393,11 @@ Entrance for remove a record from table.
 
 **Parameters**: 
 
-  * **table_id** Table id. 
-  * **key** Record key. 
+  * **table_id** table id. 
+  * **key** record key. 
 
 
-**Return**: Root page number. 
+**Return**: root page number. 
 
 
 
@@ -407,32 +407,32 @@ Entrance for remove a record from table.
 
 #include "tree.h"
 
-#include <vector>
-#include <utility>
-#include <algorithm>
+#include <buffer.h>
+#include <errors.h>
+#include <page.h>
 
-#include "errors.h"
-#include "file.h"
-#include "page.h"
+#include <algorithm>
+#include <utility>
+#include <vector>
 
 pagenum_t make_node(tableid_t table_id, pagenum_t parent_page_idx) {
     allocatedpage_t page = {};
-    pagenum_t page_idx = file_alloc_page(table_id);
+    pagenum_t page_idx = buffered_alloc_page(table_id);
 
     page.page_header.is_leaf_page = 0;
     page.page_header.parent_page_idx = parent_page_idx;
     page.page_header.key_num = 0;
 
-    file_write_page(table_id, page_idx, &page);
+    buffered_write_page(table_id, page_idx, &page);
 
     return page_idx;
 }
 
 pagenum_t make_leaf(tableid_t table_id, pagenum_t parent_page_idx) {
     leafpage_t leaf_page;
-    pagenum_t leaf_page_idx = file_alloc_page(table_id);
+    pagenum_t leaf_page_idx = buffered_alloc_page(table_id);
 
-    file_read_page(table_id, leaf_page_idx, &leaf_page);
+    buffered_read_page(table_id, leaf_page_idx, &leaf_page);
 
     leaf_page.page_header.is_leaf_page = 1;
     leaf_page.page_header.parent_page_idx = parent_page_idx;
@@ -441,35 +441,34 @@ pagenum_t make_leaf(tableid_t table_id, pagenum_t parent_page_idx) {
     leaf_page.page_header.reserved_footer.footer_1 = 3968;
     leaf_page.page_header.reserved_footer.footer_2 = 0;
 
-    file_write_page(table_id, leaf_page_idx, &leaf_page);
+    buffered_write_page(table_id, leaf_page_idx, &leaf_page);
 
     return leaf_page_idx;
 }
 
 pagenum_t create_tree(tableid_t table_id, int64_t key, const char* value,
                       uint16_t value_size) {
-    auto& instance = file_helper::get_table(table_id);
-
-    headerpage_t& header_page = instance.header_page;
+    headerpage_t header_page;
 
     leafpage_t leaf_page;
     pagenum_t leaf_page_idx = make_leaf(table_id);
-    file_read_page(table_id, leaf_page_idx, &leaf_page);
+
+    buffered_read_page(table_id, 0, &header_page);
+    buffered_read_page(table_id, leaf_page_idx, &leaf_page);
 
     page_helper::add_leaf_value(&leaf_page, key, value, value_size);
 
     header_page.root_page_idx = leaf_page_idx;
 
-    file_write_page(table_id, leaf_page_idx, &leaf_page);
-    file_helper::flush_header(table_id);
+    buffered_write_page(table_id, leaf_page_idx, &leaf_page);
+    buffered_write_page(table_id, 0, &header_page);
 
     return leaf_page_idx;
 }
 
 pagenum_t find_leaf(tableid_t table_id, int64_t key) {
-    auto& instance = file_helper::get_table(table_id);
-
-    headerpage_t& header_page = instance.header_page;
+    headerpage_t header_page;
+    buffered_read_page(table_id, 0, &header_page, false);
 
     internalpage_t current_page;
     pagenum_t current_page_idx = header_page.root_page_idx;
@@ -478,7 +477,8 @@ pagenum_t find_leaf(tableid_t table_id, int64_t key) {
         return 0;
     }
 
-    file_read_page(table_id, header_page.root_page_idx, &current_page);
+    buffered_read_page(table_id, header_page.root_page_idx, &current_page,
+                       false);
     while (!current_page.page_header.is_leaf_page) {
         int i = 0;
         for (i = 0; i < current_page.page_header.key_num; i++) {
@@ -491,7 +491,7 @@ pagenum_t find_leaf(tableid_t table_id, int64_t key) {
         } else {
             current_page_idx = *page_helper::get_leftmost_child_idx(reinterpret_cast<internalpage_t*>(&current_page));
         }
-        file_read_page(table_id, current_page_idx, &current_page);
+        buffered_read_page(table_id, current_page_idx, &current_page, false);
     }
 
     return current_page_idx;
@@ -504,7 +504,7 @@ bool find_by_key(tableid_t table_id, int64_t key, char* value,
     pagenum_t leaf_page_idx = find_leaf(table_id, key);
 
     if (!leaf_page_idx) return false;
-    file_read_page(table_id, leaf_page_idx, &leaf_page);
+    buffered_read_page(table_id, leaf_page_idx, &leaf_page, false);
 
     PageSlot* leaf_slot = page_helper::get_page_slot(&leaf_page);
 
@@ -522,18 +522,17 @@ bool find_by_key(tableid_t table_id, int64_t key, char* value,
 
 pagenum_t insert_into_new_root(tableid_t table_id, pagenum_t left_page_idx,
                                int64_t key, pagenum_t right_page_idx) {
-    auto& instance = file_helper::get_table(table_id);
-
-    headerpage_t& header_page = instance.header_page;
+    headerpage_t header_page;
     allocatedpage_t left_page, right_page;
 
     internalpage_t new_root_page;
     pagenum_t new_root_page_idx;
 
     new_root_page_idx = make_node(table_id);
-    file_read_page(table_id, new_root_page_idx, &new_root_page);
-    file_read_page(table_id, left_page_idx, &left_page);
-    file_read_page(table_id, right_page_idx, &right_page);
+    buffered_read_page(table_id, 0, &header_page);
+    buffered_read_page(table_id, new_root_page_idx, &new_root_page);
+    buffered_read_page(table_id, left_page_idx, &left_page);
+    buffered_read_page(table_id, right_page_idx, &right_page);
 
     *page_helper::get_leftmost_child_idx(&new_root_page) = left_page_idx;
     page_helper::add_internal_key(&new_root_page, key, right_page_idx);
@@ -541,12 +540,12 @@ pagenum_t insert_into_new_root(tableid_t table_id, pagenum_t left_page_idx,
     left_page.page_header.parent_page_idx = new_root_page_idx;
     right_page.page_header.parent_page_idx = new_root_page_idx;
 
-    file_write_page(table_id, new_root_page_idx, &new_root_page);
-    file_write_page(table_id, left_page_idx, &left_page);
-    file_write_page(table_id, right_page_idx, &right_page);
+    buffered_write_page(table_id, new_root_page_idx, &new_root_page);
+    buffered_write_page(table_id, left_page_idx, &left_page);
+    buffered_write_page(table_id, right_page_idx, &right_page);
 
     header_page.root_page_idx = new_root_page_idx;
-    file_helper::flush_header(table_id);
+    buffered_write_page(table_id, 0, &header_page);
 
     return new_root_page_idx;
 }
@@ -557,7 +556,7 @@ pagenum_t insert_into_node(tableid_t table_id, pagenum_t parent_page_idx,
     int insert_position;
     internalpage_t parent_page;
 
-    file_read_page(table_id, parent_page_idx, &parent_page);
+    buffered_read_page(table_id, parent_page_idx, &parent_page);
 
     page_helper::add_internal_key(&parent_page, key, right_page_idx);
     std::sort(parent_page.page_branches,
@@ -566,7 +565,7 @@ pagenum_t insert_into_node(tableid_t table_id, pagenum_t parent_page_idx,
             return a.key < b.key;
         });
 
-    file_write_page(table_id, parent_page_idx, &parent_page);
+    buffered_write_page(table_id, parent_page_idx, &parent_page);
 
     return parent_page_idx;
 }
@@ -580,14 +579,14 @@ pagenum_t insert_into_node_after_splitting(tableid_t table_id, pagenum_t page_id
 
     std::vector<PageBranch> temp_branches;
 
-    file_read_page(table_id, page_idx, &page);
+    buffered_read_page(table_id, page_idx, &page);
 
     /* Create the new node and copy
      * half the keys and pointers to the
      * old and half to the new.
      */
     new_page_idx = make_node(table_id, page.page_header.parent_page_idx);
-    file_read_page(table_id, new_page_idx, &new_page);
+    buffered_read_page(table_id, new_page_idx, &new_page);
 
     for (int i = 0; i < 248; i++) {
         temp_branches.push_back(page.page_branches[i]);
@@ -612,21 +611,22 @@ pagenum_t insert_into_node_after_splitting(tableid_t table_id, pagenum_t page_id
 
     allocatedpage_t leftmost_child_page;
 
-    file_read_page(table_id, temp_branches[124].page_idx, &leftmost_child_page);
+    buffered_read_page(table_id, temp_branches[124].page_idx,
+                       &leftmost_child_page);
     leftmost_child_page.page_header.parent_page_idx = new_page_idx;
-    file_write_page(table_id, temp_branches[124].page_idx, &leftmost_child_page);
-    
+    buffered_write_page(table_id, temp_branches[124].page_idx,
+                        &leftmost_child_page);
 
     for (int i = 125; i < 249; i++) {
         allocatedpage_t child_page;
         page_helper::add_internal_key(&new_page, temp_branches[i].key,
                                       temp_branches[i].page_idx);
 
-        file_read_page(table_id, temp_branches[i].page_idx, &child_page);
+        buffered_read_page(table_id, temp_branches[i].page_idx, &child_page);
 
         child_page.page_header.parent_page_idx = new_page_idx;
 
-        file_write_page(table_id, temp_branches[i].page_idx, &child_page);
+        buffered_write_page(table_id, temp_branches[i].page_idx, &child_page);
     }
 
     /* Insert a new key into the parent of the two
@@ -634,8 +634,8 @@ pagenum_t insert_into_node_after_splitting(tableid_t table_id, pagenum_t page_id
      * the old node to the left and the new to the right.
      */
 
-    file_write_page(table_id, page_idx, &page);
-    file_write_page(table_id, new_page_idx, &new_page);
+    buffered_write_page(table_id, page_idx, &page);
+    buffered_write_page(table_id, new_page_idx, &new_page);
 
     return insert_into_parent(table_id, page_idx, seperate_key,
                               new_page_idx);
@@ -643,15 +643,12 @@ pagenum_t insert_into_node_after_splitting(tableid_t table_id, pagenum_t page_id
 
 pagenum_t insert_into_parent(tableid_t table_id, pagenum_t left_page_idx, int64_t key,
                              pagenum_t right_page_idx) {
-    auto& instance = file_helper::get_table(table_id);
-
-    headerpage_t& header_page = instance.header_page;
     allocatedpage_t left_page;
 
     internalpage_t parent_page;
     pagenum_t parent_page_idx;
 
-    file_read_page(table_id, left_page_idx, &left_page);
+    buffered_read_page(table_id, left_page_idx, &left_page, false);
 
     if (left_page.page_header.parent_page_idx == 0) {
         return insert_into_new_root(table_id, left_page_idx, key,
@@ -659,8 +656,7 @@ pagenum_t insert_into_parent(tableid_t table_id, pagenum_t left_page_idx, int64_
     }
 
     parent_page_idx = left_page.page_header.parent_page_idx;
-    file_read_page(table_id, parent_page_idx,
-                   &parent_page);
+    buffered_read_page(table_id, parent_page_idx, &parent_page, false);
 
     if (parent_page.page_header.key_num < 248)
         return insert_into_node(table_id, parent_page_idx, left_page_idx, key,
@@ -678,14 +674,14 @@ pagenum_t insert_into_leaf_after_splitting(tableid_t table_id,
     pagenum_t new_leaf_page_idx;
     PageSlot* leaf_slot = page_helper::get_page_slot(&leaf_page);
 
-    file_read_page(table_id, leaf_page_idx, &leaf_page);
+    buffered_read_page(table_id, leaf_page_idx, &leaf_page);
 
     int total_values_num = leaf_page.page_header.key_num + 1;
     std::vector<std::pair<PageSlot, const char*>> temp;
 
     new_leaf_page_idx =
         make_leaf(table_id, leaf_page.page_header.parent_page_idx);
-    file_read_page(table_id, new_leaf_page_idx, &new_leaf_page);
+    buffered_read_page(table_id, new_leaf_page_idx, &new_leaf_page);
 
     for (int i = 0; i < leaf_page.page_header.key_num; i++) {
         char* temp_value = new char[MAX_VALUE_SIZE];
@@ -736,8 +732,8 @@ pagenum_t insert_into_leaf_after_splitting(tableid_t table_id,
     *new_leaf_sibling_idx = *leaf_sibling_idx;
     *leaf_sibling_idx = new_leaf_page_idx;
 
-    file_write_page(table_id, leaf_page_idx, &leaf_page);
-    file_write_page(table_id, new_leaf_page_idx, &new_leaf_page);
+    buffered_write_page(table_id, leaf_page_idx, &leaf_page);
+    buffered_write_page(table_id, new_leaf_page_idx, &new_leaf_page);
 
     for (auto& temp_pair : temp) {
         delete[] temp_pair.second;
@@ -749,9 +745,7 @@ pagenum_t insert_into_leaf_after_splitting(tableid_t table_id,
 
 pagenum_t insert_node(tableid_t table_id, int64_t key, const char* value,
                       uint16_t value_size) {
-    auto& instance = file_helper::get_table(table_id);
-
-    headerpage_t& header_page = instance.header_page;
+    headerpage_t header_page;
 
     leafpage_t leaf_page;
     pagenum_t leaf_page_idx;
@@ -768,6 +762,7 @@ pagenum_t insert_node(tableid_t table_id, int64_t key, const char* value,
      * Start a new tree.
      */
 
+    buffered_read_page(table_id, 0, &header_page, false);
     if (header_page.root_page_idx == 0)
         return create_tree(table_id, key, value, value_size);
 
@@ -776,7 +771,7 @@ pagenum_t insert_node(tableid_t table_id, int64_t key, const char* value,
      */
 
     leaf_page_idx = find_leaf(table_id, key);
-    file_read_page(table_id, leaf_page_idx, &leaf_page);
+    buffered_read_page(table_id, leaf_page_idx, &leaf_page);
 
     /* Case: leaf has room for key and pointer.
      */
@@ -813,7 +808,7 @@ pagenum_t insert_node(tableid_t table_id, int64_t key, const char* value,
             delete[] temp_pair.second;
         }
 
-        file_write_page(table_id, leaf_page_idx, &leaf_page);
+        buffered_write_page(table_id, leaf_page_idx, &leaf_page);
         return leaf_page_idx;
     }
 
@@ -825,12 +820,11 @@ pagenum_t insert_node(tableid_t table_id, int64_t key, const char* value,
 }
 
 pagenum_t adjust_root(tableid_t table_id) {
-    auto& instance = file_helper::get_table(table_id);
-
-    headerpage_t& header_page = instance.header_page;
+    headerpage_t header_page;
     allocatedpage_t root_page, new_root_page;
 
-    file_read_page(table_id, header_page.root_page_idx, &root_page);
+    buffered_read_page(table_id, 0, &header_page);
+    buffered_read_page(table_id, header_page.root_page_idx, &root_page);
 
     /* Case: nonempty root.
      * Key and pointer have already been deleted,
@@ -847,21 +841,24 @@ pagenum_t adjust_root(tableid_t table_id) {
     // as the new root.
 
     if (!root_page.page_header.is_leaf_page) {
-        file_free_page(table_id, header_page.root_page_idx);
+        buffered_free_page(table_id, header_page.root_page_idx);
+        buffered_read_page(table_id, 0, &header_page);
 
         header_page.root_page_idx = *page_helper::get_leftmost_child_idx(
             reinterpret_cast<internalpage_t*>(&root_page));
-        file_read_page(table_id, header_page.root_page_idx, &new_root_page);
+        buffered_read_page(table_id, header_page.root_page_idx, &new_root_page);
         new_root_page.page_header.parent_page_idx = 0;
-        file_write_page(table_id, header_page.root_page_idx, &new_root_page);
+        buffered_write_page(table_id, header_page.root_page_idx,
+                            &new_root_page);
     } else {
-        file_free_page(table_id, header_page.root_page_idx);
+        buffered_free_page(table_id, header_page.root_page_idx);
+        buffered_read_page(table_id, 0, &header_page);
         header_page.root_page_idx = 0;
-        file_helper::flush_header(table_id);
+        buffered_write_page(table_id, 0, &header_page);
         return 1;
     }
 
-    file_helper::flush_header(table_id);
+    buffered_write_page(table_id, 0, &header_page);
 
     return header_page.root_page_idx;
 }
@@ -870,9 +867,7 @@ pagenum_t coalesce_internal_nodes(tableid_t table_id, pagenum_t left_page_idx,
                                   int64_t seperate_key,
                                   int seperate_key_idx,
                                   pagenum_t right_page_idx) {
-    auto& instance = file_helper::get_table(table_id);
-
-    headerpage_t& header_page = instance.header_page;
+    headerpage_t header_page;
 
     int64_t old_key;
     internalpage_t parent_page;
@@ -880,18 +875,23 @@ pagenum_t coalesce_internal_nodes(tableid_t table_id, pagenum_t left_page_idx,
     allocatedpage_t child_page;
     PageSlot* right_slot;
 
-    file_read_page(table_id, left_page_idx, &left_page);
-    file_read_page(table_id, right_page_idx, &right_page);
-    file_read_page(table_id, left_page.page_header.parent_page_idx,
-                   &parent_page);
+    buffered_read_page(table_id, 0, &header_page, false);
+    buffered_read_page(table_id, left_page_idx, &left_page);
+    buffered_read_page(table_id, right_page_idx, &right_page);
+    buffered_read_page(table_id, left_page.page_header.parent_page_idx,
+                       &parent_page);
 
     page_helper::add_internal_key(&left_page,
                                   seperate_key,
                                   *page_helper::get_leftmost_child_idx(&right_page));
 
-    file_read_page(table_id, *page_helper::get_leftmost_child_idx(&right_page), &child_page);
+    buffered_read_page(table_id,
+                       *page_helper::get_leftmost_child_idx(&right_page),
+                       &child_page);
     child_page.page_header.parent_page_idx = left_page_idx;
-    file_write_page(table_id, *page_helper::get_leftmost_child_idx(&right_page), &child_page);
+    buffered_write_page(table_id,
+                        *page_helper::get_leftmost_child_idx(&right_page),
+                        &child_page);
 
     for (int i = 0; i < right_page.page_header.key_num; i++) {
         allocatedpage_t child_page;
@@ -899,15 +899,15 @@ pagenum_t coalesce_internal_nodes(tableid_t table_id, pagenum_t left_page_idx,
                                       right_page.page_branches[i].key,
                                       right_page.page_branches[i].page_idx);
 
-        file_read_page(table_id, right_page.page_branches[i].page_idx,
-                       &child_page);
+        buffered_read_page(table_id, right_page.page_branches[i].page_idx,
+                           &child_page);
         child_page.page_header.parent_page_idx = left_page_idx;
-        file_write_page(table_id, right_page.page_branches[i].page_idx,
-                        &child_page);
+        buffered_write_page(table_id, right_page.page_branches[i].page_idx,
+                            &child_page);
     }
 
-    file_write_page(table_id, left_page_idx, &left_page);
-    file_free_page(table_id, right_page_idx);
+    buffered_write_page(table_id, left_page_idx, &left_page);
+    buffered_free_page(table_id, right_page_idx);
 
     for (int i = 0; i < parent_page.page_header.key_num; i++) {
         if (parent_page.page_branches[i].page_idx == right_page_idx) {
@@ -921,19 +921,18 @@ pagenum_t coalesce_internal_nodes(tableid_t table_id, pagenum_t left_page_idx,
 }
 
 pagenum_t coalesce_leaf_nodes(tableid_t table_id, pagenum_t left_page_idx, pagenum_t right_page_idx) {
-
-    auto& instance = file_helper::get_table(table_id);
-
-    headerpage_t& header_page = instance.header_page;
+    headerpage_t header_page;
 
     int64_t old_key;
     internalpage_t parent_page;
     leafpage_t left_page, right_page;
     PageSlot* right_slot;
 
-    file_read_page(table_id, left_page_idx, &left_page);
-    file_read_page(table_id, right_page_idx, &right_page);
-    file_read_page(table_id, left_page.page_header.parent_page_idx, &parent_page);
+    buffered_read_page(table_id, 0, &header_page, false);
+    buffered_read_page(table_id, left_page_idx, &left_page);
+    buffered_read_page(table_id, right_page_idx, &right_page);
+    buffered_read_page(table_id, left_page.page_header.parent_page_idx,
+                       &parent_page);
 
     /* In a leaf, append the keys and pointers of
      * n to the neighbor.
@@ -950,8 +949,8 @@ pagenum_t coalesce_leaf_nodes(tableid_t table_id, pagenum_t left_page_idx, pagen
     }
     *page_helper::get_sibling_idx(&left_page) = *page_helper::get_sibling_idx(&right_page);
 
-    file_write_page(table_id, left_page_idx, &left_page);
-    file_free_page(table_id, right_page_idx);
+    buffered_write_page(table_id, left_page_idx, &left_page);
+    buffered_free_page(table_id, right_page_idx);
 
     for(int i = 0; i < parent_page.page_header.key_num; i++) {
         if(parent_page.page_branches[i].page_idx == right_page_idx) {
@@ -964,10 +963,7 @@ pagenum_t coalesce_leaf_nodes(tableid_t table_id, pagenum_t left_page_idx, pagen
 }
 
 pagenum_t delete_internal_key(tableid_t table_id, pagenum_t internal_page_idx, int64_t key) {
-
-    auto& instance = file_helper::get_table(table_id);
-
-    headerpage_t& header_page = instance.header_page;
+    headerpage_t header_page;
 
     int seperate_key_idx;
     int64_t seperate_key;
@@ -979,9 +975,10 @@ pagenum_t delete_internal_key(tableid_t table_id, pagenum_t internal_page_idx, i
     pagenum_t parent_page_idx;
     internalpage_t parent_page;
 
-    file_read_page(table_id, internal_page_idx, &internal_page);
+    buffered_read_page(table_id, 0, &header_page, false);
+    buffered_read_page(table_id, internal_page_idx, &internal_page);
     page_helper::remove_internal_key(&internal_page, key);
-    file_write_page(table_id, internal_page_idx, &internal_page);
+    buffered_write_page(table_id, internal_page_idx, &internal_page);
 
     parent_page_idx = internal_page.page_header.parent_page_idx;
 
@@ -991,7 +988,7 @@ pagenum_t delete_internal_key(tableid_t table_id, pagenum_t internal_page_idx, i
     if (internal_page.page_header.key_num >= 124)
         return header_page.root_page_idx;
 
-    file_read_page(table_id, parent_page_idx, &parent_page);
+    buffered_read_page(table_id, parent_page_idx, &parent_page);
     if (*page_helper::get_leftmost_child_idx(&parent_page) ==
         internal_page_idx) {
         seperate_key_idx = 0;
@@ -1024,7 +1021,7 @@ pagenum_t delete_internal_key(tableid_t table_id, pagenum_t internal_page_idx, i
         left_sibling = true;
     }
 
-    file_read_page(table_id, sibling_page_idx, &sibling_page);
+    buffered_read_page(table_id, sibling_page_idx, &sibling_page);
 
     /* Coalescence. */
 
@@ -1050,9 +1047,13 @@ pagenum_t delete_internal_key(tableid_t table_id, pagenum_t internal_page_idx, i
                 &internal_page, seperate_key,
                 *page_helper::get_leftmost_child_idx(&sibling_page));
 
-            file_read_page(table_id, *page_helper::get_leftmost_child_idx(&sibling_page), &leftmost_child_page);
+            buffered_read_page(
+                table_id, *page_helper::get_leftmost_child_idx(&sibling_page),
+                &leftmost_child_page);
             leftmost_child_page.page_header.parent_page_idx = internal_page_idx;
-            file_write_page(table_id, *page_helper::get_leftmost_child_idx(&sibling_page), &leftmost_child_page);
+            buffered_write_page(
+                table_id, *page_helper::get_leftmost_child_idx(&sibling_page),
+                &leftmost_child_page);
 
             *page_helper::get_leftmost_child_idx(&sibling_page) = sibling_page.page_branches[0].page_idx;
 
@@ -1077,29 +1078,30 @@ pagenum_t delete_internal_key(tableid_t table_id, pagenum_t internal_page_idx, i
                 sibling_page.page_branches[sibling_page.page_header.key_num - 1]
                     .page_idx;
 
-            file_read_page(table_id, *page_helper::get_leftmost_child_idx(&internal_page), &leftmost_child_page);
+            buffered_read_page(
+                table_id, *page_helper::get_leftmost_child_idx(&internal_page),
+                &leftmost_child_page);
             leftmost_child_page.page_header.parent_page_idx = internal_page_idx;
-            file_write_page(table_id, *page_helper::get_leftmost_child_idx(&internal_page), &leftmost_child_page);
-            
+            buffered_write_page(
+                table_id, *page_helper::get_leftmost_child_idx(&internal_page),
+                &leftmost_child_page);
+
             page_helper::remove_internal_key(
                 &sibling_page,
                 sibling_page.page_branches[sibling_page.page_header.key_num - 1]
                     .key);
         }
 
-        file_write_page(table_id, internal_page_idx, &internal_page);
-        file_write_page(table_id, sibling_page_idx, &sibling_page);
-        file_write_page(table_id, parent_page_idx, &parent_page);
+        buffered_write_page(table_id, internal_page_idx, &internal_page);
+        buffered_write_page(table_id, sibling_page_idx, &sibling_page);
+        buffered_write_page(table_id, parent_page_idx, &parent_page);
     }
 
     return header_page.root_page_idx;
 }
 
 pagenum_t delete_leaf_key(tableid_t table_id, pagenum_t leaf_page_idx, int64_t key) {
-
-    auto& instance = file_helper::get_table(table_id);
-
-    headerpage_t& header_page = instance.header_page;
+    headerpage_t header_page;
 
     int seperate_key_idx = 99999;
     bool left_sibling = false;
@@ -1110,16 +1112,17 @@ pagenum_t delete_leaf_key(tableid_t table_id, pagenum_t leaf_page_idx, int64_t k
     pagenum_t parent_page_idx;
     internalpage_t parent_page;
 
-    file_read_page(table_id, leaf_page_idx, &leaf_page);
+    buffered_read_page(table_id, 0, &header_page, false);
+    buffered_read_page(table_id, leaf_page_idx, &leaf_page);
     page_helper::remove_leaf_value(&leaf_page, key);
-    file_write_page(table_id, leaf_page_idx, &leaf_page);
+    buffered_write_page(table_id, leaf_page_idx, &leaf_page);
 
     parent_page_idx = leaf_page.page_header.parent_page_idx;
 
     if (leaf_page_idx == header_page.root_page_idx)
         return adjust_root(table_id);
 
-    file_read_page(table_id, parent_page_idx, &parent_page);
+    buffered_read_page(table_id, parent_page_idx, &parent_page);
 
     if (*page_helper::get_free_space(&leaf_page) < REDISTRIBUTE_THRESHOLD)
         return leaf_page_idx;
@@ -1144,7 +1147,7 @@ pagenum_t delete_leaf_key(tableid_t table_id, pagenum_t leaf_page_idx, int64_t k
         }
         left_sibling = true;
     }
-    file_read_page(table_id, sibling_page_idx, &sibling_page);
+    buffered_read_page(table_id, sibling_page_idx, &sibling_page);
 
     if(sibling_page.page_header.parent_page_idx != leaf_page.page_header.parent_page_idx) {
         if (parent_page.page_header.key_num < 2) {
@@ -1158,7 +1161,7 @@ pagenum_t delete_leaf_key(tableid_t table_id, pagenum_t leaf_page_idx, int64_t k
                     .page_idx;
         }
         left_sibling = true;
-        file_read_page(table_id, sibling_page_idx, &sibling_page);
+        buffered_read_page(table_id, sibling_page_idx, &sibling_page);
     }
 
     if (*page_helper::get_free_space(&leaf_page) + *page_helper::get_free_space(&sibling_page) >= PAGE_SIZE - PAGE_HEADER_SIZE) {
@@ -1239,9 +1242,9 @@ pagenum_t delete_leaf_key(tableid_t table_id, pagenum_t leaf_page_idx, int64_t k
             parent_page.page_branches[seperate_key_idx].key = leaf_slot[0].key;
         }
 
-        file_write_page(table_id, leaf_page_idx, &leaf_page);
-        file_write_page(table_id, sibling_page_idx, &sibling_page);
-        file_write_page(table_id, parent_page_idx, &parent_page);
+        buffered_write_page(table_id, leaf_page_idx, &leaf_page);
+        buffered_write_page(table_id, sibling_page_idx, &sibling_page);
+        buffered_write_page(table_id, parent_page_idx, &parent_page);
     }
 
     return header_page.root_page_idx;
@@ -1262,4 +1265,4 @@ pagenum_t delete_node(tableid_t table_id, int64_t key) {
 
 -------------------------------
 
-Updated on 2021-10-16 at 22:14:07 +0900
+Updated on 2021-10-25 at 17:08:33 +0900

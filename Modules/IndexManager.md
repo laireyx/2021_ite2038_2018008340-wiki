@@ -1,7 +1,4 @@
----
-title: IndexManager
 
----
 
 # IndexManager
 
@@ -11,30 +8,30 @@ title: IndexManager
 
 |                | Name           |
 | -------------- | -------------- |
-| pagenum_t | **[make_leaf](/Modules/group__IndexManager#function-make-leaf)**(tableid_t table_id, pagenum_t parent_page_idx =0)<br>Allocate and make a leaf page.  |
-| pagenum_t | **[make_node](/Modules/group__IndexManager#function-make-node)**(tableid_t table_id, pagenum_t parent_page_idx =0)<br>Allocate and make an internal page.  |
-| pagenum_t | **[create_tree](/Modules/group__IndexManager#function-create-tree)**(tableid_t table_id, int64_t key, const char * value, uint16_t value_size)<br>Create a new tree.  |
-| pagenum_t | **[find_leaf](/Modules/group__IndexManager#function-find-leaf)**(tableid_t table_id, int64_t key)<br>Find a leaf node which contains given key.  |
-| bool | **[find_by_key](/Modules/group__IndexManager#function-find-by-key)**(tableid_t table_id, int64_t key, char * value =nullptr, uint16_t * value_size =nullptr)<br>Find a record with key.  |
-| pagenum_t | **[insert_into_node](/Modules/group__IndexManager#function-insert-into-node)**(tableid_t table_id, pagenum_t parent_page_idx, pagenum_t left_page_idx, int64_t key, pagenum_t right_page_idx)<br>Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page.  |
-| pagenum_t | **[insert_into_node_after_splitting](/Modules/group__IndexManager#function-insert-into-node-after-splitting)**(tableid_t table_id, pagenum_t parent_page_idx, int64_t key, pagenum_t right_page_idx)<br>Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page, and split it into two pages.  |
-| pagenum_t | **[insert_into_parent](/Modules/group__IndexManager#function-insert-into-parent)**(tableid_t table_id, pagenum_t left_page_idx, int64_t key, pagenum_t right_page_idx)<br>Choose right method between just inserting and <code>insert&#95;into&#95;node&#95;after&#95;splitting</code> and call it.  |
-| pagenum_t | **[insert_into_leaf_after_splitting](/Modules/group__IndexManager#function-insert-into-leaf-after-splitting)**(tableid_t table_id, pagenum_t leaf_page_idx, int64_t key, const char * value, uint16_t value_size)<br>Insert <code>(key, value)</code>into leaf node and split it into two pages.  |
-| pagenum_t | **[insert_node](/Modules/group__IndexManager#function-insert-node)**(tableid_t table_id, int64_t key, const char * value, uint16_t value_size)<br>Find appropriate leaf page and insert a record into it.  |
-| pagenum_t | **[adjust_root](/Modules/group__IndexManager#function-adjust-root)**(tableid_t table_id)<br>Adjust root page.  |
-| pagenum_t | **[coalesce_internal_nodes](/Modules/group__IndexManager#function-coalesce-internal-nodes)**(tableid_t table_id, pagenum_t left_page_idx, int64_t seperate_key, int seperate_key_idx, pagenum_t right_page_idx)<br>Coalesces two internal pages.  |
-| pagenum_t | **[coalesce_leaf_nodes](/Modules/group__IndexManager#function-coalesce-leaf-nodes)**(tableid_t table_id, pagenum_t left_page_idx, pagenum_t right_page_idx)<br>Coalesces two leaf pages.  |
-| pagenum_t | **[delete_internal_key](/Modules/group__IndexManager#function-delete-internal-key)**(tableid_t table_id, pagenum_t internal_page_idx, int64_t key)<br>Delete a page branch from internal page.  |
-| pagenum_t | **[delete_leaf_key](/Modules/group__IndexManager#function-delete-leaf-key)**(tableid_t table_id, pagenum_t leaf_page_idx, int64_t key)<br>Delete a record from leaf page.  |
-| pagenum_t | **[delete_node](/Modules/group__IndexManager#function-delete-node)**(tableid_t table_id, int64_t key)<br>Entrance for remove a record from table.  |
-| pagenum_t | **[insert_into_new_root](/Modules/group__IndexManager#function-insert-into-new-root)**(tableid_t table_id, pagenum_t left_page_idx, int64_t key, pagenum_t right_page_idx) |
+| pagenum_t | **[make_leaf](/Modules/IndexManager#function-make_leaf)**(tableid_t table_id, pagenum_t parent_page_idx =0)<br>Allocate and make a leaf page.  |
+| pagenum_t | **[make_node](/Modules/IndexManager#function-make_node)**(tableid_t table_id, pagenum_t parent_page_idx =0)<br>Allocate and make an internal page.  |
+| pagenum_t | **[create_tree](/Modules/IndexManager#function-create_tree)**(tableid_t table_id, int64_t key, const char * value, uint16_t value_size)<br>Create a new tree.  |
+| pagenum_t | **[find_leaf](/Modules/IndexManager#function-find_leaf)**(tableid_t table_id, int64_t key)<br>Find a leaf node which contains given key.  |
+| bool | **[find_by_key](/Modules/IndexManager#function-find_by_key)**(tableid_t table_id, int64_t key, char * value =nullptr, uint16_t * value_size =nullptr)<br>Find a record with key.  |
+| pagenum_t | **[insert_into_node](/Modules/IndexManager#function-insert_into_node)**(tableid_t table_id, pagenum_t parent_page_idx, pagenum_t left_page_idx, int64_t key, pagenum_t right_page_idx)<br>Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page.  |
+| pagenum_t | **[insert_into_node_after_splitting](/Modules/IndexManager#function-insert_into_node_after_splitting)**(tableid_t table_id, pagenum_t parent_page_idx, int64_t key, pagenum_t right_page_idx)<br>Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page, and split it into two pages.  |
+| pagenum_t | **[insert_into_parent](/Modules/IndexManager#function-insert_into_parent)**(tableid_t table_id, pagenum_t left_page_idx, int64_t key, pagenum_t right_page_idx)<br>Choose right method between just inserting and <code>insert&#95;into&#95;node&#95;after&#95;splitting</code> and call it.  |
+| pagenum_t | **[insert_into_leaf_after_splitting](/Modules/IndexManager#function-insert_into_leaf_after_splitting)**(tableid_t table_id, pagenum_t leaf_page_idx, int64_t key, const char * value, uint16_t value_size)<br>Insert <code>(key, value)</code>into leaf node and split it into two pages.  |
+| pagenum_t | **[insert_node](/Modules/IndexManager#function-insert_node)**(tableid_t table_id, int64_t key, const char * value, uint16_t value_size)<br>Find appropriate leaf page and insert a record into it.  |
+| pagenum_t | **[adjust_root](/Modules/IndexManager#function-adjust_root)**(tableid_t table_id)<br>Adjust root page.  |
+| pagenum_t | **[coalesce_internal_nodes](/Modules/IndexManager#function-coalesce_internal_nodes)**(tableid_t table_id, pagenum_t left_page_idx, int64_t seperate_key, int seperate_key_idx, pagenum_t right_page_idx)<br>Coalesces two internal pages.  |
+| pagenum_t | **[coalesce_leaf_nodes](/Modules/IndexManager#function-coalesce_leaf_nodes)**(tableid_t table_id, pagenum_t left_page_idx, pagenum_t right_page_idx)<br>Coalesces two leaf pages.  |
+| pagenum_t | **[delete_internal_key](/Modules/IndexManager#function-delete_internal_key)**(tableid_t table_id, pagenum_t internal_page_idx, int64_t key)<br>Delete a page branch from internal page.  |
+| pagenum_t | **[delete_leaf_key](/Modules/IndexManager#function-delete_leaf_key)**(tableid_t table_id, pagenum_t leaf_page_idx, int64_t key)<br>Delete a record from leaf page.  |
+| pagenum_t | **[delete_node](/Modules/IndexManager#function-delete_node)**(tableid_t table_id, int64_t key)<br>Entrance for remove a record from table.  |
+| pagenum_t | **[insert_into_new_root](/Modules/IndexManager#function-insert_into_new_root)**(tableid_t table_id, pagenum_t left_page_idx, int64_t key, pagenum_t right_page_idx) |
 
 ## Attributes
 
 |                | Name           |
 | -------------- | -------------- |
-| constexpr int | **[REDISTRIBUTE_THRESHOLD](/Modules/group__IndexManager#variable-redistribute-threshold)**  |
-| constexpr int | **[MAX_VALUE_SIZE](/Modules/group__IndexManager#variable-max-value-size)**  |
+| constexpr int | **[REDISTRIBUTE_THRESHOLD](/Modules/IndexManager#variable-redistribute_threshold)**  |
+| constexpr int | **[MAX_VALUE_SIZE](/Modules/IndexManager#variable-max_value_size)**  |
 
 
 ## Functions Documentation
@@ -431,4 +428,4 @@ constexpr int MAX_VALUE_SIZE = 112;
 
 -------------------------------
 
-Updated on 2021-10-25 at 17:08:19 +0900
+Updated on 2021-10-25 at 17:08:33 +0900

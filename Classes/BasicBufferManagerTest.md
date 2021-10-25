@@ -1,11 +1,8 @@
----
-title: BasicBufferManagerTest
 
----
 
 # BasicBufferManagerTest
 
-**Module:** **[TestCode](/Modules/group__TestCode)**
+**Module:** **[TestCode](/Modules/TestCode)**
 
 
 
@@ -17,15 +14,15 @@ Inherits from testing::Test
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[BasicBufferManagerTest](/Classes/classBasicBufferManagerTest#function-basicbuffermanagertest)**() |
-| | **[~BasicBufferManagerTest](/Classes/classBasicBufferManagerTest#function-~basicbuffermanagertest)**() |
+| | **[BasicBufferManagerTest](/Classes/BasicBufferManagerTest#function-basicbuffermanagertest)**() |
+| | **[~BasicBufferManagerTest](/Classes/BasicBufferManagerTest#function-~basicbuffermanagertest)**() |
 
 ## Protected Attributes
 
 |                | Name           |
 | -------------- | -------------- |
-| int | **[test_order](/Classes/classBasicBufferManagerTest#variable-test-order)** <br>Random indexes for test count.  |
-| tableid_t | **[table_id](/Classes/classBasicBufferManagerTest#variable-table-id)** <br>Test table id.  |
+| int | **[test_order](/Classes/BasicBufferManagerTest#variable-test_order)** <br>Random indexes for test count.  |
+| tableid_t | **[table_id](/Classes/BasicBufferManagerTest#variable-table_id)** <br>Test table id.  |
 
 ## Protected Functions Documentation
 
@@ -63,4 +60,4 @@ Test table id.
 
 -------------------------------
 
-Updated on 2021-10-25 at 17:08:19 +0900
+Updated on 2021-10-25 at 17:08:33 +0900

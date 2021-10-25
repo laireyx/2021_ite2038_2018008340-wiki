@@ -8,13 +8,14 @@
 
 | Name           |
 | -------------- |
-| **[page_helper](/Namespaces/page_helper)** <br><a href="/Classes/Page">Page</a> helper.  |
+| **[page_helper](/Namespaces/page_helper)** <br>Page helper.  |
 
 ## Classes
 
 |                | Name           |
 | -------------- | -------------- |
 | class | **[Page](/Classes/Page)** <br>struct for abstract page.  |
+| class | **[FullPage](/Classes/FullPage)** <br>struct for any page.  |
 | class | **[HeaderPage](/Classes/HeaderPage)** <br>struct for the header page.  |
 | class | **[FreePage](/Classes/FreePage)** <br>struct for the free page.  |
 | class | **[PageHeader](/Classes/PageHeader)** <br>page header for allocated(internal and leaf) node.  |
@@ -31,6 +32,7 @@
 |                | Name           |
 | -------------- | -------------- |
 | typedef <a href="/Classes/Page">Page</a> | **[page_t](/Modules/DiskSpaceManager#typedef-page_t)**  |
+| typedef <a href="/Classes/FullPage">FullPage</a> | **[fullpage_t](/Modules/DiskSpaceManager#typedef-fullpage_t)**  |
 | typedef <a href="/Classes/PageHeader">PageHeader</a> | **[pageheader_t](/Modules/DiskSpaceManager#typedef-pageheader_t)**  |
 | typedef <a href="/Classes/HeaderPage">HeaderPage</a> | **[headerpage_t](/Modules/DiskSpaceManager#typedef-headerpage_t)**  |
 | typedef <a href="/Classes/FreePage">FreePage</a> | **[freepage_t](/Modules/DiskSpaceManager#typedef-freepage_t)**  |
@@ -63,6 +65,13 @@
 
 ```cpp
 typedef Page page_t;
+```
+
+
+### typedef fullpage_t
+
+```cpp
+typedef FullPage fullpage_t;
 ```
 
 
@@ -192,7 +201,7 @@ Reserved area for normal allocated page.
 ```cpp
 
 #pragma once
-#include "types.h"
+#include <types.h>
 
 #include <cstdint>
 
@@ -203,6 +212,10 @@ constexpr int PAGE_HEADER_SIZE = 128;
 constexpr int MAX_PAGE_BRANCHES = 248;
 
 struct Page {};
+
+struct FullPage : public Page {
+    uint8_t reserved[PAGE_SIZE];
+};
 
 struct HeaderPage : public Page {
     pagenum_t free_page_idx;
@@ -281,6 +294,7 @@ pagenum_t* get_leftmost_child_idx(InternalPage* page);
 }
 
 typedef Page page_t;
+typedef FullPage fullpage_t;
 typedef PageHeader pageheader_t;
 typedef HeaderPage headerpage_t;
 typedef FreePage freepage_t;
@@ -292,4 +306,4 @@ typedef LeafPage leafpage_t;
 
 -------------------------------
 
-Updated on 2021-10-16 at 22:14:07 +0900
+Updated on 2021-10-25 at 17:08:33 +0900

@@ -4,7 +4,7 @@
 
 **Module:** **[DiskSpaceManager](/Modules/DiskSpaceManager)**
 
-<a href="/Classes/Page">Page</a> helper.  [More...](#detailed-description)
+Page helper.  [More...](#detailed-description)
 
 ## Functions
 
@@ -24,7 +24,7 @@
 
 ## Detailed Description
 
-<a href="/Classes/Page">Page</a> helper. 
+Page helper. 
 
 This namespace includes some helper functions which are used by APIs such as tree manager which uses direct page access. These functions do not call any other APIs, but modifying only given data. 
 
@@ -43,7 +43,7 @@ Get page slots.
 
 **Parameters**: 
 
-  * **page** Leaf page. 
+  * **page** leaf page. 
 
 
 **Return**: <code>PageSlot&#42;</code>
@@ -66,10 +66,10 @@ Get leaf value.
 
 **Parameters**: 
 
-  * **page** Leaf page. 
-  * **value_idx** Index number of value. 
-  * **value** The value will be set into this pointer if not null. 
-  * **value_size** The value size will be set into this pointer if not null. 
+  * **page** leaf page. 
+  * **value_idx** index number of value. 
+  * **value** value will be set into this pointer if not null. 
+  * **value_size** value size will be set into this pointer if not null. 
 
 
 Get a leaf value corresponds to index <code>value&#95;idx</code>, using the page slot information. Then copies the value and its size into given pointer, which is given by caller.
@@ -90,10 +90,10 @@ Get leaf value.
 
 **Parameters**: 
 
-  * **page** Leaf page. 
-  * **value_offset** Value offset. 
-  * **value_size** Value size. 
-  * **value** The value will be set into this pointer if not null. 
+  * **page** leaf page. 
+  * **value_offset** value offset. 
+  * **value_size** value size. 
+  * **value** value will be set into this pointer if not null. 
 
 
 Get a leaf value using exact offset and size. Usually it does not called from the outside, and just help the other function. Then copies the value and its size into given pointer, which is given by caller.
@@ -112,8 +112,8 @@ Check if given page has enough space for given value size.
 
 **Parameters**: 
 
-  * **page** Leaf page. 
-  * **value_size** Value size. 
+  * **page** leaf page. 
+  * **value_size** value size. 
 
 
 **Return**: <code>true</code> if space is enough, <code>false</code> otherwise. 
@@ -151,7 +151,7 @@ pagenum_t * get_sibling_idx(
 
 Get next sibling index. 
 
-**Return**: Right sibling index if page is not rightmost child. <code>0</code> if it is. 
+**Return**: right sibling index if page is not rightmost child. <code>0</code> if it is. 
 
 In leaf page, <code>page-&gt;page&#95;header.reserved&#95;footer.footer&#95;2</code> represents the very next(it means right) sibling index.
 
@@ -171,10 +171,10 @@ Add a leaf value into the last position of the leaf page.
 
 **Parameters**: 
 
-  * **page** The leaf page. 
-  * **key** Record key. 
-  * **value** Record value. 
-  * **value_size** Record value size. 
+  * **page** leaf page. 
+  * **key** record key. 
+  * **value** record value. 
+  * **value_size** record value size. 
 
 
 **Return**: <code>true</code> if the page has enough space and appending is successful, <code>false</code> otherwise. 
@@ -192,8 +192,8 @@ Remove a record and compact reserved area in the leaf page.
 
 **Parameters**: 
 
-  * **page** The leaf page. 
-  * **key** Record key. 
+  * **page** leaf page. 
+  * **key** record key. 
 
 
 **Return**: <code>true</code> if the key was inside the leaf record and deleted successfully, <code>false</code> otherwise. 
@@ -212,9 +212,9 @@ Add a page branch into the last position of the internal page.
 
 **Parameters**: 
 
-  * **page** The internal page. 
-  * **key** Branch key. 
-  * **page_idx** Branch page index. 
+  * **page** internal page. 
+  * **key** branch key. 
+  * **page_idx** branch page index. 
 
 
 **Return**: <code>true</code> if the page has enough space and appending is successful, <code>false</code> otherwise. 
@@ -232,8 +232,8 @@ Remove a page branch and realign branches.
 
 **Parameters**: 
 
-  * **page** The internal page. 
-  * **key** Branch key. 
+  * **page** internal page. 
+  * **key** branch key. 
 
 
 **Return**: <code>true</code> if the key was inside the internal branch and deleted successfully, <code>false</code> otherwise. 
@@ -250,10 +250,10 @@ Get leftmost child page index.
 
 **Parameters**: 
 
-  * **page** The internal page. 
+  * **page** internal page. 
 
 
-**Return**: Leftmost child page index. 
+**Return**: leftmost child page index. 
 
 In internal page, <code>page-&gt;page&#95;header.reserved&#95;footer.footer&#95;2</code> represents current free space amount.
 
@@ -264,4 +264,4 @@ In internal page, <code>page-&gt;page&#95;header.reserved&#95;footer.footer&#95;
 
 -------------------------------
 
-Updated on 2021-10-16 at 22:14:07 +0900
+Updated on 2021-10-25 at 17:08:33 +0900

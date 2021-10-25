@@ -1,12 +1,8 @@
----
-title: FullPage
-summary: struct for any page. 
 
----
 
 # FullPage
 
-**Module:** **[DiskSpaceManager](/Modules/group__DiskSpaceManager)**
+**Module:** **[DiskSpaceManager](/Modules/DiskSpaceManager)**
 
 
 
@@ -15,13 +11,13 @@ struct for any page.
 
 `#include <page.h>`
 
-Inherits from [Page](/Classes/structPage)
+Inherits from [Page](/Classes/Page)
 
 ## Public Attributes
 
 |                | Name           |
 | -------------- | -------------- |
-| uint8_t | **[reserved](/Classes/structFullPage#variable-reserved)** <br>Reserved area for page.  |
+| uint8_t | **[reserved](/Classes/FullPage#variable-reserved)** <br>Reserved area for page.  |
 
 ## Public Attributes Documentation
 
@@ -35,4 +31,4 @@ Reserved area for page.
 
 -------------------------------
 
-Updated on 2021-10-25 at 17:08:19 +0900
+Updated on 2021-10-25 at 17:08:33 +0900

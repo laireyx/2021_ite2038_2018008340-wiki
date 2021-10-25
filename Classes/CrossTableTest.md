@@ -1,11 +1,8 @@
----
-title: CrossTableTest
 
----
 
 # CrossTableTest
 
-**Module:** **[TestCode](/Modules/group__TestCode)**
+**Module:** **[TestCode](/Modules/TestCode)**
 
 
 
@@ -17,15 +14,15 @@ Inherits from testing::Test
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[CrossTableTest](/Classes/classCrossTableTest#function-crosstabletest)**() |
-| | **[~CrossTableTest](/Classes/classCrossTableTest#function-~crosstabletest)**() |
+| | **[CrossTableTest](/Classes/CrossTableTest#function-crosstabletest)**() |
+| | **[~CrossTableTest](/Classes/CrossTableTest#function-~crosstabletest)**() |
 
 ## Protected Attributes
 
 |                | Name           |
 | -------------- | -------------- |
-| int | **[test_order](/Classes/classCrossTableTest#variable-test-order)** <br>Random indexes for test count.  |
-| tableid_t | **[table_id](/Classes/classCrossTableTest#variable-table-id)** <br>Test table id.  |
+| int | **[test_order](/Classes/CrossTableTest#variable-test_order)** <br>Random indexes for test count.  |
+| tableid_t | **[table_id](/Classes/CrossTableTest#variable-table_id)** <br>Test table id.  |
 
 ## Protected Functions Documentation
 
@@ -63,4 +60,4 @@ Test table id.
 
 -------------------------------
 
-Updated on 2021-10-25 at 17:08:19 +0900
+Updated on 2021-10-25 at 17:08:33 +0900

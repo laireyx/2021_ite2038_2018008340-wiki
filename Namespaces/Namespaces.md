@@ -5,14 +5,15 @@
 
 
 
+* **namespace [buffer_helper](/Namespaces/buffer_helper)** <br>BufferManager helper. 
 * **namespace [error](/Namespaces/error)** <br>Error. 
 * **namespace [file_helper](/Namespaces/file_helper)** <br>Filemanager helper. 
-* **namespace [page_helper](/Namespaces/page_helper)** <br><a href="/Classes/Page">Page</a> helper. 
-* **namespace [table_helper](/Namespaces/table_helper)** 
+* **namespace [page_helper](/Namespaces/page_helper)** <br>Page helper. 
+* **namespace [std](/Namespaces/std)** 
 * **namespace [testing](/Namespaces/testing)** 
 
 
 
 -------------------------------
 
-Updated on 2021-10-16 at 22:14:07 +0900
+Updated on 2021-10-25 at 17:08:33 +0900

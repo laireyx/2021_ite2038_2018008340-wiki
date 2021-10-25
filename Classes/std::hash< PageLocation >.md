@@ -1,7 +1,4 @@
----
-title: std::hash< PageLocation >
 
----
 
 # std::hash< PageLocation >
 
@@ -16,7 +13,7 @@ title: std::hash< PageLocation >
 
 |                | Name           |
 | -------------- | -------------- |
-| size_t | **[operator()](/Classes/structstd_1_1hash_3_01PageLocation_01_4#function-operator())**(const <a href="/Modules/group__BufferManager#typedef-pagelocation">PageLocation</a> & location) const |
+| size_t | **[operator()](/Classes/std::hash< PageLocation >#function-operator())**(const <a href="/Modules/BufferManager#typedef-pagelocation">PageLocation</a> & location) const |
 
 ## Public Functions Documentation
 
@@ -31,4 +28,4 @@ inline size_t operator()(
 
 -------------------------------
 
-Updated on 2021-10-25 at 17:08:19 +0900
+Updated on 2021-10-25 at 17:08:33 +0900

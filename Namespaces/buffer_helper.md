@@ -1,12 +1,8 @@
----
-title: buffer_helper
-summary: BufferManager helper. 
 
----
 
 # buffer_helper
 
-**Module:** **[BufferManager](/Modules/group__BufferManager)**
+**Module:** **[BufferManager](/Modules/BufferManager)**
 
 BufferManager helper.  [More...](#detailed-description)
 
@@ -14,12 +10,12 @@ BufferManager helper.  [More...](#detailed-description)
 
 |                | Name           |
 | -------------- | -------------- |
-| <a href="/Classes/structBufferBlock">BufferBlock</a> * | **[load_buffer](/Namespaces/namespacebuffer__helper#function-load-buffer)**(const <a href="/Modules/group__BufferManager#typedef-pagelocation">PageLocation</a> & page_location, <a href="/Modules/group__DiskSpaceManager#typedef-page-t">page_t</a> * page, bool pin =true)<br>Load a page into buffer.  |
-| bool | **[apply_buffer](/Namespaces/namespacebuffer__helper#function-apply-buffer)**(const <a href="/Modules/group__BufferManager#typedef-pagelocation">PageLocation</a> & page_location, const <a href="/Modules/group__DiskSpaceManager#typedef-page-t">page_t</a> * page)<br>Apply a page into buffer.  |
-| bool | **[is_full](/Namespaces/namespacebuffer__helper#function-is-full)**()<br>Check if there buffer slot is full.  |
-| int | **[evict](/Namespaces/namespacebuffer__helper#function-evict)**()<br>Evict a buffer with the lowest priority.  |
-| void | **[detach_from_tree](/Namespaces/namespacebuffer__helper#function-detach-from-tree)**(int buffer_idx)<br>detach a buffer from Recently-Used list.  |
-| void | **[prepend_to_head](/Namespaces/namespacebuffer__helper#function-prepend-to-head)**(int buffer_idx)<br>prepend a buffer to the head of Recently-Used list.  |
+| <a href="/Classes/BufferBlock">BufferBlock</a> * | **[load_buffer](/Namespaces/buffer_helper#function-load_buffer)**(const <a href="/Modules/BufferManager#typedef-pagelocation">PageLocation</a> & page_location, <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * page, bool pin =true)<br>Load a page into buffer.  |
+| bool | **[apply_buffer](/Namespaces/buffer_helper#function-apply_buffer)**(const <a href="/Modules/BufferManager#typedef-pagelocation">PageLocation</a> & page_location, const <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * page)<br>Apply a page into buffer.  |
+| bool | **[is_full](/Namespaces/buffer_helper#function-is_full)**()<br>Check if there buffer slot is full.  |
+| int | **[evict](/Namespaces/buffer_helper#function-evict)**()<br>Evict a buffer with the lowest priority.  |
+| void | **[detach_from_tree](/Namespaces/buffer_helper#function-detach_from_tree)**(int buffer_idx)<br>detach a buffer from Recently-Used list.  |
+| void | **[prepend_to_head](/Namespaces/buffer_helper#function-prepend_to_head)**(int buffer_idx)<br>prepend a buffer to the head of Recently-Used list.  |
 
 ## Detailed Description
 
@@ -96,7 +92,7 @@ Evict a buffer with the lowest priority.
 
 **Return**: evicted buffer slot index if success, <code>&lt;0</code> otherwise. 
 
-<code><a href="/Namespaces/namespacebuffer__helper#function-load-buffer">load&#95;buffer()</a></code> will determine using of fallback method with return value of <code><a href="/Namespaces/namespacebuffer__helper#function-evict">evict()</a></code>.
+<code><a href="/Namespaces/buffer_helper#function-load-buffer">load&#95;buffer()</a></code> will determine using of fallback method with return value of <code><a href="/Namespaces/buffer_helper#function-evict">evict()</a></code>.
 
 
 ### function detach_from_tree
@@ -138,4 +134,4 @@ prepend a buffer to the head of Recently-Used list.
 
 -------------------------------
 
-Updated on 2021-10-25 at 17:08:19 +0900
+Updated on 2021-10-25 at 17:08:33 +0900
