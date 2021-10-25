@@ -11,29 +11,29 @@ title: db/include/tree.h
 
 |                | Name           |
 | -------------- | -------------- |
-| pagenum_t | **[make_leaf](/Modules/group__IndexManager#function-make-leaf)**(tableid_t table_id, pagenum_t parent_page_idx =0)<br>Allocate and make a leaf page.  |
-| pagenum_t | **[make_node](/Modules/group__IndexManager#function-make-node)**(tableid_t table_id, pagenum_t parent_page_idx =0)<br>Allocate and make an internal page.  |
-| pagenum_t | **[create_tree](/Modules/group__IndexManager#function-create-tree)**(tableid_t table_id, int64_t key, const char * value, uint16_t value_size)<br>Create a new tree.  |
-| pagenum_t | **[find_leaf](/Modules/group__IndexManager#function-find-leaf)**(tableid_t table_id, int64_t key)<br>Find a leaf node which contains given key.  |
-| bool | **[find_by_key](/Modules/group__IndexManager#function-find-by-key)**(tableid_t table_id, int64_t key, char * value =nullptr, uint16_t * value_size =nullptr)<br>Find a record with key.  |
-| pagenum_t | **[insert_into_node](/Modules/group__IndexManager#function-insert-into-node)**(tableid_t table_id, pagenum_t parent_page_idx, pagenum_t left_page_idx, int64_t key, pagenum_t right_page_idx)<br>Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page.  |
-| pagenum_t | **[insert_into_node_after_splitting](/Modules/group__IndexManager#function-insert-into-node-after-splitting)**(tableid_t table_id, pagenum_t parent_page_idx, int64_t key, pagenum_t right_page_idx)<br>Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page, and split it into two pages.  |
-| pagenum_t | **[insert_into_parent](/Modules/group__IndexManager#function-insert-into-parent)**(tableid_t table_id, pagenum_t left_page_idx, int64_t key, pagenum_t right_page_idx)<br>Choose right method between just inserting and <code>insert&#95;into&#95;node&#95;after&#95;splitting</code> and call it.  |
-| pagenum_t | **[insert_into_leaf_after_splitting](/Modules/group__IndexManager#function-insert-into-leaf-after-splitting)**(tableid_t table_id, pagenum_t leaf_page_idx, int64_t key, const char * value, uint16_t value_size)<br>Insert <code>(key, value)</code>into leaf node and split it into two pages.  |
-| pagenum_t | **[insert_node](/Modules/group__IndexManager#function-insert-node)**(tableid_t table_id, int64_t key, const char * value, uint16_t value_size)<br>Find appropriate leaf page and insert a record into it.  |
-| pagenum_t | **[adjust_root](/Modules/group__IndexManager#function-adjust-root)**(tableid_t table_id)<br>Adjust root page.  |
-| pagenum_t | **[coalesce_internal_nodes](/Modules/group__IndexManager#function-coalesce-internal-nodes)**(tableid_t table_id, pagenum_t left_page_idx, int64_t seperate_key, int seperate_key_idx, pagenum_t right_page_idx)<br>Coalesces two internal pages.  |
-| pagenum_t | **[coalesce_leaf_nodes](/Modules/group__IndexManager#function-coalesce-leaf-nodes)**(tableid_t table_id, pagenum_t left_page_idx, pagenum_t right_page_idx)<br>Coalesces two leaf pages.  |
-| pagenum_t | **[delete_internal_key](/Modules/group__IndexManager#function-delete-internal-key)**(tableid_t table_id, pagenum_t internal_page_idx, int64_t key)<br>Delete a page branch from internal page.  |
-| pagenum_t | **[delete_leaf_key](/Modules/group__IndexManager#function-delete-leaf-key)**(tableid_t table_id, pagenum_t leaf_page_idx, int64_t key)<br>Delete a record from leaf page.  |
-| pagenum_t | **[delete_node](/Modules/group__IndexManager#function-delete-node)**(tableid_t table_id, int64_t key)<br>Entrance for remove a record from table.  |
+| pagenum_t | **[make_leaf](/Modules/group__DiskBasedBpt#function-make-leaf)**(tableid_t table_id, pagenum_t parent_page_idx =0)<br>Allocate and make a leaf page.  |
+| pagenum_t | **[make_node](/Modules/group__DiskBasedBpt#function-make-node)**(tableid_t table_id, pagenum_t parent_page_idx =0)<br>Allocate and make an internal page.  |
+| pagenum_t | **[create_tree](/Modules/group__DiskBasedBpt#function-create-tree)**(tableid_t table_id, int64_t key, const char * value, uint16_t value_size)<br>Create a new tree.  |
+| pagenum_t | **[find_leaf](/Modules/group__DiskBasedBpt#function-find-leaf)**(tableid_t table_id, int64_t key)<br>Find a leaf node which contains given key.  |
+| bool | **[find_by_key](/Modules/group__DiskBasedBpt#function-find-by-key)**(tableid_t table_id, int64_t key, char * value =nullptr, uint16_t * value_size =nullptr)<br>Find a record with key.  |
+| pagenum_t | **[insert_into_node](/Modules/group__DiskBasedBpt#function-insert-into-node)**(tableid_t table_id, pagenum_t parent_page_idx, pagenum_t left_page_idx, int64_t key, pagenum_t right_page_idx)<br>Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page.  |
+| pagenum_t | **[insert_into_node_after_splitting](/Modules/group__DiskBasedBpt#function-insert-into-node-after-splitting)**(tableid_t table_id, pagenum_t parent_page_idx, int64_t key, pagenum_t right_page_idx)<br>Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page, and split it into two pages.  |
+| pagenum_t | **[insert_into_parent](/Modules/group__DiskBasedBpt#function-insert-into-parent)**(tableid_t table_id, pagenum_t left_page_idx, int64_t key, pagenum_t right_page_idx)<br>Choose right method between just inserting and <code>insert&#95;into&#95;node&#95;after&#95;splitting</code> and call it.  |
+| pagenum_t | **[insert_into_leaf_after_splitting](/Modules/group__DiskBasedBpt#function-insert-into-leaf-after-splitting)**(tableid_t table_id, pagenum_t leaf_page_idx, int64_t key, const char * value, uint16_t value_size)<br>Insert <code>(key, value)</code>into leaf node and split it into two pages.  |
+| pagenum_t | **[insert_node](/Modules/group__DiskBasedBpt#function-insert-node)**(tableid_t table_id, int64_t key, const char * value, uint16_t value_size)<br>Find appropriate leaf page and insert a record into it.  |
+| pagenum_t | **[adjust_root](/Modules/group__DiskBasedBpt#function-adjust-root)**(tableid_t table_id)<br>Adjust root page.  |
+| pagenum_t | **[coalesce_internal_nodes](/Modules/group__DiskBasedBpt#function-coalesce-internal-nodes)**(tableid_t table_id, pagenum_t left_page_idx, int64_t seperate_key, int seperate_key_idx, pagenum_t right_page_idx)<br>Coalesces two internal pages.  |
+| pagenum_t | **[coalesce_leaf_nodes](/Modules/group__DiskBasedBpt#function-coalesce-leaf-nodes)**(tableid_t table_id, pagenum_t left_page_idx, pagenum_t right_page_idx)<br>Coalesces two leaf pages.  |
+| pagenum_t | **[delete_internal_key](/Modules/group__DiskBasedBpt#function-delete-internal-key)**(tableid_t table_id, pagenum_t internal_page_idx, int64_t key)<br>Delete a page branch from internal page.  |
+| pagenum_t | **[delete_leaf_key](/Modules/group__DiskBasedBpt#function-delete-leaf-key)**(tableid_t table_id, pagenum_t leaf_page_idx, int64_t key)<br>Delete a record from leaf page.  |
+| pagenum_t | **[delete_node](/Modules/group__DiskBasedBpt#function-delete-node)**(tableid_t table_id, int64_t key)<br>Entrance for remove a record from table.  |
 
 ## Attributes
 
 |                | Name           |
 | -------------- | -------------- |
-| constexpr int | **[REDISTRIBUTE_THRESHOLD](/Modules/group__IndexManager#variable-redistribute-threshold)**  |
-| constexpr int | **[MAX_VALUE_SIZE](/Modules/group__IndexManager#variable-max-value-size)**  |
+| constexpr int | **[REDISTRIBUTE_THRESHOLD](/Modules/group__DiskBasedBpt#variable-redistribute-threshold)**  |
+| constexpr int | **[MAX_VALUE_SIZE](/Modules/group__DiskBasedBpt#variable-max-value-size)**  |
 
 
 ## Functions Documentation
@@ -51,11 +51,11 @@ Allocate and make a leaf page.
 
 **Parameters**: 
 
-  * **table_id** table id. 
-  * **parent_page_idx** parent page index. 
+  * **table_id** Table id. 
+  * **parent_page_idx** Parent page index. 
 
 
-**Return**: created page index. 
+**Return**: Created page index. 
 
 ### function make_node
 
@@ -70,11 +70,11 @@ Allocate and make an internal page.
 
 **Parameters**: 
 
-  * **table_id** table id. 
-  * **parent_page_idx** parent page index. 
+  * **table_id** Table id. 
+  * **parent_page_idx** Parent page index. 
 
 
-**Return**: created page index. 
+**Return**: Created page index. 
 
 ### function create_tree
 
@@ -91,13 +91,13 @@ Create a new tree.
 
 **Parameters**: 
 
-  * **table_id** table id. 
-  * **key** initial record key. 
-  * **value** initial record value. 
-  * **value_size** initial record value size. 
+  * **table_id** Table id. 
+  * **key** Initial record key. 
+  * **value** Initial record value. 
+  * **value_size** Initial record value size. 
 
 
-**Return**: root page index. 
+**Return**: Root page index. 
 
 Create a new leaf page for root page and set initial record.
 
@@ -115,11 +115,11 @@ Find a leaf node which contains given key.
 
 **Parameters**: 
 
-  * **table_id** table id. 
-  * **key** key to query with. 
+  * **table_id** Table id. 
+  * **key** Key to query with. 
 
 
-**Return**: page index if found. <code>0</code> if the key does not exist. 
+**Return**: <a href="/Classes/structPage">Page</a> index if found. <code>0</code> if the key does not exist. 
 
 ### function find_by_key
 
@@ -136,8 +136,8 @@ Find a record with key.
 
 **Parameters**: 
 
-  * **table_id** table id. 
-  * **key** key to query with. 
+  * **table_id** Table id. 
+  * **key** Key to query with. 
   * **value** If the record is found successful, then this value is set to record value. Caller should allocate enough(MAX_VALUE_SIZE) memory for it. 
   * **value_size** If the record is found successful, then this value is set to record size. 
 
@@ -160,14 +160,14 @@ Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page.
 
 **Parameters**: 
 
-  * **table_id** table id. 
-  * **parent_page_idx** parent page index. 
-  * **left_page_idx** left page index. 
-  * **key** key which means right page. 
-  * **right_page_idx** right page index. 
+  * **table_id** Table id. 
+  * **parent_page_idx** Parent page index. 
+  * **left_page_idx** Left page index. 
+  * **key** Key which means right page. 
+  * **right_page_idx** Right page index. 
 
 
-**Return**: root page number. 
+**Return**: Root page number. 
 
 ### function insert_into_node_after_splitting
 
@@ -184,13 +184,13 @@ Insert a <code>(key, right&#95;page&#95;idx)</code> tuple in parent page, and sp
 
 **Parameters**: 
 
-  * **table_id** table id. 
-  * **parent_page_idx** parent page index. 
-  * **key** key which means right page. 
-  * **right_page_idx** right page index. 
+  * **table_id** Table id. 
+  * **parent_page_idx** Parent page index. 
+  * **key** Key which means right page. 
+  * **right_page_idx** Right page index. 
 
 
-**Return**: root page number. 
+**Return**: Root page number. 
 
 ### function insert_into_parent
 
@@ -207,13 +207,13 @@ Choose right method between just inserting and <code>insert&#95;into&#95;node&#9
 
 **Parameters**: 
 
-  * **table_id** table id. 
-  * **left_page_idx** left page index. 
-  * **key** key which means right page. 
-  * **right_page_idx** right page index. 
+  * **table_id** Table id. 
+  * **left_page_idx** Left page index. 
+  * **key** Key which means right page. 
+  * **right_page_idx** Right page index. 
 
 
-**Return**: root page number. 
+**Return**: Root page number. 
 
 ### function insert_into_leaf_after_splitting
 
@@ -231,14 +231,14 @@ Insert <code>(key, value)</code>into leaf node and split it into two pages.
 
 **Parameters**: 
 
-  * **table_id** table id. 
-  * **leaf_page_idx** leaf page index. 
-  * **key** record key. 
-  * **value** record value. 
-  * **value_size** record value size. 
+  * **table_id** Table id. 
+  * **leaf_page_idx** Leaf page index. 
+  * **key** Record key. 
+  * **value** Record value. 
+  * **value_size** Record value size. 
 
 
-**Return**: root page number. 
+**Return**: Root page number. 
 
 ### function insert_node
 
@@ -255,13 +255,13 @@ Find appropriate leaf page and insert a record into it.
 
 **Parameters**: 
 
-  * **table_id** table id. 
-  * **key** record key. 
-  * **value** record value. 
-  * **value_size** record value size. 
+  * **table_id** Table id. 
+  * **key** Record key. 
+  * **value** Record value. 
+  * **value_size** Record value size. 
 
 
-**Return**: root page number. 
+**Return**: Root page number. 
 
 ### function adjust_root
 
@@ -275,7 +275,7 @@ Adjust root page.
 
 **Parameters**: 
 
-  * **table_id** table id. 
+  * **table_id** Table id. 
 
 
 **Return**: <code>&gt;0</code> if succesful. <code>0</code> otherwise. 
@@ -299,14 +299,14 @@ Coalesces two internal pages.
 
 **Parameters**: 
 
-  * **table_id** table id. 
-  * **left_page_idx** left page index. 
-  * **seperate_key** key which can seperate between left and right page. 
-  * **seperate_key_idx** parent branch index of <code>seperate&#95;key</code>. 
-  * **right_page_idx** right page index. 
+  * **table_id** Table id. 
+  * **left_page_idx** Left page index. 
+  * **seperate_key** Key which can seperate between left and right page. 
+  * **seperate_key_idx** Parent branch index of <code>seperate&#95;key</code>. 
+  * **right_page_idx** Right page index. 
 
 
-**Return**: root page number. 
+**Return**: Root page number. 
 
 Moves all right page branch into the left page.
 
@@ -325,12 +325,12 @@ Coalesces two leaf pages.
 
 **Parameters**: 
 
-  * **table_id** table id. 
-  * **left_page_idx** left page index. 
-  * **right_page_idx** right page index. 
+  * **table_id** Table id. 
+  * **left_page_idx** Left page index. 
+  * **right_page_idx** Right page index. 
 
 
-**Return**: root page number. 
+**Return**: Root page number. 
 
 Moves all right page record into the left page.
 
@@ -349,12 +349,12 @@ Delete a page branch from internal page.
 
 **Parameters**: 
 
-  * **table_id** table id. 
-  * **internal_page_idx** internal page index. 
-  * **key** branch key. 
+  * **table_id** Table id. 
+  * **internal_page_idx** Internal page index. 
+  * **key** Branch key. 
 
 
-**Return**: root page number. 
+**Return**: Root page number. 
 
 ### function delete_leaf_key
 
@@ -370,12 +370,12 @@ Delete a record from leaf page.
 
 **Parameters**: 
 
-  * **table_id** table id. 
-  * **leaf_page_idx** leaf page index. 
-  * **key** record key. 
+  * **table_id** Table id. 
+  * **leaf_page_idx** Leaf page index. 
+  * **key** Record key. 
 
 
-**Return**: root page number. 
+**Return**: Root page number. 
 
 ### function delete_node
 
@@ -390,11 +390,11 @@ Entrance for remove a record from table.
 
 **Parameters**: 
 
-  * **table_id** table id. 
-  * **key** record key. 
+  * **table_id** Table id. 
+  * **key** Record key. 
 
 
-**Return**: root page number. 
+**Return**: Root page number. 
 
 
 ## Attributes Documentation
@@ -420,7 +420,7 @@ constexpr int MAX_VALUE_SIZE = 112;
 
 #pragma once
 
-#include <types.h>
+#include "types.h"
 
 constexpr int REDISTRIBUTE_THRESHOLD = 2500;
 constexpr int MAX_VALUE_SIZE = 112;
@@ -465,4 +465,4 @@ pagenum_t delete_node(tableid_t table_id, int64_t key);
 
 -------------------------------
 
-Updated on 2021-10-25 at 16:59:00 +0900
+Updated on 2021-10-25 at 17:06:26 +0900

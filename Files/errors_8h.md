@@ -95,4 +95,4 @@ inline bool ok(bool assertion, bool exit_flag = THROW_EXCEPTION) {
 
 -------------------------------
 
-Updated on 2021-10-25 at 16:59:00 +0900
+Updated on 2021-10-25 at 17:06:26 +0900

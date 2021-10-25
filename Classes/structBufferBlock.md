@@ -83,4 +83,4 @@ next buffer block index of Recently-Used linked list.
 
 -------------------------------
 
-Updated on 2021-10-25 at 16:59:00 +0900
+Updated on 2021-10-25 at 17:04:35 +0900

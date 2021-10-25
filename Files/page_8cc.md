@@ -11,7 +11,7 @@ title: db/src/page.cc
 
 | Name           |
 | -------------- |
-| **[page_helper](/Namespaces/namespacepage__helper)** <br>Page helper.  |
+| **[page_helper](/Namespaces/namespacepage__helper)** <br><a href="/Classes/structPage">Page</a> helper.  |
 
 
 
@@ -19,13 +19,13 @@ title: db/src/page.cc
 ## Source code
 
 ```cpp
-#include <page.h>
+#include "page.h"
 
 #include <cstring>
 #include <iostream>
 #include <vector>
 
-#include <types.h>
+#include "types.h"
 
 namespace page_helper {
 PageSlot* get_page_slot(LeafPage* page) {
@@ -159,4 +159,4 @@ uint64_t* get_leftmost_child_idx(InternalPage* page) {
 
 -------------------------------
 
-Updated on 2021-10-25 at 16:59:00 +0900
+Updated on 2021-10-25 at 17:06:26 +0900

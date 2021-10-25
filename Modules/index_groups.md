@@ -8,14 +8,13 @@ title: Modules
 
 
 
-* **group [BufferManager](/Modules/group__BufferManager)** 
-* **group [DatabaseAPI](/Modules/group__DatabaseAPI)** 
+* **group [DiskBasedBpt](/Modules/group__DiskBasedBpt)** 
 * **group [DiskSpaceManager](/Modules/group__DiskSpaceManager)** 
-* **group [IndexManager](/Modules/group__IndexManager)** 
+* **group [TableManager](/Modules/group__TableManager)** 
 * **group [TestCode](/Modules/group__TestCode)** 
 
 
 
 -------------------------------
 
-Updated on 2021-10-25 at 16:59:00 +0900
+Updated on 2021-10-25 at 17:06:26 +0900

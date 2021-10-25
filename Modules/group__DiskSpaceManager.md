@@ -12,7 +12,7 @@ title: DiskSpaceManager
 | Name           |
 | -------------- |
 | **[file_helper](/Namespaces/namespacefile__helper)** <br>Filemanager helper.  |
-| **[page_helper](/Namespaces/namespacepage__helper)** <br>Page helper.  |
+| **[page_helper](/Namespaces/namespacepage__helper)** <br><a href="/Classes/structPage">Page</a> helper.  |
 
 ## Classes
 
@@ -20,7 +20,6 @@ title: DiskSpaceManager
 | -------------- | -------------- |
 | class | **[TableInstance](/Classes/structTableInstance)** <br>Table file instance.  |
 | class | **[Page](/Classes/structPage)** <br>struct for abstract page.  |
-| class | **[FullPage](/Classes/structFullPage)** <br>struct for any page.  |
 | class | **[HeaderPage](/Classes/structHeaderPage)** <br>struct for the header page.  |
 | class | **[FreePage](/Classes/structFreePage)** <br>struct for the free page.  |
 | class | **[PageHeader](/Classes/structPageHeader)** <br>page header for allocated(internal and leaf) node.  |
@@ -37,7 +36,6 @@ title: DiskSpaceManager
 | -------------- | -------------- |
 | typedef struct <a href="/Classes/structTableInstance">TableInstance</a> | **[TableInstance](/Modules/group__DiskSpaceManager#typedef-tableinstance)**  |
 | typedef <a href="/Classes/structPage">Page</a> | **[page_t](/Modules/group__DiskSpaceManager#typedef-page-t)**  |
-| typedef <a href="/Classes/structFullPage">FullPage</a> | **[fullpage_t](/Modules/group__DiskSpaceManager#typedef-fullpage-t)**  |
 | typedef <a href="/Classes/structPageHeader">PageHeader</a> | **[pageheader_t](/Modules/group__DiskSpaceManager#typedef-pageheader-t)**  |
 | typedef <a href="/Classes/structHeaderPage">HeaderPage</a> | **[headerpage_t](/Modules/group__DiskSpaceManager#typedef-headerpage-t)**  |
 | typedef <a href="/Classes/structFreePage">FreePage</a> | **[freepage_t](/Modules/group__DiskSpaceManager#typedef-freepage-t)**  |
@@ -50,10 +48,10 @@ title: DiskSpaceManager
 |                | Name           |
 | -------------- | -------------- |
 | tableid_t | **[file_open_table_file](/Modules/group__DiskSpaceManager#function-file-open-table-file)**(const char * path)<br>Open existing table file or create one if not existed.  |
-| pagenum_t | **[file_alloc_page](/Modules/group__DiskSpaceManager#function-file-alloc-page)**(tableid_t table_id)<br>Allocate an on-disk page from the free page list.  |
-| void | **[file_free_page](/Modules/group__DiskSpaceManager#function-file-free-page)**(tableid_t table_id, pagenum_t pagenum)<br>Free an on-disk page to the free page list.  |
-| void | **[file_read_page](/Modules/group__DiskSpaceManager#function-file-read-page)**(tableid_t table_id, pagenum_t pagenum, <a href="/Modules/group__DiskSpaceManager#typedef-page-t">page_t</a> * dest)<br>Read an on-disk page into the in-memory page structure(dest)  |
-| void | **[file_write_page](/Modules/group__DiskSpaceManager#function-file-write-page)**(tableid_t table_id, pagenum_t pagenum, const <a href="/Modules/group__DiskSpaceManager#typedef-page-t">page_t</a> * src)<br>Write an in-memory page(src) to the on-disk page.  |
+| pagenum_t | **[file_alloc_page](/Modules/group__DiskSpaceManager#function-file-alloc-page)**(int64_t table_id)<br>Allocate an on-disk page from the free page list.  |
+| void | **[file_free_page](/Modules/group__DiskSpaceManager#function-file-free-page)**(int64_t table_id, pagenum_t pagenum)<br>Free an on-disk page to the free page list.  |
+| void | **[file_read_page](/Modules/group__DiskSpaceManager#function-file-read-page)**(int64_t table_id, pagenum_t pagenum, <a href="/Modules/group__DiskSpaceManager#typedef-page-t">page_t</a> * dest)<br>Read an on-disk page into the in-memory page structure(dest)  |
+| void | **[file_write_page](/Modules/group__DiskSpaceManager#function-file-write-page)**(int64_t table_id, pagenum_t pagenum, const <a href="/Modules/group__DiskSpaceManager#typedef-page-t">page_t</a> * src)<br>Write an in-memory page(src) to the on-disk page.  |
 | void | **[file_close_table_files](/Modules/group__DiskSpaceManager#function-file-close-table-files)**()<br>Stop referencing the table files.  |
 | struct <a href="/Classes/structPageSlot">PageSlot</a> | **[__attribute__](/Modules/group__DiskSpaceManager#function---attribute--)**((packed) ) |
 
@@ -84,13 +82,6 @@ typedef struct TableInstance TableInstance;
 
 ```
 typedef Page page_t;
-```
-
-
-### typedef fullpage_t
-
-```
-typedef FullPage fullpage_t;
 ```
 
 
@@ -160,7 +151,7 @@ Open existing table file or create one if not existed.
 
 ```
 pagenum_t file_alloc_page(
-    tableid_t table_id
+    int64_t table_id
 )
 ```
 
@@ -177,7 +168,7 @@ Allocate an on-disk page from the free page list.
 
 ```
 void file_free_page(
-    tableid_t table_id,
+    int64_t table_id,
     pagenum_t pagenum
 )
 ```
@@ -194,7 +185,7 @@ Free an on-disk page to the free page list.
 
 ```
 void file_read_page(
-    tableid_t table_id,
+    int64_t table_id,
     pagenum_t pagenum,
     page_t * dest
 )
@@ -213,7 +204,7 @@ Read an on-disk page into the in-memory page structure(dest)
 
 ```
 void file_write_page(
-    tableid_t table_id,
+    int64_t table_id,
     pagenum_t pagenum,
     const page_t * src
 )
@@ -331,4 +322,4 @@ all table instances
 
 -------------------------------
 
-Updated on 2021-10-25 at 16:59:00 +0900
+Updated on 2021-10-25 at 17:06:26 +0900

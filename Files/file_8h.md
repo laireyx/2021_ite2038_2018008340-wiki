@@ -30,10 +30,10 @@ title: db/include/file.h
 |                | Name           |
 | -------------- | -------------- |
 | tableid_t | **[file_open_table_file](/Modules/group__DiskSpaceManager#function-file-open-table-file)**(const char * path)<br>Open existing table file or create one if not existed.  |
-| pagenum_t | **[file_alloc_page](/Modules/group__DiskSpaceManager#function-file-alloc-page)**(tableid_t table_id)<br>Allocate an on-disk page from the free page list.  |
-| void | **[file_free_page](/Modules/group__DiskSpaceManager#function-file-free-page)**(tableid_t table_id, pagenum_t pagenum)<br>Free an on-disk page to the free page list.  |
-| void | **[file_read_page](/Modules/group__DiskSpaceManager#function-file-read-page)**(tableid_t table_id, pagenum_t pagenum, <a href="/Modules/group__DiskSpaceManager#typedef-page-t">page_t</a> * dest)<br>Read an on-disk page into the in-memory page structure(dest)  |
-| void | **[file_write_page](/Modules/group__DiskSpaceManager#function-file-write-page)**(tableid_t table_id, pagenum_t pagenum, const <a href="/Modules/group__DiskSpaceManager#typedef-page-t">page_t</a> * src)<br>Write an in-memory page(src) to the on-disk page.  |
+| pagenum_t | **[file_alloc_page](/Modules/group__DiskSpaceManager#function-file-alloc-page)**(int64_t table_id)<br>Allocate an on-disk page from the free page list.  |
+| void | **[file_free_page](/Modules/group__DiskSpaceManager#function-file-free-page)**(int64_t table_id, pagenum_t pagenum)<br>Free an on-disk page to the free page list.  |
+| void | **[file_read_page](/Modules/group__DiskSpaceManager#function-file-read-page)**(int64_t table_id, pagenum_t pagenum, <a href="/Modules/group__DiskSpaceManager#typedef-page-t">page_t</a> * dest)<br>Read an on-disk page into the in-memory page structure(dest)  |
+| void | **[file_write_page](/Modules/group__DiskSpaceManager#function-file-write-page)**(int64_t table_id, pagenum_t pagenum, const <a href="/Modules/group__DiskSpaceManager#typedef-page-t">page_t</a> * src)<br>Write an in-memory page(src) to the on-disk page.  |
 | void | **[file_close_table_files](/Modules/group__DiskSpaceManager#function-file-close-table-files)**()<br>Stop referencing the table files.  |
 
 ## Attributes
@@ -77,7 +77,7 @@ Open existing table file or create one if not existed.
 
 ```cpp
 pagenum_t file_alloc_page(
-    tableid_t table_id
+    int64_t table_id
 )
 ```
 
@@ -94,7 +94,7 @@ Allocate an on-disk page from the free page list.
 
 ```cpp
 void file_free_page(
-    tableid_t table_id,
+    int64_t table_id,
     pagenum_t pagenum
 )
 ```
@@ -111,7 +111,7 @@ Free an on-disk page to the free page list.
 
 ```cpp
 void file_read_page(
-    tableid_t table_id,
+    int64_t table_id,
     pagenum_t pagenum,
     page_t * dest
 )
@@ -130,7 +130,7 @@ Read an on-disk page into the in-memory page structure(dest)
 
 ```cpp
 void file_write_page(
-    tableid_t table_id,
+    int64_t table_id,
     pagenum_t pagenum,
     const page_t * src
 )
@@ -194,8 +194,8 @@ Its value is 2560.
 
 #pragma once
 
-#include <page.h>
-#include <types.h>
+#include "page.h"
+#include "types.h"
 
 constexpr int INITIAL_TABLE_FILE_SIZE = 10 * 1024 * 1024;
 
@@ -207,24 +207,25 @@ constexpr int INITIAL_TABLE_CAPS =
 typedef struct TableInstance {
     char* file_path;
     int file_descriptor;
+    headerpage_t header_page;
 } TableInstance;
 
 namespace file_helper {
-TableInstance& get_table_instance(tableid_t table_id);
-void extend_capacity(tableid_t table_id, pagenum_t newsize = 0);
+TableInstance& get_table(tableid_t table_id);
+void extend_capacity(tableid_t table_id, pagenum_t newsize);
 
-void flush_header(tableid_t table_id, headerpage_t* header_page);
+void flush_header(tableid_t table_id);
 };  // namespace file_helper
 
 tableid_t file_open_table_file(const char* path);
 
-pagenum_t file_alloc_page(tableid_t table_id);
+pagenum_t file_alloc_page(int64_t table_id);
 
-void file_free_page(tableid_t table_id, pagenum_t pagenum);
+void file_free_page(int64_t table_id, pagenum_t pagenum);
 
-void file_read_page(tableid_t table_id, pagenum_t pagenum, page_t* dest);
+void file_read_page(int64_t table_id, pagenum_t pagenum, page_t* dest);
 
-void file_write_page(tableid_t table_id, pagenum_t pagenum, const page_t* src);
+void file_write_page(int64_t table_id, pagenum_t pagenum, const page_t* src);
 
 void file_close_table_files();
 ```
@@ -232,4 +233,4 @@ void file_close_table_files();
 
 -------------------------------
 
-Updated on 2021-10-25 at 16:59:00 +0900
+Updated on 2021-10-25 at 17:06:26 +0900
