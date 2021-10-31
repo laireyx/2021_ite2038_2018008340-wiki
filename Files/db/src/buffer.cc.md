@@ -20,6 +20,7 @@
 | void | **[buffered_free_page](/Modules/BufferManager#function-buffered_free_page)**(tableid_t table_id, pagenum_t pagenum)<br>Free an on-disk page to the free page list.  |
 | void | **[buffered_read_page](/Modules/BufferManager#function-buffered_read_page)**(tableid_t table_id, pagenum_t pagenum, <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * dest, bool pin =true)<br>Read an on-disk page into the in-memory page structure(dest)  |
 | void | **[buffered_write_page](/Modules/BufferManager#function-buffered_write_page)**(tableid_t table_id, pagenum_t pagenum, const <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * src)<br>Write an in-memory page(src) to the on-disk page.  |
+| void | **[buffered_release_page](/Modules/BufferManager#function-buffered_release_page)**(tableid_t table_id, pagenum_t pagenum)<br>Releases an in-memory buffer.  |
 | int | **[shutdown_buffer](/Modules/BufferManager#function-shutdown_buffer)**()<br>Shutdown buffer manager.  |
 
 ## Attributes
@@ -143,6 +144,26 @@ Write an in-memory page(src) to the on-disk page.
   * **src** the pointer of the page data. 
 
 
+### function buffered_release_page
+
+```cpp
+void buffered_release_page(
+    tableid_t table_id,
+    pagenum_t pagenum
+)
+```
+
+Releases an in-memory buffer. 
+
+**Parameters**: 
+
+  * **table_id** table id obtained with <code><a href="/Modules/BufferManager#function-buffered-open-table-file">buffered&#95;open&#95;table&#95;file()</a></code>. 
+  * **pagenum** page index. 
+
+
+In case of conditional writing, instead of using R(read without pin) - R(read with pin) - W(write to clean pin) method, Just clearing pin without write any data is needed.
+
+
 ### function shutdown_buffer
 
 ```cpp
@@ -208,6 +229,7 @@ std::unordered_map< PageLocation, int > buffer_index;
 #include <new>
 #include <unordered_map>
 #include <utility>
+#include <iostream>
 
 BufferBlock* buffer_slot = nullptr;
 int buffer_head_idx = -1;
@@ -217,12 +239,9 @@ int buffer_size = 0;
 std::unordered_map<PageLocation, int> buffer_index;
 
 namespace buffer_helper {
-BufferBlock* load_buffer(const PageLocation& page_location, page_t* page,
+BufferBlock* load_buffer(tableid_t table_id, pagenum_t pagenum, page_t* page,
                          bool pin) {
-    tableid_t table_id;
-    pagenum_t page_num;
-
-    std::tie(table_id, page_num) = page_location;
+    auto page_location = std::make_pair(table_id, pagenum);
     const auto& existing_buffer = buffer_index.find(page_location);
     if (existing_buffer != buffer_index.end()) {
         int buffer_page_idx = existing_buffer->second;
@@ -233,7 +252,9 @@ BufferBlock* load_buffer(const PageLocation& page_location, page_t* page,
 
         buffer_page->is_pinned = (pin ? 1 : 0);
 
-        memcpy(page, &(buffer_page->page), PAGE_SIZE);
+        if (page != nullptr) {
+            memcpy(page, &(buffer_page->page), PAGE_SIZE);
+        }
         return buffer_slot + buffer_page_idx;
     }
 
@@ -253,21 +274,22 @@ BufferBlock* load_buffer(const PageLocation& page_location, page_t* page,
         buffer_page->is_pinned = pin ? 1 : 0;
         buffer_page->page_location = page_location;
 
-        file_read_page(table_id, page_num, &(buffer_page->page));
-        memcpy(page, &(buffer_page->page), PAGE_SIZE);
+        file_read_page(table_id, pagenum, &(buffer_page->page));
+        if (page != nullptr) {
+            memcpy(page, &(buffer_page->page), PAGE_SIZE);
+        }
         return buffer_page;
     }
 
     // direct I/O fallback
-    file_read_page(table_id, page_num, page);
+    if (page != nullptr) {
+        file_read_page(table_id, pagenum, page);
+    }
     return nullptr;
 }
 
-bool apply_buffer(const PageLocation& page_location, const page_t* page) {
-    tableid_t table_id;
-    pagenum_t page_num;
-
-    std::tie(table_id, page_num) = page_location;
+bool apply_buffer(tableid_t table_id, pagenum_t pagenum, const page_t* page) {
+    auto page_location = std::make_pair(table_id, pagenum);
     const auto& existing_buffer = buffer_index.find(page_location);
     if (existing_buffer != buffer_index.end()) {
         int buffer_page_idx = existing_buffer->second;
@@ -283,14 +305,21 @@ bool apply_buffer(const PageLocation& page_location, const page_t* page) {
     }
 
     // direct I/O fallback
-    file_write_page(table_id, page_num, page);
+    file_write_page(table_id, pagenum, page);
     return false;
 }
 
-int evict() {
-    tableid_t table_id;
-    pagenum_t page_num;
+void release_buffer(tableid_t table_id, pagenum_t pagenum) {
+    auto page_location = std::make_pair(table_id, pagenum);
+    const auto& existing_buffer = buffer_index.find(page_location);
+    if (existing_buffer != buffer_index.end()) {
+        int buffer_page_idx = existing_buffer->second;
+        BufferBlock* buffer_page = buffer_slot + buffer_page_idx;
+        buffer_page->is_pinned = 0;
+    }
+}
 
+int evict() {
     int evicted_idx = buffer_tail_idx;
     BufferBlock* buffer_evict = buffer_slot + evicted_idx;
 
@@ -307,8 +336,10 @@ int evict() {
     buffer_index.erase(buffer_evict->page_location);
 
     // Flush to file if dirty
-    std::tie(table_id, page_num) = buffer_evict->page_location;
     if (buffer_evict->is_dirty) {
+        tableid_t table_id;
+        pagenum_t page_num;
+        std::tie(table_id, page_num) = buffer_evict->page_location;
         file_write_page(table_id, page_num, &buffer_evict->page);
     }
 
@@ -353,6 +384,7 @@ int init_buffer(int _buffer_size) {
         buffer_size = _buffer_size;
         buffer_slot = new BufferBlock[buffer_size];
         for (int i = 0; i < buffer_size; i++) {
+            buffer_slot[i].page_location = std::make_pair(MAX_TABLE_INSTANCE + 1, 0);
             buffer_slot[i].is_dirty = false;
             buffer_slot[i].is_pinned = 0;
 
@@ -381,28 +413,26 @@ pagenum_t buffered_alloc_page(tableid_t table_id) {
 
     headerpage_t header_page;
 
-    buffer_helper::load_buffer(std::make_pair(table_id, 0), &header_page);
+    buffer_helper::load_buffer(table_id, 0, &header_page);
 
     // Pop the first page from free page stack.
     pagenum_t free_page_idx = header_page.free_page_idx;
 
     freepage_t allocated_page;
-    buffer_helper::load_buffer(std::make_pair(table_id, free_page_idx),
-                               &allocated_page);
+    buffer_helper::load_buffer(table_id, free_page_idx, &allocated_page);
 
     // Move the first free page index to the next page.
     header_page.free_page_idx = allocated_page.next_free_idx;
 
-    buffer_helper::apply_buffer(std::make_pair(table_id, 0), &header_page);
-    buffer_helper::apply_buffer(std::make_pair(table_id, free_page_idx),
-                                &allocated_page);
+    buffer_helper::apply_buffer(table_id, 0, &header_page);
+    buffer_helper::apply_buffer(table_id, free_page_idx, &allocated_page);
 
     return free_page_idx;
 }
 
 void buffered_free_page(tableid_t table_id, pagenum_t pagenum) {
     headerpage_t header_page;
-    buffer_helper::load_buffer(std::make_pair(table_id, 0), &header_page);
+    buffer_helper::load_buffer(table_id, 0, &header_page);
 
     // Current first free page index
     pagenum_t old_free_page_idx = header_page.free_page_idx;
@@ -412,25 +442,25 @@ void buffered_free_page(tableid_t table_id, pagenum_t pagenum) {
     // Next free page index of newly freed page is current first free page
     // index. Its just pushing the pagenum into free page stack.
     new_free_page.next_free_idx = old_free_page_idx;
-    buffer_helper::apply_buffer(std::make_pair(table_id, pagenum),
-                                &new_free_page);
+    buffer_helper::apply_buffer(table_id, pagenum, &new_free_page);
 
     // Set the first free page to freed page number.
     header_page.free_page_idx = pagenum;
-    buffer_helper::apply_buffer(std::make_pair(table_id, 0), &header_page);
+    buffer_helper::apply_buffer(table_id, 0, &header_page);
 }
 
 void buffered_read_page(tableid_t table_id, pagenum_t pagenum, page_t* dest,
                         bool pin) {
-    buffer_helper::load_buffer(std::make_pair(table_id, pagenum), dest);
+    buffer_helper::load_buffer(table_id, pagenum, dest, pin);
 }
 
 void buffered_write_page(tableid_t table_id, pagenum_t pagenum,
                          const page_t* src) {
-    if (!buffer_helper::apply_buffer(std::make_pair(table_id, pagenum), src)) {
-        // direct I/O fallback
-        file_write_page(table_id, pagenum, src);
-    }
+    buffer_helper::apply_buffer(table_id, pagenum, src);
+}
+
+void buffered_release_page(tableid_t table_id, pagenum_t pagenum) {
+    buffer_helper::release_buffer(table_id, pagenum);
 }
 
 int shutdown_buffer() {
@@ -459,4 +489,4 @@ int shutdown_buffer() {
 
 -------------------------------
 
-Updated on 2021-10-25 at 17:08:33 +0900
+Updated on 2021-10-31 at 22:47:05 +0900

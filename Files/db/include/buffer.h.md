@@ -35,6 +35,7 @@
 | void | **[buffered_free_page](/Modules/BufferManager#function-buffered_free_page)**(tableid_t table_id, pagenum_t pagenum)<br>Free an on-disk page to the free page list.  |
 | void | **[buffered_read_page](/Modules/BufferManager#function-buffered_read_page)**(tableid_t table_id, pagenum_t pagenum, <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * dest, bool pin =true)<br>Read an on-disk page into the in-memory page structure(dest)  |
 | void | **[buffered_write_page](/Modules/BufferManager#function-buffered_write_page)**(tableid_t table_id, pagenum_t pagenum, const <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * src)<br>Write an in-memory page(src) to the on-disk page.  |
+| void | **[buffered_release_page](/Modules/BufferManager#function-buffered_release_page)**(tableid_t table_id, pagenum_t pagenum)<br>Releases an in-memory buffer.  |
 | int | **[shutdown_buffer](/Modules/BufferManager#function-shutdown_buffer)**()<br>Shutdown buffer manager.  |
 
 ## Types Documentation
@@ -164,6 +165,26 @@ Write an in-memory page(src) to the on-disk page.
   * **src** the pointer of the page data. 
 
 
+### function buffered_release_page
+
+```cpp
+void buffered_release_page(
+    tableid_t table_id,
+    pagenum_t pagenum
+)
+```
+
+Releases an in-memory buffer. 
+
+**Parameters**: 
+
+  * **table_id** table id obtained with <code><a href="/Modules/BufferManager#function-buffered-open-table-file">buffered&#95;open&#95;table&#95;file()</a></code>. 
+  * **pagenum** page index. 
+
+
+In case of conditional writing, instead of using R(read without pin) - R(read with pin) - W(write to clean pin) method, Just clearing pin without write any data is needed.
+
+
 ### function shutdown_buffer
 
 ```cpp
@@ -211,9 +232,10 @@ typedef struct BufferBlock {
 } BufferBlock;
 
 namespace buffer_helper {
-BufferBlock* load_buffer(const PageLocation& page_location, page_t* page,
+BufferBlock* load_buffer(tableid_t table_id, pagenum_t pagenum, page_t* page,
                          bool pin = true);
-bool apply_buffer(const PageLocation& page_location, const page_t* page);
+bool apply_buffer(tableid_t table_id, pagenum_t pagenum, const page_t* page);
+void release_buffer(tableid_t table_id, pagenum_t pagenum);
 bool is_full();
 int evict();
 void detach_from_tree(int buffer_idx);
@@ -234,10 +256,12 @@ void buffered_read_page(tableid_t table_id, pagenum_t pagenum, page_t* dest,
 void buffered_write_page(tableid_t table_id, pagenum_t pagenum,
                          const page_t* src);
 
+void buffered_release_page(tableid_t table_id, pagenum_t pagenum);
+
 int shutdown_buffer();
 ```
 
 
 -------------------------------
 
-Updated on 2021-10-25 at 17:08:33 +0900
+Updated on 2021-10-31 at 22:47:05 +0900

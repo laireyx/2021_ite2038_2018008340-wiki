@@ -34,6 +34,7 @@
 | void | **[buffered_free_page](/Modules/BufferManager#function-buffered_free_page)**(tableid_t table_id, pagenum_t pagenum)<br>Free an on-disk page to the free page list.  |
 | void | **[buffered_read_page](/Modules/BufferManager#function-buffered_read_page)**(tableid_t table_id, pagenum_t pagenum, <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * dest, bool pin =true)<br>Read an on-disk page into the in-memory page structure(dest)  |
 | void | **[buffered_write_page](/Modules/BufferManager#function-buffered_write_page)**(tableid_t table_id, pagenum_t pagenum, const <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * src)<br>Write an in-memory page(src) to the on-disk page.  |
+| void | **[buffered_release_page](/Modules/BufferManager#function-buffered_release_page)**(tableid_t table_id, pagenum_t pagenum)<br>Releases an in-memory buffer.  |
 | int | **[shutdown_buffer](/Modules/BufferManager#function-shutdown_buffer)**()<br>Shutdown buffer manager.  |
 
 ## Attributes
@@ -173,6 +174,26 @@ Write an in-memory page(src) to the on-disk page.
   * **src** the pointer of the page data. 
 
 
+### function buffered_release_page
+
+```
+void buffered_release_page(
+    tableid_t table_id,
+    pagenum_t pagenum
+)
+```
+
+Releases an in-memory buffer. 
+
+**Parameters**: 
+
+  * **table_id** table id obtained with <code><a href="/Modules/BufferManager#function-buffered-open-table-file">buffered&#95;open&#95;table&#95;file()</a></code>. 
+  * **pagenum** page index. 
+
+
+In case of conditional writing, instead of using R(read without pin) - R(read with pin) - W(write to clean pin) method, Just clearing pin without write any data is needed.
+
+
 ### function shutdown_buffer
 
 ```
@@ -230,4 +251,4 @@ std::unordered_map< PageLocation, int > buffer_index;
 
 -------------------------------
 
-Updated on 2021-10-25 at 17:08:33 +0900
+Updated on 2021-10-31 at 22:47:05 +0900

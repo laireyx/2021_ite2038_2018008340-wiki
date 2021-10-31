@@ -10,8 +10,9 @@ BufferManager helper.  [More...](#detailed-description)
 
 |                | Name           |
 | -------------- | -------------- |
-| <a href="/Classes/BufferBlock">BufferBlock</a> * | **[load_buffer](/Namespaces/buffer_helper#function-load_buffer)**(const <a href="/Modules/BufferManager#typedef-pagelocation">PageLocation</a> & page_location, <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * page, bool pin =true)<br>Load a page into buffer.  |
-| bool | **[apply_buffer](/Namespaces/buffer_helper#function-apply_buffer)**(const <a href="/Modules/BufferManager#typedef-pagelocation">PageLocation</a> & page_location, const <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * page)<br>Apply a page into buffer.  |
+| <a href="/Classes/BufferBlock">BufferBlock</a> * | **[load_buffer](/Namespaces/buffer_helper#function-load_buffer)**(tableid_t table_id, pagenum_t pagenum, <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * page, bool pin =true)<br>Load a page into buffer.  |
+| bool | **[apply_buffer](/Namespaces/buffer_helper#function-apply_buffer)**(tableid_t table_id, pagenum_t pagenum, const <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * page)<br>Apply a page into buffer.  |
+| void | **[release_buffer](/Namespaces/buffer_helper#function-release_buffer)**(tableid_t table_id, pagenum_t pagenum)<br>Release a buffer page.  |
 | bool | **[is_full](/Namespaces/buffer_helper#function-is_full)**()<br>Check if there buffer slot is full.  |
 | int | **[evict](/Namespaces/buffer_helper#function-evict)**()<br>Evict a buffer with the lowest priority.  |
 | void | **[detach_from_tree](/Namespaces/buffer_helper#function-detach_from_tree)**(int buffer_idx)<br>detach a buffer from Recently-Used list.  |
@@ -30,7 +31,8 @@ This namespace includes some helper functions which are used by buffermanager AP
 
 ```cpp
 BufferBlock * load_buffer(
-    const PageLocation & page_location,
+    tableid_t table_id,
+    pagenum_t pagenum,
     page_t * page,
     bool pin =true
 )
@@ -40,7 +42,8 @@ Load a page into buffer.
 
 **Parameters**: 
 
-  * **page_location** page location. 
+  * **table_id** table id. 
+  * **pagenum** page number. 
   * **page** page. 
   * **pin** pin. 
 
@@ -54,7 +57,8 @@ Return a buffer block if exists. If not, automatically evict a buffer with the l
 
 ```cpp
 bool apply_buffer(
-    const PageLocation & page_location,
+    tableid_t table_id,
+    pagenum_t pagenum,
     const page_t * page
 )
 ```
@@ -63,13 +67,34 @@ Apply a page into buffer.
 
 **Parameters**: 
 
-  * **page_location** page location. 
+  * **table_id** table id. 
+  * **pagenum** page number. 
   * **page** page content. 
 
 
 **Return**: <code>true</code> if buffer write success, <code>false</code> if fallback method is used. 
 
 Apply page content into buffer block if exists. If not, return <code>false</code> to notify fallback direct I/O method should be used.
+
+
+### function release_buffer
+
+```cpp
+void release_buffer(
+    tableid_t table_id,
+    pagenum_t pagenum
+)
+```
+
+Release a buffer page. 
+
+**Parameters**: 
+
+  * **page_location** page location. 
+  * **page** page content. 
+
+
+Remove the pin from the buffer.
 
 
 ### function is_full
@@ -134,4 +159,4 @@ prepend a buffer to the head of Recently-Used list.
 
 -------------------------------
 
-Updated on 2021-10-25 at 17:08:33 +0900
+Updated on 2021-10-31 at 22:47:05 +0900

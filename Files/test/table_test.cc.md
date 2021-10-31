@@ -67,7 +67,7 @@ Tests database deletion API.
 ### variable test_count
 
 ```cpp
-constexpr int test_count = 10000;
+constexpr int test_count = 20000;
 ```
 
 
@@ -77,6 +77,7 @@ constexpr int test_count = 10000;
 ```cpp
 
 #include <db.h>
+#include <buffer.h>
 
 #include <gtest/gtest.h>
 #include <sys/stat.h>
@@ -86,7 +87,7 @@ constexpr int test_count = 10000;
 #include <cstring>
 #include <ctime>
 
-constexpr int test_count = 10000;
+constexpr int test_count = 20000;
 
 class BasicTableTest : public ::testing::Test {
    protected:
@@ -185,4 +186,4 @@ TEST_F(BasicTableTest, RandomDeletionTest) {
 
 -------------------------------
 
-Updated on 2021-10-25 at 17:08:33 +0900
+Updated on 2021-10-31 at 22:47:05 +0900
