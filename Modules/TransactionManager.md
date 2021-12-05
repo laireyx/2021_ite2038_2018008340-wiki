@@ -22,7 +22,7 @@
 |                | Name           |
 | -------------- | -------------- |
 | enum| **[LogType](/Modules/TransactionManager#enum-logtype)** { UPDATE = 0}<br>Transaction log type.  |
-| enum| **[TransactionState](/Modules/TransactionManager#enum-transactionstate)** { RUNNING = 0, WAITING = 1, COMMITTING = 2, COMMITTED = 3, ABORTING = 4, ABORTED = 5}<br>Transaction running state.  |
+| enum| **[TransactionState](/Modules/TransactionManager#enum-transactionstate)** { RUNNING = 0, COMMITTING = 1, ABORTING = 2}<br>Transaction running state.  |
 | typedef struct <a href="/Classes/TransactionLog">TransactionLog</a> | **[trxlog_t](/Modules/TransactionManager#typedef-trxlog_t)**  |
 
 ## Functions
@@ -61,11 +61,8 @@ Transaction log type.
 | Enumerator | Value | Description |
 | ---------- | ----- | ----------- |
 | RUNNING | 0|   |
-| WAITING | 1|   |
-| COMMITTING | 2|   |
-| COMMITTED | 3|   |
-| ABORTING | 4|   |
-| ABORTED | 5|   |
+| COMMITTING | 1|   |
+| ABORTING | 2|   |
 
 
 
@@ -176,4 +173,4 @@ Transaction log.
 
 -------------------------------
 
-Updated on 2021-12-05 at 18:37:58 +0900
+Updated on 2021-12-05 at 18:53:29 +0900

@@ -19,7 +19,7 @@
 | pagenum_t * | **[get_sibling_idx](/Namespaces/page_helper#function-get_sibling_idx)**(<a href="/Classes/LeafPage">LeafPage</a> * page)<br>Get next sibling index.  |
 | bool | **[add_leaf_value](/Namespaces/page_helper#function-add_leaf_value)**(<a href="/Classes/LeafPage">LeafPage</a> * page, recordkey_t key, const char * value, valsize_t value_size)<br>Add a leaf value into the last position of the leaf page.  |
 | bool | **[remove_leaf_value](/Namespaces/page_helper#function-remove_leaf_value)**(<a href="/Classes/LeafPage">LeafPage</a> * page, recordkey_t key)<br>Remove a record and compact reserved area in the leaf page.  |
-| bool | **[set_leaf_value](/Namespaces/page_helper#function-set_leaf_value)**(<a href="/Classes/LeafPage">LeafPage</a> * page, recordkey_t key, char * old_value, valsize_t * old_val_size, const char * new_value, valsize_t new_val_size)<br>Update the record value in the page and returns old record value size.  |
+| void | **[set_leaf_value](/Namespaces/page_helper#function-set_leaf_value)**(<a href="/Classes/LeafPage">LeafPage</a> * page, int key_idx, char * old_value, valsize_t * old_val_size, const char * new_value, valsize_t new_val_size)<br>Update the record value in the page and returns old record value size.  |
 | bool | **[add_internal_key](/Namespaces/page_helper#function-add_internal_key)**(<a href="/Classes/InternalPage">InternalPage</a> * page, recordkey_t key, pagenum_t page_idx)<br>Add a page branch into the last position of the internal page.  |
 | bool | **[remove_internal_key](/Namespaces/page_helper#function-remove_internal_key)**(<a href="/Classes/InternalPage">InternalPage</a> * page, recordkey_t key)<br>Remove a page branch and realign branches.  |
 | pagenum_t * | **[get_leftmost_child_idx](/Namespaces/page_helper#function-get_leftmost_child_idx)**(<a href="/Classes/InternalPage">InternalPage</a> * page)<br>Get leftmost child page index.  |
@@ -225,9 +225,9 @@ Remove a record and compact reserved area in the leaf page.
 ### function set_leaf_value
 
 ```cpp
-bool set_leaf_value(
+void set_leaf_value(
     LeafPage * page,
-    recordkey_t key,
+    int key_idx,
     char * old_value,
     valsize_t * old_val_size,
     const char * new_value,
@@ -240,14 +240,12 @@ Update the record value in the page and returns old record value size.
 **Parameters**: 
 
   * **page** record page. 
-  * **key** record key. 
+  * **key_idx** record key index. 
   * **old_value** old record value. 
   * **old_val_size** old record value size. 
   * **new_value** new record value. 
   * **new_val_size** new record value size. 
 
-
-**Return**: <code>true</code> if update successfully, <code>false</code> otherwise. 
 
 Todoupdate at here 
 
@@ -320,4 +318,4 @@ In internal page, <code>page-&gt;page&#95;header.reserved&#95;footer.footer&#95;
 
 -------------------------------
 
-Updated on 2021-12-05 at 18:37:58 +0900
+Updated on 2021-12-05 at 18:53:29 +0900

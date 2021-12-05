@@ -6,7 +6,7 @@
 
 
 
-page slot for allocated(internal and leaf) node. 
+page slot for leaf node. 
 
 
 `#include <page.h>`
@@ -18,6 +18,7 @@ page slot for allocated(internal and leaf) node.
 | recordkey_t | **[key](/Classes/PageSlot#variable-key)** <br>The page key.  |
 | valsize_t | **[value_size](/Classes/PageSlot#variable-value_size)** <br>The value size(in bytes).  |
 | uint16_t | **[value_offset](/Classes/PageSlot#variable-value_offset)** <br>The value offset(in bytes).  |
+| trxid_t | **[trx_id](/Classes/PageSlot#variable-trx_id)** <br>Transaction id which is implicitly locked this record.  |
 
 ## Public Attributes Documentation
 
@@ -45,6 +46,14 @@ uint16_t value_offset;
 
 The value offset(in bytes). 
 
+### variable trx_id
+
+```cpp
+trxid_t trx_id;
+```
+
+Transaction id which is implicitly locked this record. 
+
 -------------------------------
 
-Updated on 2021-12-05 at 18:37:58 +0900
+Updated on 2021-12-05 at 18:53:29 +0900

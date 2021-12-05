@@ -27,7 +27,7 @@
 | class | **[HeaderPage](/Classes/HeaderPage)** <br>struct for the header page.  |
 | class | **[FreePage](/Classes/FreePage)** <br>struct for the free page.  |
 | class | **[PageHeader](/Classes/PageHeader)** <br>page header for allocated(internal and leaf) node.  |
-| class | **[PageSlot](/Classes/PageSlot)** <br>page slot for allocated(internal and leaf) node.  |
+| class | **[PageSlot](/Classes/PageSlot)** <br>page slot for leaf node.  |
 | class | **[PageBranch](/Classes/PageBranch)** <br>page slot for internal node.  |
 | class | **[AllocatedPage](/Classes/AllocatedPage)** <br>struct for allocated page.  |
 | class | **[AllocatedFullPage](/Classes/AllocatedFullPage)** <br>struct for any allocated page.  |
@@ -333,4 +333,4 @@ all table instances
 
 -------------------------------
 
-Updated on 2021-12-05 at 18:37:58 +0900
+Updated on 2021-12-05 at 18:53:29 +0900

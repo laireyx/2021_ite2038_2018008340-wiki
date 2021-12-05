@@ -31,8 +31,10 @@
 | -------------- | -------------- |
 | int | **[init_lock_table](/Modules/LockManager#function-init_lock_table)**()<br>Initialize lock table.  |
 | int | **[cleanup_lock_table](/Modules/LockManager#function-cleanup_lock_table)**()<br>Cleanup lock table.  |
-| <a href="/Classes/Lock">Lock</a> * | **[lock_acquire](/Modules/LockManager#function-lock_acquire)**(int table_id, pagenum_t page_id, int key_idx, trxid_t trx_id, int lock_mode)<br>Acquire a lock corresponding to given table id and key.  |
+| <a href="/Classes/Lock">Lock</a> * | **[explicit_lock](/Modules/LockManager#function-explicit_lock)**(tableid_t table_id, pagenum_t page_id, int key_idx, trxid_t trx_id)<br>Create an acquired explicit lock.  |
+| <a href="/Classes/Lock">Lock</a> * | **[lock_acquire](/Modules/LockManager#function-lock_acquire)**(tableid_t table_id, pagenum_t page_id, int key_idx, trxid_t trx_id, int lock_mode)<br>Acquire a lock corresponding to given table id and key.  |
 | int | **[lock_release](/Modules/LockManager#function-lock_release)**(<a href="/Classes/Lock">Lock</a> * lock_obj)<br>Release a lock.  |
+| bool | **[empty_trx](/Modules/LockManager#function-empty_trx)**(trxid_t trx_id) |
 
 ## Attributes
 
@@ -84,11 +86,37 @@ Cleanup lock table.
 
 **Return**: <code>0</code> if success, negative value otherwise. 
 
+### function explicit_lock
+
+```
+Lock * explicit_lock(
+    tableid_t table_id,
+    pagenum_t page_id,
+    int key_idx,
+    trxid_t trx_id
+)
+```
+
+Create an acquired explicit lock. 
+
+**Parameters**: 
+
+  * **table_id** table id. 
+  * **page_id** page id. 
+  * **key_idx** record key index. 
+  * **trx_id** transaction id. 
+
+
+**Return**: created lock instance. 
+
+Implicit locking is only for X-lock, so we can safely assume that created lock is always has <code>EXCLUSIVE</code> lock mode.
+
+
 ### function lock_acquire
 
 ```
 Lock * lock_acquire(
-    int table_id,
+    tableid_t table_id,
     pagenum_t page_id,
     int key_idx,
     trxid_t trx_id,
@@ -102,7 +130,7 @@ Acquire a lock corresponding to given table id and key.
 
   * **table_id** table id. 
   * **page_id** page id. 
-  * **key** record key index. 
+  * **key_idx** record key index. 
   * **trx_id** transaction id. 
   * **lock_mode** lock mode. 
 
@@ -130,6 +158,15 @@ Release a lock.
 **Return**: 0 if success, nonzero otherwise. 
 
 Releases given lock and wakes up next blocked <code><a href="/Modules/LockManager#function-lock-acquire">lock&#95;acquire()</a></code>.
+
+
+### function empty_trx
+
+```
+bool empty_trx(
+    trxid_t trx_id
+)
+```
 
 
 
@@ -165,4 +202,4 @@ Transaction waiting list.
 
 -------------------------------
 
-Updated on 2021-12-05 at 18:37:58 +0900
+Updated on 2021-12-05 at 18:53:29 +0900

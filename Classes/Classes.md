@@ -23,7 +23,7 @@
 * **class [PageBranch](/Classes/PageBranch)** <br>page slot for internal node. 
 * **class [PageHeader](/Classes/PageHeader)** <br>page header for allocated(internal and leaf) node. 
     * **struct [ReservedFooter](/Classes/PageHeader_1_1ReservedFooter)** 
-* **class [PageSlot](/Classes/PageSlot)** <br>page slot for allocated(internal and leaf) node. 
+* **class [PageSlot](/Classes/PageSlot)** <br>page slot for leaf node. 
 * **class [TableInstance](/Classes/TableInstance)** <br>Table file instance. 
 * **struct [TransactionInstance](/Classes/TransactionInstance)** <br>Transaction instance. 
 * **struct [TransactionLog](/Classes/TransactionLog)** <br>Transaction log. 
@@ -43,4 +43,4 @@
 
 -------------------------------
 
-Updated on 2021-12-05 at 18:37:58 +0900
+Updated on 2021-12-05 at 18:53:29 +0900

@@ -20,7 +20,7 @@
 | class | **[FreePage](/Classes/FreePage)** <br>struct for the free page.  |
 | class | **[PageHeader](/Classes/PageHeader)** <br>page header for allocated(internal and leaf) node.  |
 | struct | **[PageHeader::ReservedFooter](/Classes/PageHeader_1_1ReservedFooter)**  |
-| class | **[PageSlot](/Classes/PageSlot)** <br>page slot for allocated(internal and leaf) node.  |
+| class | **[PageSlot](/Classes/PageSlot)** <br>page slot for leaf node.  |
 | class | **[PageBranch](/Classes/PageBranch)** <br>page slot for internal node.  |
 | class | **[AllocatedPage](/Classes/AllocatedPage)** <br>struct for allocated page.  |
 | class | **[AllocatedFullPage](/Classes/AllocatedFullPage)** <br>struct for any allocated page.  |
@@ -53,6 +53,7 @@
 | recordkey_t | **[key](/Files/db/include/page.h#variable-key)** <br>The page key.  |
 | valsize_t | **[value_size](/Files/db/include/page.h#variable-value_size)** <br>The value size(in bytes).  |
 | uint16_t | **[value_offset](/Files/db/include/page.h#variable-value_offset)** <br>The value offset(in bytes).  |
+| trxid_t | **[trx_id](/Files/db/include/page.h#variable-trx_id)** <br>Transaction id which is implicitly locked this record.  |
 | struct <a href="/Classes/PageBranch">PageBranch</a> | **[__attribute__](/Modules/DiskSpaceManager#variable-__attribute__)**  |
 | uint8_t | **[reserved](/Files/db/include/page.h#variable-reserved)** <br>Reserved area for normal allocated page.  |
 
@@ -153,6 +154,14 @@ uint16_t value_offset;
 
 The value offset(in bytes). 
 
+### variable trx_id
+
+```cpp
+trxid_t trx_id;
+```
+
+Transaction id which is implicitly locked this record. 
+
 ### variable __attribute__
 
 ```cpp
@@ -216,7 +225,7 @@ struct PageSlot {
     recordkey_t key;
     valsize_t value_size;
     uint16_t value_offset;
-    // trxid_t trx_id;
+    trxid_t trx_id;
 } __attribute__((packed));
 
 struct PageBranch {
@@ -256,7 +265,7 @@ bool add_leaf_value(LeafPage* page, recordkey_t key, const char* value,
                     valsize_t value_size);
 bool remove_leaf_value(LeafPage* page, recordkey_t key);
 
-bool set_leaf_value(LeafPage* page, recordkey_t key, char* old_value, valsize_t* old_val_size,
+void set_leaf_value(LeafPage* page, int key_idx, char* old_value, valsize_t* old_val_size,
                     const char* new_value, valsize_t new_val_size);
 
 bool add_internal_key(InternalPage* page, recordkey_t key, pagenum_t page_idx);
@@ -277,4 +286,4 @@ typedef LeafPage leafpage_t;
 
 -------------------------------
 
-Updated on 2021-12-05 at 18:37:58 +0900
+Updated on 2021-12-05 at 18:53:29 +0900

@@ -10,11 +10,11 @@
 
 |                | Name           |
 | -------------- | -------------- |
-| <a href="/Classes/TransactionInstance">TransactionInstance</a> & | **[get_trx_instance](/Namespaces/trx_helper#function-get_trx_instance)**(trxid_t trx_id)<br>Get the trx instance object.  |
-| <a href="/Classes/lock_t">lock_t</a> * | **[lock_acquire](/Namespaces/trx_helper#function-lock_acquire)**(int table_id, pagenum_t page_idx, int key_idx, trxid_t trx_id, int lock_mode)<br>Wrapper for <code>lock&#95;acquire()</code> |
+| bool | **[connect_lock_tail](/Namespaces/trx_helper#function-connect_lock_tail)**(trxid_t trx_id, <a href="/Classes/lock_t">lock_t</a> * lock)<br>Connect a lock to the tail of next-transaction-lock list.  |
+| bool | **[is_trx_running](/Namespaces/trx_helper#function-is_trx_running)**(trxid_t trx_id)<br>Check if target transaction is running.  |
 | bool | **[verify_trx](/Namespaces/trx_helper#function-verify_trx)**(const <a href="/Classes/TransactionInstance">TransactionInstance</a> & instance)<br>Verify if transaction is on good state.  |
 | trxid_t | **[new_trx_instance](/Namespaces/trx_helper#function-new_trx_instance)**()<br>Instantiate a transaction and return its id.  |
-| void | **[release_trx_locks](/Namespaces/trx_helper#function-release_trx_locks)**(<a href="/Classes/TransactionInstance">TransactionInstance</a> & instance)<br>Release all the locks in the instance.  |
+| void | **[release_trx_locks](/Namespaces/trx_helper#function-release_trx_locks)**(trxid_t trx_id)<br>Release all the locks in the instance.  |
 | void | **[trx_rollback](/Namespaces/trx_helper#function-trx_rollback)**(trxid_t trx_id)<br>Rollback an unfinished transaction and finish it.  |
 | void | **[flush_trx_log](/Namespaces/trx_helper#function-flush_trx_log)**()<br>Flush all the transaction log(for recovery.)  |
 | void | **[trx_abort](/Namespaces/trx_helper#function-trx_abort)**(trxid_t trx_id)<br>Immediately abort a transaction and release all of its locks.  |
@@ -23,50 +23,44 @@
 
 ## Functions Documentation
 
-### function get_trx_instance
+### function connect_lock_tail
 
 ```cpp
-TransactionInstance & get_trx_instance(
+bool connect_lock_tail(
+    trxid_t trx_id,
+    lock_t * lock
+)
+```
+
+Connect a lock to the tail of next-transaction-lock list. 
+
+**Parameters**: 
+
+  * **trx_id** transaction id. 
+  * **lock** lock object. 
+
+
+**Return**: <code>true</code> if success, <code>false</code> if otherwise. 
+
+### function is_trx_running
+
+```cpp
+bool is_trx_running(
     trxid_t trx_id
 )
 ```
 
-Get the trx instance object. 
+Check if target transaction is running. 
 
 **Parameters**: 
 
   * **trx_id** transaction id. 
 
 
-**Return**: transaction instance. 
+**Return**: <code>true</code> if transaction is running. 
 
-Quickfix. Expects dragon ahead.
+RUNNING, COMMITTING, ABORTING transaction is running transaction.
 
-
-### function lock_acquire
-
-```cpp
-lock_t * lock_acquire(
-    int table_id,
-    pagenum_t page_idx,
-    int key_idx,
-    trxid_t trx_id,
-    int lock_mode
-)
-```
-
-Wrapper for <code>lock&#95;acquire()</code>
-
-**Parameters**: 
-
-  * **table_id** table id. 
-  * **page_idx** page index. 
-  * **key** record key index. 
-  * **trx_id** transaction id. 
-  * **lock_mode** lock mode. 
-
-
-**Return**: acquired lock. 
 
 ### function verify_trx
 
@@ -102,7 +96,7 @@ Instantiate a transaction and return its id.
 
 ```cpp
 void release_trx_locks(
-    TransactionInstance & instance
+    trxid_t trx_id
 )
 ```
 
@@ -110,7 +104,7 @@ Release all the locks in the instance.
 
 **Parameters**: 
 
-  * **instance** transaction instance. 
+  * **trx_id** transaction id. 
 
 
 ### function trx_rollback
@@ -190,4 +184,4 @@ Log an update query into transaction log.
 
 -------------------------------
 
-Updated on 2021-12-05 at 18:37:58 +0900
+Updated on 2021-12-05 at 18:53:29 +0900

@@ -22,7 +22,7 @@
 |                | Name           |
 | -------------- | -------------- |
 | enum| **[LogType](/Modules/TransactionManager#enum-logtype)** { UPDATE = 0}<br>Transaction log type.  |
-| enum| **[TransactionState](/Modules/TransactionManager#enum-transactionstate)** { RUNNING = 0, WAITING = 1, COMMITTING = 2, COMMITTED = 3, ABORTING = 4, ABORTED = 5}<br>Transaction running state.  |
+| enum| **[TransactionState](/Modules/TransactionManager#enum-transactionstate)** { RUNNING = 0, COMMITTING = 1, ABORTING = 2}<br>Transaction running state.  |
 | typedef struct <a href="/Classes/TransactionLog">TransactionLog</a> | **[trxlog_t](/Modules/TransactionManager#typedef-trxlog_t)**  |
 
 ## Functions
@@ -51,11 +51,8 @@ Transaction log type.
 | Enumerator | Value | Description |
 | ---------- | ----- | ----------- |
 | RUNNING | 0|   |
-| WAITING | 1|   |
-| COMMITTING | 2|   |
-| COMMITTED | 3|   |
-| ABORTING | 4|   |
-| ABORTED | 5|   |
+| COMMITTING | 1|   |
+| ABORTING | 2|   |
 
 
 
@@ -142,7 +139,7 @@ struct TransactionLog {
     trxlogid_t prev_trx_log;
 };
 
-enum TransactionState { RUNNING = 0, WAITING = 1, COMMITTING = 2, COMMITTED = 3, ABORTING = 4, ABORTED = 5 };
+enum TransactionState { RUNNING = 0, COMMITTING = 1, ABORTING = 2 };
 
 struct TransactionInstance {
     TransactionState state;
@@ -154,14 +151,11 @@ struct TransactionInstance {
 typedef struct TransactionLog trxlog_t;
 
 namespace trx_helper {
-
-TransactionInstance& get_trx_instance(trxid_t trx_id);
-
-lock_t* lock_acquire(int table_id, pagenum_t page_idx, int key_idx,
-                   trxid_t trx_id, int lock_mode);
+bool connect_lock_tail(trxid_t trx_id, lock_t* lock);
+bool is_trx_running(trxid_t trx_id);
 bool verify_trx(const TransactionInstance& instance);
 trxid_t new_trx_instance();
-void release_trx_locks(TransactionInstance& instance);
+void release_trx_locks(trxid_t trx_id);
 void trx_rollback(trxid_t trx_id);
 void flush_trx_log();
 void trx_abort(trxid_t trx_id);
@@ -181,4 +175,4 @@ trxid_t trx_commit(trxid_t trx_id);
 
 -------------------------------
 
-Updated on 2021-12-05 at 18:37:58 +0900
+Updated on 2021-12-05 at 18:53:29 +0900
