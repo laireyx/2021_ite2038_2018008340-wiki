@@ -2,7 +2,7 @@
 
 # buffer_helper
 
-**Module:** **[BufferManager](/Modules/BufferManager)**
+**Module:** **[DiskSpaceManager](/Modules/DiskSpaceManager)** **/** **[BufferManager](/Modules/BufferManager)**
 
 BufferManager helper.  [More...](#detailed-description)
 
@@ -10,13 +10,12 @@ BufferManager helper.  [More...](#detailed-description)
 
 |                | Name           |
 | -------------- | -------------- |
-| <a href="/Classes/BufferBlock">BufferBlock</a> * | **[load_buffer](/Namespaces/buffer_helper#function-load_buffer)**(tableid_t table_id, pagenum_t pagenum, <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * page, bool pin =true)<br>Load a page into buffer.  |
+| <a href="/Classes/BufferBlock">BufferBlock</a> * | **[load_buffer](/Namespaces/buffer_helper#function-load_buffer)**(tableid_t table_id, pagenum_t pagenum, <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * page, trxid_t trx_id =0, bool pin =true)<br>Load a page into buffer.  |
 | bool | **[apply_buffer](/Namespaces/buffer_helper#function-apply_buffer)**(tableid_t table_id, pagenum_t pagenum, const <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * page)<br>Apply a page into buffer.  |
 | void | **[release_buffer](/Namespaces/buffer_helper#function-release_buffer)**(tableid_t table_id, pagenum_t pagenum)<br>Release a buffer page.  |
 | bool | **[is_full](/Namespaces/buffer_helper#function-is_full)**()<br>Check if there buffer slot is full.  |
 | int | **[evict](/Namespaces/buffer_helper#function-evict)**()<br>Evict a buffer with the lowest priority.  |
-| void | **[detach_from_tree](/Namespaces/buffer_helper#function-detach_from_tree)**(int buffer_idx)<br>detach a buffer from Recently-Used list.  |
-| void | **[prepend_to_head](/Namespaces/buffer_helper#function-prepend_to_head)**(int buffer_idx)<br>prepend a buffer to the head of Recently-Used list.  |
+| void | **[move_to_head](/Namespaces/buffer_helper#function-move_to_head)**(int buffer_idx)<br>Move a buffer to head of Recently-Used list.  |
 
 ## Detailed Description
 
@@ -34,6 +33,7 @@ BufferBlock * load_buffer(
     tableid_t table_id,
     pagenum_t pagenum,
     page_t * page,
+    trxid_t trx_id =0,
     bool pin =true
 )
 ```
@@ -45,6 +45,7 @@ Load a page into buffer.
   * **table_id** table id. 
   * **pagenum** page number. 
   * **page** page. 
+  * **trx_id** transaction id. 
   * **pin** pin. 
 
 
@@ -120,37 +121,19 @@ Evict a buffer with the lowest priority.
 <code><a href="/Namespaces/buffer_helper#function-load-buffer">load&#95;buffer()</a></code> will determine using of fallback method with return value of <code><a href="/Namespaces/buffer_helper#function-evict">evict()</a></code>.
 
 
-### function detach_from_tree
+### function move_to_head
 
 ```cpp
-void detach_from_tree(
+void move_to_head(
     int buffer_idx
 )
 ```
 
-detach a buffer from Recently-Used list. 
+Move a buffer to head of Recently-Used list. 
 
 **Parameters**: 
 
   * **buffer_idx** index of buffer which will be detached. 
-
-
-It links previous and next index of given buffer.
-
-
-### function prepend_to_head
-
-```cpp
-void prepend_to_head(
-    int buffer_idx
-)
-```
-
-prepend a buffer to the head of Recently-Used list. 
-
-**Parameters**: 
-
-  * **buffer_idx** index of buffer which will be prepended. 
 
 
 
@@ -159,4 +142,4 @@ prepend a buffer to the head of Recently-Used list.
 
 -------------------------------
 
-Updated on 2021-11-09 at 23:03:19 +0900
+Updated on 2021-12-05 at 18:36:40 +0900

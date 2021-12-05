@@ -15,8 +15,8 @@ page slot for allocated(internal and leaf) node.
 
 |                | Name           |
 | -------------- | -------------- |
-| int64_t | **[key](/Classes/PageSlot#variable-key)** <br>The page key.  |
-| uint16_t | **[value_size](/Classes/PageSlot#variable-value_size)** <br>The value size(in bytes).  |
+| recordkey_t | **[key](/Classes/PageSlot#variable-key)** <br>The page key.  |
+| valsize_t | **[value_size](/Classes/PageSlot#variable-value_size)** <br>The value size(in bytes).  |
 | uint16_t | **[value_offset](/Classes/PageSlot#variable-value_offset)** <br>The value offset(in bytes).  |
 
 ## Public Attributes Documentation
@@ -24,7 +24,7 @@ page slot for allocated(internal and leaf) node.
 ### variable key
 
 ```cpp
-int64_t key;
+recordkey_t key;
 ```
 
 The page key. 
@@ -32,7 +32,7 @@ The page key.
 ### variable value_size
 
 ```cpp
-uint16_t value_size;
+valsize_t value_size;
 ```
 
 The value size(in bytes). 
@@ -47,4 +47,4 @@ The value offset(in bytes).
 
 -------------------------------
 
-Updated on 2021-11-09 at 23:03:19 +0900
+Updated on 2021-12-05 at 18:36:40 +0900

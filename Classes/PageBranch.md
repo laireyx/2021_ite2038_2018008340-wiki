@@ -15,7 +15,7 @@ page slot for internal node.
 
 |                | Name           |
 | -------------- | -------------- |
-| int64_t | **[key](/Classes/PageBranch#variable-key)** <br>The page key.  |
+| recordkey_t | **[key](/Classes/PageBranch#variable-key)** <br>The page key.  |
 | uint16_t | **[page_idx](/Classes/PageBranch#variable-page_idx)** <br>The page index.  |
 
 ## Public Attributes Documentation
@@ -23,7 +23,7 @@ page slot for internal node.
 ### variable key
 
 ```cpp
-int64_t key;
+recordkey_t key;
 ```
 
 The page key. 
@@ -38,4 +38,4 @@ The page index.
 
 -------------------------------
 
-Updated on 2021-11-09 at 23:03:19 +0900
+Updated on 2021-12-05 at 18:36:40 +0900

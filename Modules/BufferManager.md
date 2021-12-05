@@ -2,13 +2,20 @@
 
 # BufferManager
 
+**Module:** **[DiskSpaceManager](/Modules/DiskSpaceManager)**
 
+
+
+## Modules
+
+| Name           |
+| -------------- |
+| **[IndexManager](/Modules/IndexManager)**  |
 
 ## Namespaces
 
 | Name           |
 | -------------- |
-| **[std](/Namespaces/std)**  |
 | **[buffer_helper](/Namespaces/buffer_helper)** <br>BufferManager helper.  |
 
 ## Classes
@@ -21,7 +28,6 @@
 
 |                | Name           |
 | -------------- | -------------- |
-| typedef std::pair< tableid_t, pagenum_t > | **[PageLocation](/Modules/BufferManager#typedef-pagelocation)**  |
 | typedef struct <a href="/Classes/BufferBlock">BufferBlock</a> | **[BufferBlock](/Modules/BufferManager#typedef-bufferblock)**  |
 
 ## Functions
@@ -30,9 +36,9 @@
 | -------------- | -------------- |
 | int | **[init_buffer](/Modules/BufferManager#function-init_buffer)**(int buffer_size)<br>Initialize buffer manager.  |
 | tableid_t | **[buffered_open_table_file](/Modules/BufferManager#function-buffered_open_table_file)**(const char * path)<br>Open existing table file or create one if not existed.  |
-| pagenum_t | **[buffered_alloc_page](/Modules/BufferManager#function-buffered_alloc_page)**(tableid_t table_id)<br>Allocate an on-disk page from the free page list.  |
-| void | **[buffered_free_page](/Modules/BufferManager#function-buffered_free_page)**(tableid_t table_id, pagenum_t pagenum)<br>Free an on-disk page to the free page list.  |
-| void | **[buffered_read_page](/Modules/BufferManager#function-buffered_read_page)**(tableid_t table_id, pagenum_t pagenum, <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * dest, bool pin =true)<br>Read an on-disk page into the in-memory page structure(dest)  |
+| pagenum_t | **[buffered_alloc_page](/Modules/BufferManager#function-buffered_alloc_page)**(tableid_t table_id, trxid_t trx_id =0)<br>Allocate an on-disk page from the free page list.  |
+| void | **[buffered_free_page](/Modules/BufferManager#function-buffered_free_page)**(tableid_t table_id, pagenum_t pagenum, trxid_t trx_id =0)<br>Free an on-disk page to the free page list.  |
+| void | **[buffered_read_page](/Modules/BufferManager#function-buffered_read_page)**(tableid_t table_id, pagenum_t pagenum, <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * dest, trxid_t trx_id =0, bool pin =true)<br>Read an on-disk page into the in-memory page structure(dest)  |
 | void | **[buffered_write_page](/Modules/BufferManager#function-buffered_write_page)**(tableid_t table_id, pagenum_t pagenum, const <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * src)<br>Write an in-memory page(src) to the on-disk page.  |
 | void | **[buffered_release_page](/Modules/BufferManager#function-buffered_release_page)**(tableid_t table_id, pagenum_t pagenum)<br>Releases an in-memory buffer.  |
 | int | **[shutdown_buffer](/Modules/BufferManager#function-shutdown_buffer)**()<br>Shutdown buffer manager.  |
@@ -41,20 +47,15 @@
 
 |                | Name           |
 | -------------- | -------------- |
+| constexpr int | **[DEFAULT_BUFFER_SIZE](/Modules/BufferManager#variable-default_buffer_size)** <br>Initial number of buffer pages when initializing db.  |
 | <a href="/Classes/BufferBlock">BufferBlock</a> * | **[buffer_slot](/Modules/BufferManager#variable-buffer_slot)** <br>buffer slot.  |
 | int | **[buffer_head_idx](/Modules/BufferManager#variable-buffer_head_idx)** <br>head index of Recently-Used list.  |
 | int | **[buffer_tail_idx](/Modules/BufferManager#variable-buffer_tail_idx)** <br>tail index of Recently-Used list.  |
 | int | **[buffer_size](/Modules/BufferManager#variable-buffer_size)** <br>size of buffer block.  |
-| std::unordered_map< <a href="/Modules/BufferManager#typedef-pagelocation">PageLocation</a>, int > | **[buffer_index](/Modules/BufferManager#variable-buffer_index)**  |
+| std::unordered_map< PageLocation, int > | **[buffer_index](/Modules/BufferManager#variable-buffer_index)**  |
+| pthread_mutex_t * | **[buffer_manager_mutex](/Modules/BufferManager#variable-buffer_manager_mutex)**  |
 
 ## Types Documentation
-
-### typedef PageLocation
-
-```
-typedef std::pair<tableid_t, pagenum_t> PageLocation;
-```
-
 
 ### typedef BufferBlock
 
@@ -104,7 +105,8 @@ Open existing table file or create one if not existed.
 
 ```
 pagenum_t buffered_alloc_page(
-    tableid_t table_id
+    tableid_t table_id,
+    trxid_t trx_id =0
 )
 ```
 
@@ -113,6 +115,7 @@ Allocate an on-disk page from the free page list.
 **Parameters**: 
 
   * **table_id** table id obtained with <code><a href="/Modules/BufferManager#function-buffered-open-table-file">buffered&#95;open&#95;table&#95;file()</a></code>. 
+  * **trx_id** transaction id. 
 
 
 **Return**: >0 <a href="/Classes/Page">Page</a> index number if allocation success. 0 Zero if allocation failed. 
@@ -122,7 +125,8 @@ Allocate an on-disk page from the free page list.
 ```
 void buffered_free_page(
     tableid_t table_id,
-    pagenum_t pagenum
+    pagenum_t pagenum,
+    trxid_t trx_id =0
 )
 ```
 
@@ -131,6 +135,7 @@ Free an on-disk page to the free page list.
 **Parameters**: 
 
   * **table_id** table id obtained with <code><a href="/Modules/BufferManager#function-buffered-open-table-file">buffered&#95;open&#95;table&#95;file()</a></code>. 
+  * **trx_id** transaction id. 
   * **pagenum** page index. 
 
 
@@ -141,6 +146,7 @@ void buffered_read_page(
     tableid_t table_id,
     pagenum_t pagenum,
     page_t * dest,
+    trxid_t trx_id =0,
     bool pin =true
 )
 ```
@@ -152,6 +158,7 @@ Read an on-disk page into the in-memory page structure(dest)
   * **table_id** table id obtained with <code><a href="/Modules/BufferManager#function-buffered-open-table-file">buffered&#95;open&#95;table&#95;file()</a></code>. 
   * **pagenum** page index. 
   * **dest** the pointer of the page data. 
+  * **trx_id** transaction id. 
   * **pin** <code>true</code> if this buffer will be writed after. 
 
 
@@ -207,6 +214,14 @@ Shutdown buffer manager.
 
 ## Attributes Documentation
 
+### variable DEFAULT_BUFFER_SIZE
+
+```
+constexpr int DEFAULT_BUFFER_SIZE = 1024;
+```
+
+Initial number of buffer pages when initializing db. 
+
 ### variable buffer_slot
 
 ```
@@ -246,9 +261,16 @@ std::unordered_map< PageLocation, int > buffer_index;
 ```
 
 
+### variable buffer_manager_mutex
+
+```
+pthread_mutex_t * buffer_manager_mutex;
+```
+
+
 
 
 
 -------------------------------
 
-Updated on 2021-11-09 at 23:03:19 +0900
+Updated on 2021-12-05 at 18:36:40 +0900

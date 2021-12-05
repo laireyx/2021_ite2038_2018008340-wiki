@@ -2,7 +2,7 @@
 
 # BufferBlock
 
-**Module:** **[BufferManager](/Modules/BufferManager)**
+**Module:** **[DiskSpaceManager](/Modules/DiskSpaceManager)** **/** **[BufferManager](/Modules/BufferManager)**
 
 
 
@@ -16,9 +16,11 @@
 |                | Name           |
 | -------------- | -------------- |
 | <a href="/Modules/DiskSpaceManager#typedef-fullpage-t">fullpage_t</a> | **[page](/Classes/BufferBlock#variable-page)** <br>buffered page.  |
-| <a href="/Modules/BufferManager#typedef-pagelocation">PageLocation</a> | **[page_location](/Classes/BufferBlock#variable-page_location)** <br>page location.  |
+| PageLocation | **[page_location](/Classes/BufferBlock#variable-page_location)** <br>page location.  |
+| pthread_cond_t | **[latch](/Classes/BufferBlock#variable-latch)** <br>page latch.  |
+| trxid_t | **[pin_owner](/Classes/BufferBlock#variable-pin_owner)**  |
+| int | **[pin_count](/Classes/BufferBlock#variable-pin_count)** <br>how many threads are using(or waiting) this buffer block.  |
 | bool | **[is_dirty](/Classes/BufferBlock#variable-is_dirty)** <br><code>true</code> if this buffer has been modified, <code>false</code> otherwise.  |
-| int | **[is_pinned](/Classes/BufferBlock#variable-is_pinned)** <br><code>true</code> if this buffer is currently using, <code>false</code> otherwise.  |
 | int | **[prev_block_idx](/Classes/BufferBlock#variable-prev_block_idx)** <br>revious buffer block index of Recently-Used linked list.  |
 | int | **[next_block_idx](/Classes/BufferBlock#variable-next_block_idx)** <br>next buffer block index of Recently-Used linked list.  |
 
@@ -40,6 +42,29 @@ PageLocation page_location;
 
 page location. 
 
+### variable latch
+
+```cpp
+pthread_cond_t latch;
+```
+
+page latch. 
+
+### variable pin_owner
+
+```cpp
+trxid_t pin_owner;
+```
+
+
+### variable pin_count
+
+```cpp
+int pin_count;
+```
+
+how many threads are using(or waiting) this buffer block. 
+
 ### variable is_dirty
 
 ```cpp
@@ -47,14 +72,6 @@ bool is_dirty;
 ```
 
 <code>true</code> if this buffer has been modified, <code>false</code> otherwise. 
-
-### variable is_pinned
-
-```cpp
-int is_pinned;
-```
-
-<code>true</code> if this buffer is currently using, <code>false</code> otherwise. 
 
 ### variable prev_block_idx
 
@@ -80,4 +97,4 @@ next buffer block index of Recently-Used linked list.
 
 -------------------------------
 
-Updated on 2021-11-09 at 23:03:19 +0900
+Updated on 2021-12-05 at 18:36:40 +0900

@@ -7,13 +7,13 @@
 
 
 
-`#include <buffer.h>`
+`#include <types.h>`
 
 ## Public Functions
 
 |                | Name           |
 | -------------- | -------------- |
-| size_t | **[operator()](/Classes/std::hash< PageLocation >#function-operator())**(const <a href="/Modules/BufferManager#typedef-pagelocation">PageLocation</a> & location) const |
+| size_t | **[operator()](/Classes/std::hash< PageLocation >#function-operator())**(const PageLocation & location) const |
 
 ## Public Functions Documentation
 
@@ -28,4 +28,4 @@ inline size_t operator()(
 
 -------------------------------
 
-Updated on 2021-11-09 at 23:03:19 +0900
+Updated on 2021-12-05 at 18:36:39 +0900

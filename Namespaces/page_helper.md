@@ -4,27 +4,29 @@
 
 **Module:** **[DiskSpaceManager](/Modules/DiskSpaceManager)**
 
-Page helper.  [More...](#detailed-description)
+<a href="/Classes/Page">Page</a> helper.  [More...](#detailed-description)
 
 ## Functions
 
 |                | Name           |
 | -------------- | -------------- |
 | <a href="/Classes/PageSlot">PageSlot</a> * | **[get_page_slot](/Namespaces/page_helper#function-get_page_slot)**(<a href="/Classes/LeafPage">LeafPage</a> * page)<br>Get page slots.  |
-| void | **[get_leaf_value](/Namespaces/page_helper#function-get_leaf_value)**(<a href="/Classes/LeafPage">LeafPage</a> * page, int value_idx, char * value, uint16_t * value_size =nullptr)<br>Get leaf value.  |
-| void | **[get_leaf_value](/Namespaces/page_helper#function-get_leaf_value)**(<a href="/Classes/LeafPage">LeafPage</a> * page, uint16_t value_offset, uint16_t value_size, char * value)<br>Get leaf value.  |
-| bool | **[has_enough_space](/Namespaces/page_helper#function-has_enough_space)**(<a href="/Classes/LeafPage">LeafPage</a> * page, uint16_t value_size)<br>Check if given page has enough space for given value size.  |
+| int | **[get_record_idx](/Namespaces/page_helper#function-get_record_idx)**(<a href="/Classes/LeafPage">LeafPage</a> * page, recordkey_t key)<br>Get the record index.  |
+| void | **[get_leaf_value](/Namespaces/page_helper#function-get_leaf_value)**(<a href="/Classes/LeafPage">LeafPage</a> * page, int value_idx, char * value, valsize_t * value_size =nullptr)<br>Get leaf value.  |
+| void | **[get_leaf_value](/Namespaces/page_helper#function-get_leaf_value)**(<a href="/Classes/LeafPage">LeafPage</a> * page, uint16_t value_offset, valsize_t value_size, char * value)<br>Get leaf value.  |
+| bool | **[has_enough_space](/Namespaces/page_helper#function-has_enough_space)**(<a href="/Classes/LeafPage">LeafPage</a> * page, valsize_t value_size)<br>Check if given page has enough space for given value size.  |
 | uint64_t * | **[get_free_space](/Namespaces/page_helper#function-get_free_space)**(<a href="/Classes/LeafPage">LeafPage</a> * page)<br>Get free space amount.  |
 | pagenum_t * | **[get_sibling_idx](/Namespaces/page_helper#function-get_sibling_idx)**(<a href="/Classes/LeafPage">LeafPage</a> * page)<br>Get next sibling index.  |
-| bool | **[add_leaf_value](/Namespaces/page_helper#function-add_leaf_value)**(<a href="/Classes/LeafPage">LeafPage</a> * page, int64_t key, const char * value, uint16_t value_size)<br>Add a leaf value into the last position of the leaf page.  |
-| bool | **[remove_leaf_value](/Namespaces/page_helper#function-remove_leaf_value)**(<a href="/Classes/LeafPage">LeafPage</a> * page, int64_t key)<br>Remove a record and compact reserved area in the leaf page.  |
-| bool | **[add_internal_key](/Namespaces/page_helper#function-add_internal_key)**(<a href="/Classes/InternalPage">InternalPage</a> * page, int64_t key, pagenum_t page_idx)<br>Add a page branch into the last position of the internal page.  |
-| bool | **[remove_internal_key](/Namespaces/page_helper#function-remove_internal_key)**(<a href="/Classes/InternalPage">InternalPage</a> * page, int64_t key)<br>Remove a page branch and realign branches.  |
+| bool | **[add_leaf_value](/Namespaces/page_helper#function-add_leaf_value)**(<a href="/Classes/LeafPage">LeafPage</a> * page, recordkey_t key, const char * value, valsize_t value_size)<br>Add a leaf value into the last position of the leaf page.  |
+| bool | **[remove_leaf_value](/Namespaces/page_helper#function-remove_leaf_value)**(<a href="/Classes/LeafPage">LeafPage</a> * page, recordkey_t key)<br>Remove a record and compact reserved area in the leaf page.  |
+| bool | **[set_leaf_value](/Namespaces/page_helper#function-set_leaf_value)**(<a href="/Classes/LeafPage">LeafPage</a> * page, recordkey_t key, char * old_value, valsize_t * old_val_size, const char * new_value, valsize_t new_val_size)<br>Update the record value in the page and returns old record value size.  |
+| bool | **[add_internal_key](/Namespaces/page_helper#function-add_internal_key)**(<a href="/Classes/InternalPage">InternalPage</a> * page, recordkey_t key, pagenum_t page_idx)<br>Add a page branch into the last position of the internal page.  |
+| bool | **[remove_internal_key](/Namespaces/page_helper#function-remove_internal_key)**(<a href="/Classes/InternalPage">InternalPage</a> * page, recordkey_t key)<br>Remove a page branch and realign branches.  |
 | pagenum_t * | **[get_leftmost_child_idx](/Namespaces/page_helper#function-get_leftmost_child_idx)**(<a href="/Classes/InternalPage">InternalPage</a> * page)<br>Get leftmost child page index.  |
 
 ## Detailed Description
 
-Page helper. 
+<a href="/Classes/Page">Page</a> helper. 
 
 This namespace includes some helper functions which are used by APIs such as tree manager which uses direct page access. These functions do not call any other APIs, but modifying only given data. 
 
@@ -51,6 +53,28 @@ Get page slots.
 It just return the reserved area as <code>PageSlot&#42;</code>, which means it does not give any hints for the number of slots. Anyway, you can still get the number of the slots by using <code>page-&gt;page&#95;header.key&#95;num</code>
 
 
+### function get_record_idx
+
+```cpp
+int get_record_idx(
+    LeafPage * page,
+    recordkey_t key
+)
+```
+
+Get the record index. 
+
+**Parameters**: 
+
+  * **page** leaf page. 
+  * **key** record key 
+
+
+**Return**: record index if found, <code>-1</code> otherwise. 
+
+Search record key from the leaf page slot and return its index.
+
+
 ### function get_leaf_value
 
 ```cpp
@@ -58,7 +82,7 @@ void get_leaf_value(
     LeafPage * page,
     int value_idx,
     char * value,
-    uint16_t * value_size =nullptr
+    valsize_t * value_size =nullptr
 )
 ```
 
@@ -81,7 +105,7 @@ Get a leaf value corresponds to index <code>value&#95;idx</code>, using the page
 void get_leaf_value(
     LeafPage * page,
     uint16_t value_offset,
-    uint16_t value_size,
+    valsize_t value_size,
     char * value
 )
 ```
@@ -104,7 +128,7 @@ Get a leaf value using exact offset and size. Usually it does not called from th
 ```cpp
 bool has_enough_space(
     LeafPage * page,
-    uint16_t value_size
+    valsize_t value_size
 )
 ```
 
@@ -161,9 +185,9 @@ In leaf page, <code>page-&gt;page&#95;header.reserved&#95;footer.footer&#95;2</c
 ```cpp
 bool add_leaf_value(
     LeafPage * page,
-    int64_t key,
+    recordkey_t key,
     const char * value,
-    uint16_t value_size
+    valsize_t value_size
 )
 ```
 
@@ -184,7 +208,7 @@ Add a leaf value into the last position of the leaf page.
 ```cpp
 bool remove_leaf_value(
     LeafPage * page,
-    int64_t key
+    recordkey_t key
 )
 ```
 
@@ -198,12 +222,44 @@ Remove a record and compact reserved area in the leaf page.
 
 **Return**: <code>true</code> if the key was inside the leaf record and deleted successfully, <code>false</code> otherwise. 
 
+### function set_leaf_value
+
+```cpp
+bool set_leaf_value(
+    LeafPage * page,
+    recordkey_t key,
+    char * old_value,
+    valsize_t * old_val_size,
+    const char * new_value,
+    valsize_t new_val_size
+)
+```
+
+Update the record value in the page and returns old record value size. 
+
+**Parameters**: 
+
+  * **page** record page. 
+  * **key** record key. 
+  * **old_value** old record value. 
+  * **old_val_size** old record value size. 
+  * **new_value** new record value. 
+  * **new_val_size** new record value size. 
+
+
+**Return**: <code>true</code> if update successfully, <code>false</code> otherwise. 
+
+Todoupdate at here 
+
+Todoupdate at here 
+
+
 ### function add_internal_key
 
 ```cpp
 bool add_internal_key(
     InternalPage * page,
-    int64_t key,
+    recordkey_t key,
     pagenum_t page_idx
 )
 ```
@@ -224,7 +280,7 @@ Add a page branch into the last position of the internal page.
 ```cpp
 bool remove_internal_key(
     InternalPage * page,
-    int64_t key
+    recordkey_t key
 )
 ```
 
@@ -264,4 +320,4 @@ In internal page, <code>page-&gt;page&#95;header.reserved&#95;footer.footer&#95;
 
 -------------------------------
 
-Updated on 2021-11-09 at 23:03:19 +0900
+Updated on 2021-12-05 at 18:36:40 +0900
