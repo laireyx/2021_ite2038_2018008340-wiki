@@ -1,6 +1,6 @@
 
 
-# db/include/transaction.h
+# TransactionManager
 
 
 
@@ -34,6 +34,16 @@
 | trxid_t | **[trx_begin](/Modules/TransactionManager#function-trx_begin)**()<br>Begin a transaction.  |
 | trxid_t | **[trx_commit](/Modules/TransactionManager#function-trx_commit)**(trxid_t trx_id)<br>Commit a transaction.  |
 
+## Attributes
+
+|                | Name           |
+| -------------- | -------------- |
+| pthread_mutex_t * | **[trx_manager_mutex](/Modules/TransactionManager#variable-trx_manager_mutex)** <br>Transaction manager mutex.  |
+| trxid_t | **[accumulated_trx_id](/Modules/TransactionManager#variable-accumulated_trx_id)** <br>Accumulated trx id.  |
+| trxid_t | **[accumulated_trxlog_id](/Modules/TransactionManager#variable-accumulated_trxlog_id)** <br>Accumulated trx log id.  |
+| std::unordered_map< trxid_t, <a href="/Classes/TransactionInstance">TransactionInstance</a> > | **[transaction_instances](/Modules/TransactionManager#variable-transaction_instances)** <br>Transaction instances.  |
+| std::unordered_map< trxlogid_t, <a href="/Classes/TransactionLog">TransactionLog</a> > | **[trx_logs](/Modules/TransactionManager#variable-trx_logs)** <br>Transaction log.  |
+
 ## Types Documentation
 
 ### enum LogType
@@ -63,7 +73,7 @@ Transaction running state.
 
 ### typedef trxlog_t
 
-```cpp
+```
 typedef struct TransactionLog trxlog_t;
 ```
 
@@ -73,7 +83,7 @@ typedef struct TransactionLog trxlog_t;
 
 ### function init_trx
 
-```cpp
+```
 int init_trx()
 ```
 
@@ -83,7 +93,7 @@ Initialize a transaction manager.
 
 ### function cleanup_trx
 
-```cpp
+```
 int cleanup_trx()
 ```
 
@@ -93,7 +103,7 @@ Cleanup a transaction manager.
 
 ### function trx_begin
 
-```cpp
+```
 trxid_t trx_begin()
 ```
 
@@ -103,7 +113,7 @@ Begin a transaction.
 
 ### function trx_commit
 
-```cpp
+```
 trxid_t trx_commit(
     trxid_t trx_id
 )
@@ -119,64 +129,49 @@ Commit a transaction.
 **Return**: <code>trx&#95;id</code>(committed transaction id) if success. <code>0</code> otherwise. 
 
 
+## Attributes Documentation
 
-## Source code
+### variable trx_manager_mutex
 
-```cpp
-
-#pragma once
-
-#include <lock.h>
-#include <types.h>
-
-#include <vector>
-
-enum LogType { UPDATE = 0 };
-
-struct TransactionLog {
-    LogType type;
-    tableid_t table_id;
-    recordkey_t key;
-    char* old_value;
-    valsize_t old_val_size;
-    trxlogid_t prev_trx_log;
-};
-
-enum TransactionState { RUNNING = 0, WAITING = 1, COMMITTING = 2, COMMITTED = 3, ABORTING = 4, ABORTED = 5 };
-
-struct TransactionInstance {
-    TransactionState state;
-    trxlogid_t log_tail;
-    Lock* lock_head;
-    Lock* lock_tail;
-};
-
-typedef struct TransactionLog trxlog_t;
-
-namespace trx_helper {
-
-TransactionInstance& get_trx_instance(trxid_t trx_id);
-
-lock_t* lock_acquire(int table_id, pagenum_t page_idx, int key_idx,
-                   trxid_t trx_id, int lock_mode);
-bool verify_trx(const TransactionInstance& instance);
-trxid_t new_trx_instance();
-void release_trx_locks(TransactionInstance& instance);
-void trx_rollback(trxid_t trx_id);
-void flush_trx_log();
-void trx_abort(trxid_t trx_id);
-trxlogid_t log_update(tableid_t table_id, recordkey_t key,
-                      const char* old_value, valsize_t old_val_size,
-                      trxid_t trx_id);
-};  // namespace trx_helper
-
-int init_trx();
-
-int cleanup_trx();
-
-trxid_t trx_begin();
-trxid_t trx_commit(trxid_t trx_id);
 ```
+pthread_mutex_t * trx_manager_mutex = nullptr;
+```
+
+Transaction manager mutex. 
+
+### variable accumulated_trx_id
+
+```
+trxid_t accumulated_trx_id = 0;
+```
+
+Accumulated trx id. 
+
+### variable accumulated_trxlog_id
+
+```
+trxid_t accumulated_trxlog_id = 0;
+```
+
+Accumulated trx log id. 
+
+### variable transaction_instances
+
+```
+std::unordered_map< trxid_t, TransactionInstance > transaction_instances;
+```
+
+Transaction instances. 
+
+### variable trx_logs
+
+```
+std::unordered_map< trxlogid_t, TransactionLog > trx_logs;
+```
+
+Transaction log. 
+
+
 
 
 -------------------------------

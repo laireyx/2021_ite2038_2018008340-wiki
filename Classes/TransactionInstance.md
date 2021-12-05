@@ -2,7 +2,7 @@
 
 # TransactionInstance
 
-**Module:** **[DiskSpaceManager](/Modules/DiskSpaceManager)**
+**Module:** **[TransactionManager](/Modules/TransactionManager)**
 
 
 
@@ -15,7 +15,7 @@ Transaction instance.
 
 |                | Name           |
 | -------------- | -------------- |
-| <a href="/Modules/DiskSpaceManager#enum-transactionstate">TransactionState</a> | **[state](/Classes/TransactionInstance#variable-state)** <br>Transaction running state.  |
+| <a href="/Modules/TransactionManager#enum-transactionstate">TransactionState</a> | **[state](/Classes/TransactionInstance#variable-state)** <br>Transaction running state.  |
 | trxlogid_t | **[log_tail](/Classes/TransactionInstance#variable-log_tail)** <br>The last log of this transaction.  |
 | <a href="/Classes/Lock">Lock</a> * | **[lock_head](/Classes/TransactionInstance#variable-lock_head)** <br>Transaction lock head.  |
 | <a href="/Classes/Lock">Lock</a> * | **[lock_tail](/Classes/TransactionInstance#variable-lock_tail)** <br>Transaction lock tail.  |
@@ -56,4 +56,4 @@ Transaction lock tail.
 
 -------------------------------
 
-Updated on 2021-12-05 at 18:36:40 +0900
+Updated on 2021-12-05 at 18:37:58 +0900

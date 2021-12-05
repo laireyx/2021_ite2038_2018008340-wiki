@@ -14,20 +14,20 @@
 
 |                | Name           |
 | -------------- | -------------- |
-| int | **[init_trx](/Modules/DiskSpaceManager#function-init_trx)**()<br>Initialize a transaction manager.  |
-| int | **[cleanup_trx](/Modules/DiskSpaceManager#function-cleanup_trx)**()<br>Cleanup a transaction manager.  |
-| trxid_t | **[trx_begin](/Modules/DiskSpaceManager#function-trx_begin)**()<br>Begin a transaction.  |
-| trxid_t | **[trx_commit](/Modules/DiskSpaceManager#function-trx_commit)**(trxid_t trx_id)<br>Commit a transaction.  |
+| int | **[init_trx](/Modules/TransactionManager#function-init_trx)**()<br>Initialize a transaction manager.  |
+| int | **[cleanup_trx](/Modules/TransactionManager#function-cleanup_trx)**()<br>Cleanup a transaction manager.  |
+| trxid_t | **[trx_begin](/Modules/TransactionManager#function-trx_begin)**()<br>Begin a transaction.  |
+| trxid_t | **[trx_commit](/Modules/TransactionManager#function-trx_commit)**(trxid_t trx_id)<br>Commit a transaction.  |
 
 ## Attributes
 
 |                | Name           |
 | -------------- | -------------- |
-| pthread_mutex_t * | **[trx_manager_mutex](/Modules/DiskSpaceManager#variable-trx_manager_mutex)** <br>Transaction manager mutex.  |
-| trxid_t | **[accumulated_trx_id](/Modules/DiskSpaceManager#variable-accumulated_trx_id)** <br>Accumulated trx id.  |
-| trxid_t | **[accumulated_trxlog_id](/Modules/DiskSpaceManager#variable-accumulated_trxlog_id)** <br>Accumulated trx log id.  |
-| std::unordered_map< trxid_t, <a href="/Classes/TransactionInstance">TransactionInstance</a> > | **[transaction_instances](/Modules/DiskSpaceManager#variable-transaction_instances)** <br>Transaction instances.  |
-| std::unordered_map< trxlogid_t, <a href="/Classes/TransactionLog">TransactionLog</a> > | **[trx_logs](/Modules/DiskSpaceManager#variable-trx_logs)** <br>Transaction log.  |
+| pthread_mutex_t * | **[trx_manager_mutex](/Modules/TransactionManager#variable-trx_manager_mutex)** <br>Transaction manager mutex.  |
+| trxid_t | **[accumulated_trx_id](/Modules/TransactionManager#variable-accumulated_trx_id)** <br>Accumulated trx id.  |
+| trxid_t | **[accumulated_trxlog_id](/Modules/TransactionManager#variable-accumulated_trxlog_id)** <br>Accumulated trx log id.  |
+| std::unordered_map< trxid_t, <a href="/Classes/TransactionInstance">TransactionInstance</a> > | **[transaction_instances](/Modules/TransactionManager#variable-transaction_instances)** <br>Transaction instances.  |
+| std::unordered_map< trxlogid_t, <a href="/Classes/TransactionLog">TransactionLog</a> > | **[trx_logs](/Modules/TransactionManager#variable-trx_logs)** <br>Transaction log.  |
 
 
 ## Functions Documentation
@@ -74,7 +74,7 @@ Commit a transaction.
 
 **Parameters**: 
 
-  * **trx_id** transaction id obtained with <code><a href="/Modules/DiskSpaceManager#function-trx-begin">trx&#95;begin()</a></code>. 
+  * **trx_id** transaction id obtained with <code><a href="/Modules/TransactionManager#function-trx-begin">trx&#95;begin()</a></code>. 
 
 
 **Return**: <code>trx&#95;id</code>(committed transaction id) if success. <code>0</code> otherwise. 
@@ -332,4 +332,4 @@ trxid_t trx_commit(trxid_t trx_id) {
 
 -------------------------------
 
-Updated on 2021-12-05 at 18:36:40 +0900
+Updated on 2021-12-05 at 18:37:58 +0900

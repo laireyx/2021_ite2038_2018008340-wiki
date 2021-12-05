@@ -2,7 +2,7 @@
 
 # trx_helper
 
-**Module:** **[DiskSpaceManager](/Modules/DiskSpaceManager)**
+**Module:** **[TransactionManager](/Modules/TransactionManager)**
 
 
 
@@ -156,7 +156,7 @@ Immediately abort a transaction and release all of its locks.
 
 **Parameters**: 
 
-  * **trx_id** transaciton id obtained with <code><a href="/Modules/DiskSpaceManager#function-trx-begin">trx&#95;begin()</a></code>. 
+  * **trx_id** transaciton id obtained with <code><a href="/Modules/TransactionManager#function-trx-begin">trx&#95;begin()</a></code>. 
 
 
 ### function log_update
@@ -190,4 +190,4 @@ Log an update query into transaction log.
 
 -------------------------------
 
-Updated on 2021-12-05 at 18:36:40 +0900
+Updated on 2021-12-05 at 18:37:58 +0900

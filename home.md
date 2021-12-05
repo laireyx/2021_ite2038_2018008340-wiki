@@ -2,6 +2,7 @@
 
 ### [Modules](/Modules/Modules)
   * [TestCode](/Modules/TestCode)
+  * [TransactionManager](/Modules/TransactionManager)
   * [LockManager](/Modules/LockManager)
   * [DatabaseAPI](/Modules/DatabaseAPI)
   * [DiskSpaceManager](/Modules/DiskSpaceManager)

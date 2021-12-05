@@ -2,7 +2,7 @@
 
 # TransactionLog
 
-**Module:** **[DiskSpaceManager](/Modules/DiskSpaceManager)**
+**Module:** **[TransactionManager](/Modules/TransactionManager)**
 
 
 
@@ -15,7 +15,7 @@ Transaction log.
 
 |                | Name           |
 | -------------- | -------------- |
-| <a href="/Modules/DiskSpaceManager#enum-logtype">LogType</a> | **[type](/Classes/TransactionLog#variable-type)** <br>Log type.  |
+| <a href="/Modules/TransactionManager#enum-logtype">LogType</a> | **[type](/Classes/TransactionLog#variable-type)** <br>Log type.  |
 | tableid_t | **[table_id](/Classes/TransactionLog#variable-table_id)** <br>Updated table id.  |
 | recordkey_t | **[key](/Classes/TransactionLog#variable-key)** <br>Updated record key.  |
 | char * | **[old_value](/Classes/TransactionLog#variable-old_value)** <br>Old record value.  |
@@ -74,4 +74,4 @@ Previous transaction log index.
 
 -------------------------------
 
-Updated on 2021-12-05 at 18:36:40 +0900
+Updated on 2021-12-05 at 18:37:58 +0900

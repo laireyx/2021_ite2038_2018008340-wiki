@@ -16,7 +16,6 @@
 | -------------- |
 | **[file_helper](/Namespaces/file_helper)** <br>Filemanager helper.  |
 | **[page_helper](/Namespaces/page_helper)** <br><a href="/Classes/Page">Page</a> helper.  |
-| **[trx_helper](/Namespaces/trx_helper)**  |
 
 ## Classes
 
@@ -34,15 +33,11 @@
 | class | **[AllocatedFullPage](/Classes/AllocatedFullPage)** <br>struct for any allocated page.  |
 | class | **[InternalPage](/Classes/InternalPage)** <br>struct for allocated internal page.  |
 | class | **[LeafPage](/Classes/LeafPage)** <br>struct for allocated leaf page.  |
-| struct | **[TransactionLog](/Classes/TransactionLog)** <br>Transaction log.  |
-| struct | **[TransactionInstance](/Classes/TransactionInstance)** <br>Transaction instance.  |
 
 ## Types
 
 |                | Name           |
 | -------------- | -------------- |
-| enum| **[LogType](/Modules/DiskSpaceManager#enum-logtype)** { UPDATE = 0}<br>Transaction log type.  |
-| enum| **[TransactionState](/Modules/DiskSpaceManager#enum-transactionstate)** { RUNNING = 0, WAITING = 1, COMMITTING = 2, COMMITTED = 3, ABORTING = 4, ABORTED = 5}<br>Transaction running state.  |
 | typedef struct <a href="/Classes/TableInstance">TableInstance</a> | **[TableInstance](/Modules/DiskSpaceManager#typedef-tableinstance)**  |
 | typedef <a href="/Classes/Page">Page</a> | **[page_t](/Modules/DiskSpaceManager#typedef-page_t)**  |
 | typedef <a href="/Classes/FullPage">FullPage</a> | **[fullpage_t](/Modules/DiskSpaceManager#typedef-fullpage_t)**  |
@@ -52,7 +47,6 @@
 | typedef <a href="/Classes/AllocatedFullPage">AllocatedFullPage</a> | **[allocatedpage_t](/Modules/DiskSpaceManager#typedef-allocatedpage_t)**  |
 | typedef <a href="/Classes/InternalPage">InternalPage</a> | **[internalpage_t](/Modules/DiskSpaceManager#typedef-internalpage_t)**  |
 | typedef <a href="/Classes/LeafPage">LeafPage</a> | **[leafpage_t](/Modules/DiskSpaceManager#typedef-leafpage_t)**  |
-| typedef struct <a href="/Classes/TransactionLog">TransactionLog</a> | **[trxlog_t](/Modules/DiskSpaceManager#typedef-trxlog_t)**  |
 
 ## Functions
 
@@ -65,10 +59,6 @@
 | void | **[file_write_page](/Modules/DiskSpaceManager#function-file_write_page)**(tableid_t table_id, pagenum_t pagenum, const <a href="/Modules/DiskSpaceManager#typedef-page-t">page_t</a> * src)<br>Write an in-memory page(src) to the on-disk page.  |
 | void | **[file_close_table_files](/Modules/DiskSpaceManager#function-file_close_table_files)**()<br>Stop referencing the table files.  |
 | struct <a href="/Classes/PageSlot">PageSlot</a> | **[__attribute__](/Modules/DiskSpaceManager#function-__attribute__)**((packed) ) |
-| int | **[init_trx](/Modules/DiskSpaceManager#function-init_trx)**()<br>Initialize a transaction manager.  |
-| int | **[cleanup_trx](/Modules/DiskSpaceManager#function-cleanup_trx)**()<br>Cleanup a transaction manager.  |
-| trxid_t | **[trx_begin](/Modules/DiskSpaceManager#function-trx_begin)**()<br>Begin a transaction.  |
-| trxid_t | **[trx_commit](/Modules/DiskSpaceManager#function-trx_commit)**(trxid_t trx_id)<br>Commit a transaction.  |
 
 ## Attributes
 
@@ -83,38 +73,8 @@
 | struct <a href="/Classes/PageBranch">PageBranch</a> | **[__attribute__](/Modules/DiskSpaceManager#variable-__attribute__)**  |
 | int | **[table_instance_count](/Modules/DiskSpaceManager#variable-table_instance_count)** <br>current table instance number  |
 | <a href="/Classes/TableInstance">TableInstance</a> | **[table_instances](/Modules/DiskSpaceManager#variable-table_instances)** <br>all table instances  |
-| pthread_mutex_t * | **[trx_manager_mutex](/Modules/DiskSpaceManager#variable-trx_manager_mutex)** <br>Transaction manager mutex.  |
-| trxid_t | **[accumulated_trx_id](/Modules/DiskSpaceManager#variable-accumulated_trx_id)** <br>Accumulated trx id.  |
-| trxid_t | **[accumulated_trxlog_id](/Modules/DiskSpaceManager#variable-accumulated_trxlog_id)** <br>Accumulated trx log id.  |
-| std::unordered_map< trxid_t, <a href="/Classes/TransactionInstance">TransactionInstance</a> > | **[transaction_instances](/Modules/DiskSpaceManager#variable-transaction_instances)** <br>Transaction instances.  |
-| std::unordered_map< trxlogid_t, <a href="/Classes/TransactionLog">TransactionLog</a> > | **[trx_logs](/Modules/DiskSpaceManager#variable-trx_logs)** <br>Transaction log.  |
 
 ## Types Documentation
-
-### enum LogType
-
-| Enumerator | Value | Description |
-| ---------- | ----- | ----------- |
-| UPDATE | 0|   |
-
-
-
-Transaction log type. 
-
-### enum TransactionState
-
-| Enumerator | Value | Description |
-| ---------- | ----- | ----------- |
-| RUNNING | 0|   |
-| WAITING | 1|   |
-| COMMITTING | 2|   |
-| COMMITTED | 3|   |
-| ABORTING | 4|   |
-| ABORTED | 5|   |
-
-
-
-Transaction running state. 
 
 ### typedef TableInstance
 
@@ -176,13 +136,6 @@ typedef InternalPage internalpage_t;
 
 ```
 typedef LeafPage leafpage_t;
-```
-
-
-### typedef trxlog_t
-
-```
-typedef struct TransactionLog trxlog_t;
 ```
 
 
@@ -295,53 +248,6 @@ struct PageSlot __attribute__(
 ```
 
 
-### function init_trx
-
-```
-int init_trx()
-```
-
-Initialize a transaction manager. 
-
-**Return**: <code>0</code> if success, negative value otherwise. 
-
-### function cleanup_trx
-
-```
-int cleanup_trx()
-```
-
-Cleanup a transaction manager. 
-
-**Return**: <code>0</code> if success, negative value otherwise. 
-
-### function trx_begin
-
-```
-trxid_t trx_begin()
-```
-
-Begin a transaction. 
-
-**Return**: positive transaction id if success. <code>0</code> or negative otherwise. 
-
-### function trx_commit
-
-```
-trxid_t trx_commit(
-    trxid_t trx_id
-)
-```
-
-Commit a transaction. 
-
-**Parameters**: 
-
-  * **trx_id** transaction id obtained with <code><a href="/Modules/DiskSpaceManager#function-trx-begin">trx&#95;begin()</a></code>. 
-
-
-**Return**: <code>trx&#95;id</code>(committed transaction id) if success. <code>0</code> otherwise. 
-
 
 ## Attributes Documentation
 
@@ -422,49 +328,9 @@ TableInstance table_instances;
 
 all table instances 
 
-### variable trx_manager_mutex
-
-```
-pthread_mutex_t * trx_manager_mutex = nullptr;
-```
-
-Transaction manager mutex. 
-
-### variable accumulated_trx_id
-
-```
-trxid_t accumulated_trx_id = 0;
-```
-
-Accumulated trx id. 
-
-### variable accumulated_trxlog_id
-
-```
-trxid_t accumulated_trxlog_id = 0;
-```
-
-Accumulated trx log id. 
-
-### variable transaction_instances
-
-```
-std::unordered_map< trxid_t, TransactionInstance > transaction_instances;
-```
-
-Transaction instances. 
-
-### variable trx_logs
-
-```
-std::unordered_map< trxlogid_t, TransactionLog > trx_logs;
-```
-
-Transaction log. 
-
 
 
 
 -------------------------------
 
-Updated on 2021-12-05 at 18:36:40 +0900
+Updated on 2021-12-05 at 18:37:58 +0900
